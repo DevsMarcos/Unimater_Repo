@@ -18,12 +18,13 @@ public class Main {
             numeroChutado = leitor.nextInt();
 
             if (numeroChutado == numeroGerado) {
-                System.out.println("Acertou");
-                return;
+                System.out.println("Você Acertou!!!");
+                break;
+            } else{
+                System.out.println("Você errou, tente novamente!");
             }
-            
-            System.out.println(numeroGerado);
-            leitor.close();
         }
+        System.out.println("O némero era: "+numeroGerado);
+        leitor.close();
     }
 }
