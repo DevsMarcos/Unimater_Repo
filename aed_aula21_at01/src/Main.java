@@ -15,10 +15,10 @@ public class Main {
             switch (opcao){
                 case 1 -> funcoes.verificarPalindromo();
                 case 2 -> funcoes.ordenaArray();
-                case 3 -> funcoes.verificarPalindromo();
+                case 3 -> funcoes.calculoJurosCompostos();
                 case 4 -> funcoes.verificarPalindromo();
                 case 5 -> funcoes.verificarPalindromo();
-                case 6 -> funcoes.verificarPalindromo();
+                case 6 -> funcoes.calculaDistanciaPontos();
 
             }
 

@@ -8,13 +8,13 @@ public class Funcoes {
         Scanner leitor = new Scanner(System.in);
 
         System.out.println("Informe a palavra ou frase que você deseja verificar que é palíndromo: ");
-        normal = leitor.nextLine().toUpperCase();
+        normal = leitor.nextLine();
 
         for (int i = normal.length(); i >= 0; i--) {
-            invertida += normal.toUpperCase().charAt(i);
+            invertida += normal.charAt(i);
         }
 
-        if (normal.equals(invertida)) {
+        if (invertida.equals(normal)) {
             System.out.println("Você possui um palíndromo!");
             System.out.println("Normal: "+normal);
             System.out.println("Invertida: "+invertida);
@@ -46,7 +46,7 @@ public class Funcoes {
     }
 
     public void calculoJurosCompostos(){
-        double montate = 0; 
+        double montate = 0d; 
         float capital = 0f;
         float taxaDeJuros = 0f;
         int tempo = 0;
@@ -87,7 +87,27 @@ public class Funcoes {
         float y1 = 0;
         float x2 = 0;
         float y2 = 0;
+        double resultado = 0;
         Scanner leitor = new Scanner(System.in);
+        System.out.println("Insira os valores o primeiro par ordenado");
+        System.out.println("Insira o valor de X1: ");
+        x1 = leitor.nextFloat();
+        System.out.println("Informe o valor de Y1: ");
+        y1 = leitor.nextFloat();
+
+        System.out.println("Informe agora os valores do segundo par ordenado");
+        System.out.println("Informe o valor de X2: ");
+        x2 = leitor.nextFloat();
+        System.out.println("Informe o valor de Y2: ");
+        y2 = leitor.nextFloat();
+
+        resultado = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2-y1), 2));
+
+        System.out.println("A distância dos pontos é de: "+resultado);
+
+        leitor.close();
+
+
 
     }
 
