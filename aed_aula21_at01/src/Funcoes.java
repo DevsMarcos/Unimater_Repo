@@ -1,20 +1,22 @@
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Funcoes {
-
+//OK---------------------------------------------------------------------------------------------------------------
     public void verificarPalindromo(){
         String normal = "";
         String invertida = "";
         Scanner leitor = new Scanner(System.in);
 
         System.out.println("Informe a palavra ou frase que você deseja verificar que é palíndromo: ");
-        normal = leitor.nextLine();
+        normal = leitor.nextLine().toUpperCase().replace(" ", "");
 
-        for (int i = normal.length(); i >= 0; i--) {
-            invertida += normal.charAt(i);
+        for (int i = normal.length()-1; i >= 0; i--) {
+            invertida += normal.toUpperCase().replace(" ", "").charAt(i);
         }
 
-        if (invertida.equals(normal)) {
+        if (normal.equals(invertida)) {
             System.out.println("Você possui um palíndromo!");
             System.out.println("Normal: "+normal);
             System.out.println("Invertida: "+invertida);
@@ -26,48 +28,45 @@ public class Funcoes {
         leitor.close();
 
     }
-
-    public void ordenaArray(){
-        int[] numeros = {1 ,6 ,8, 0, 3};
-        int numAtual = 0;
-
-        for (int i = 0; i < numeros.length; i++) {
-            for (int j = i; j < numeros.length; j++) {
-                if (numeros[i] < numeros[j]) {
-                   numAtual = numeros[j];
-                   numeros[j] = numeros[i];
-                   numeros[i] = numAtual;
-            }
-           
+//---------------------
+public void combinacoes() {
+        int[] array1 = {1, 2};
+        int[] array2 = {3, 4};
+        for (int i : array1) {
+            for (int j : array2) {
+                System.out.println("(" + i + ", " + j + ")");
             }
         }
-
-        System.out.println(numeros);
     }
-
+//----------------------------------------------------------------------------------------
+//PARCIALMENTE CERTO-------------------------------------------------------------------------------------------
     public void calculoJurosCompostos(){
-        double montate = 0d; 
-        float capital = 0f;
-        float taxaDeJuros = 0f;
+        Locale localeBR = new Locale("pt","BR");
+        NumberFormat dinheiro = NumberFormat.getCurrencyInstance(localeBR);
+
+        double montate = 0; 
+        int capital = 0;
+        int taxaDeJuros = 0/100;
         int tempo = 0;
 
         Scanner leitor = new Scanner(System.in);
         System.out.println("Informe o valor do capital inicial que você deseja aplicar: ");
-        capital = leitor.nextFloat();
+        capital = leitor.nextInt();
 
         System.out.println("Informe a taxa de juros anual em porcento: ");
-        taxaDeJuros = leitor.nextFloat();
+        taxaDeJuros = leitor.nextInt();
 
         System.out.println("Informe por quanto tempo você deseja deixar essse dinheiro aplicado: ");
         tempo = leitor.nextInt();
 
         montate = capital * Math.pow((1 + taxaDeJuros), tempo);
 
-        System.out.println("O montate final da sua aplicaççao é de: "+montate);
+        System.out.println("O montate final da sua aplicaççao é de: "+dinheiro.format(montate));
 
         leitor.close();
     }
-
+//-------------------------------------------------------------------------------
+ //OK --------------------------------------------------------------------------
     public void contaPalavras(){
         String palavras = "";
         Scanner leitor = new Scanner(System.in);
@@ -79,9 +78,10 @@ public class Funcoes {
        System.out.println("O número de espaços é de: "+numerosInt);
 
        leitor.close();
-       
-    }
 
+    }
+//--------------------------------------------------------------------------------
+// OK ----------------------------------------------------------------------------
     public void calculaDistanciaPontos(){
         float x1 = 0;
         float y1 = 0;
@@ -106,9 +106,6 @@ public class Funcoes {
         System.out.println("A distância dos pontos é de: "+resultado);
 
         leitor.close();
-
-
-
     }
-
+//----------------------------------------------------------------------------------
 }

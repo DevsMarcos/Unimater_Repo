@@ -14,9 +14,9 @@ public class Main {
 
             switch (opcao){
                 case 1 -> funcoes.verificarPalindromo();
-                case 2 -> funcoes.ordenaArray();
+                case 2 -> funcoes.combinacoes();
                 case 3 -> funcoes.calculoJurosCompostos();
-                case 4 -> funcoes.verificarPalindromo();
+                case 4 -> funcoes.contaPalavras();
                 case 5 -> funcoes.verificarPalindromo();
                 case 6 -> funcoes.calculaDistanciaPontos();
 
@@ -38,6 +38,7 @@ public class Main {
 
         int retorno = 0;
         try {
+
             retorno = scanner.nextInt();
         }catch (Exception e){
             out.println("Informe um número inteiro");
