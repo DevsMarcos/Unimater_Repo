@@ -6,19 +6,20 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(in);
+        Scanner leitor = new Scanner(in);
         Funcoes funcoes = new Funcoes();
 
         int opcao = -1;
-        while (opcao != 0){
+        while (opcao != 0) {
             opcao = executarMenu(scanner);
 
-            switch (opcao){
-                case 1 -> funcoes.verificarPalindromo();
-                case 2 -> funcoes.ordenaArray();
-                case 3 -> funcoes.calculoJurosCompostos();
-                case 4 -> funcoes.verificarPalindromo();
-                case 5 -> funcoes.verificarPalindromo();
-                case 6 -> funcoes.calculaDistanciaPontos();
+            switch (opcao) {
+                case 1 -> funcoes.verificarPalindromo(leitor);
+                case 2 -> funcoes.ordenaArray(leitor);
+                case 3 -> funcoes.calculoJurosCompostos(leitor);
+                case 4 -> funcoes.contaPalavras(leitor);
+                case 5 -> funcoes.combinacoes(leitor);
+                case 6 -> funcoes.calculaDistanciaPontos(leitor);
 
             }
 
@@ -26,7 +27,7 @@ public class Main {
         scanner.close();
     }
 
-    public static int executarMenu(Scanner scanner){
+    public static int executarMenu(Scanner scanner) {
         out.println("Escolha uma funcao abaixo:\n" +
                 "1 - verificar polindromo\n" +
                 "2 - ordenar array\n" +
@@ -38,8 +39,8 @@ public class Main {
 
         int retorno = 0;
         try {
-            retorno = scanner.nextInt();
-        }catch (Exception e){
+           retorno = scanner.nextInt();
+        } catch (Exception e) {
             out.println("Informe um número inteiro");
         }
         return retorno;
