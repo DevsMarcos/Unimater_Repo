@@ -1,5 +1,12 @@
 import java.util.Scanner;
 
+import Classes.CalculadroraDeJuros;
+import Classes.CalcularDistanciaPontos;
+import Classes.Combinacoes;
+import Classes.ContarPalavras;
+import Classes.OrdenarArray;
+import Classes.VerificarPalindromos;
+
 import static java.lang.System.*;
 
 public class Main {
@@ -7,22 +14,29 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(in);
         Scanner leitor = new Scanner(in);
-        Funcoes funcoes = new Funcoes();
+
+        //Intsanciando os métodos--------------------------------------------
+        VerificarPalindromos ehPalindromos = new VerificarPalindromos();
+        OrdenarArray ordemArray = new OrdenarArray();
+        CalculadroraDeJuros calcularJuros = new CalculadroraDeJuros();
+        ContarPalavras contaEspacos = new ContarPalavras();
+        Combinacoes executarCombinacoes = new Combinacoes();
+        CalcularDistanciaPontos executarCalculoDistancia = new CalcularDistanciaPontos();
+        //-------------------------------------------------------------------
 
         int opcao = -1;
         while (opcao != 0) {
             opcao = executarMenu(scanner);
 
             switch (opcao) {
-                case 1 -> funcoes.verificarPalindromo(leitor);
-                case 2 -> funcoes.ordenaArray(leitor);
-                case 3 -> funcoes.calculoJurosCompostos(leitor);
-                case 4 -> funcoes.contaPalavras(leitor);
-                case 5 -> funcoes.combinacoes(leitor);
-                case 6 -> funcoes.calculaDistanciaPontos(leitor);
+                case 1 -> ehPalindromos.FuncaoPalidromos(leitor);
+                case 2 -> ordemArray.ordenaArray(leitor);
+                case 3 -> calcularJuros.calculoJurosCompostos(leitor);
+                case 4 -> contaEspacos.contaPalavras(leitor);
+                case 5 -> executarCombinacoes.combinacoes(leitor);
+                case 6 -> executarCalculoDistancia.calculaDistanciaPontos(leitor);
 
             }
-
         }
         scanner.close();
     }
