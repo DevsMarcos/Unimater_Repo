@@ -105,7 +105,7 @@ public void combinacoes(Scanner leitor) {
         palavras = leitor.nextLine();
 
        String[] array = palavras.split(" ");
-       int tamanho = array.length-1;
+       int tamanho = array.length;
 
        System.out.println("O número de espaços é de: "+tamanho);
 

@@ -26,7 +26,7 @@ public class ContarPalavras {
     private int validacao(String palavras){
         String[] array = palavras.split(" ");//Faz a searação da frase, e salva cada elemento no formato
         //De um arrar.
-        int retorno = array.length-1;//mede o comprimento do array e tira um para, para remover
+        int retorno = array.length;//mede o comprimento do array e tira um para, para remover
         //O valor inicial em 0
 
         return retorno; //Retorna o valor para utilização
