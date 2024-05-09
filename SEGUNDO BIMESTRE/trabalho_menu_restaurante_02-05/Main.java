@@ -2,6 +2,8 @@ import java.util.Scanner;
 import classes.AddItem;
 import classes.AddPrice;
 import classes.PrefixPrice;
+import classes.PrintProducts;
+import classes.Produto;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,9 +16,11 @@ public class Main {
         AddItem addItem = new AddItem();
         PrefixPrice prefixarItem = new PrefixPrice();
         AddPrice adicionarPreco = new AddPrice();
+        PrintProducts printarProduto = new PrintProducts();
 
         // --------------------
         int opcao = -1;
+        Produto produto = new Produto(null, null);
 
         while (opcao != 0) {
             opcao = ExibirMenu(leitor);
@@ -24,16 +28,20 @@ public class Main {
 
                 case 1: {
                     produtos = addItem.adicionarItem(produtos, leitor);
-
                     preco = prefixarItem.prefixarPosicaoPreco(preco);
 
                     break;
                 }
+
                 case 2: {
-                    adicionarPreco.prefixPriceItem(produtos, preco, leitor);
-                  for (int i = 0; i < preco.length; i++) {
-                    System.out.println(i + " - "+ produtos[i] + " " + preco[i]  );
-                  }
+                    produto = adicionarPreco.prefixPriceItem(produtos, preco, leitor);
+                    produtos = produto.nomesProdutos;
+                    preco = produto.precos;
+                    break;
+                }
+
+                case 3: {
+                    printarProduto.printarItens(produtos, preco);
                 }
             }
         }
