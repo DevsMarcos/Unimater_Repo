@@ -1,8 +1,5 @@
 package classes;
-
 import java.util.Scanner;
-import java.util.function.Function;
-
 public class AddPrice {
     public Produto prefixPriceItem(String[] itens, double[] precos, Scanner leitor) {
 
@@ -13,7 +10,7 @@ public class AddPrice {
         double precoInfo = 0;
 
         if (itens.length < 1) {
-            String[] produtos = new String[itens.length+1];
+            String[] produtos = new String[itens.length + 1];
             System.out.println("Adicone um item primeiro!");
             produtos = addItem.adicionarItem(itens, leitor);
             precos = prefixPrice.prefixarPosicaoPreco(precos);
@@ -22,9 +19,9 @@ public class AddPrice {
         }
         if (itens.length >= 1) {
             System.out.println("Observe os itens que você possui: ");
-            for (int i = 0; i < itens.length; i++) {
+            for (int i = 1; i < itens.length; i++) {
                 System.out.println(i + "-" + itens[i]);
-            }    
+            }
         }
 
         System.out.println("Qual dos itens você deseja atribuir um novo valor: ");
@@ -40,6 +37,5 @@ public class AddPrice {
         precos[idItem] = precoInfo;
         return new Produto(itens, precos);
     }
-
 
 }

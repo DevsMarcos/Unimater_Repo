@@ -7,6 +7,6 @@ public class PrefixPrice {
         for (int i = 0; i < arrayParaPreco.length; i++) {
             arrayDePreco[i] = arrayParaPreco[i];
         }
-        return arrayDePreco = new double[arrayParaPreco.length + 1];
+        return arrayDePreco;
     };
 }
