@@ -4,6 +4,7 @@ import classes.AddPrice;
 import classes.AdicionarPedido;
 import classes.CriarPedido;
 import classes.PrefixPrice;
+import classes.PrintPedido;
 import classes.PrintProducts;
 import classes.Produto;
 
@@ -31,6 +32,7 @@ public class Main {
         PrintProducts printarProduto = new PrintProducts();
         CriarPedido criarPedido = new CriarPedido();
         AdicionarPedido adicionarPedido = new AdicionarPedido();
+        PrintPedido printarValoresPedido = new PrintPedido();
 
         // --------------------
         int opcao = -1;
@@ -64,6 +66,9 @@ public class Main {
                 case 5: {
                     pedidos = adicionarPedido.adicionarPedido(pedidos, produtos, leitor);
                     break;
+                }
+                case 6: {
+                    System.out.println("Preço Final: " +printarValoresPedido.fecharPedido(pedidos, preco, leitor));
                 }
             }
         }

@@ -38,7 +38,7 @@ public class AdicionarPedido {
             } else if (pedido[pedidoEscolhido].length - 1 == i) {
                 int[][] novoArray = new int[pedido.length][pedido[pedidoEscolhido].length + 1];
                 for (int j = 0; j < pedido.length; j++) {
-                    for (int k = 0; k < pedido[i].length; k++) {
+                    for (int k = 0; k < pedido[j].length; k++) {
                         novoArray[j][k] = pedido[j][k];
                     }
                 }
