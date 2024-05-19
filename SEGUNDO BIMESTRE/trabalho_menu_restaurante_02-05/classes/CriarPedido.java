@@ -8,7 +8,7 @@ public class CriarPedido {
         //Primeiramente analisamos se o array de itens possui algum item;
         //Caso elenão tenha a função é parada;
         if (itens.length < 1) {
-            System.out.println("Adicione umm item primeiro");
+            System.out.println("Adicione umm item primeiro!");
             return pedidos;
         //Caso tenha um item, adicionamos o pedido que o usuário requisitou
         }else if(pedidos.length < 1 ){

@@ -14,7 +14,7 @@ public class AddItem {
 
         //O for acima é utilizado para percorrer o array parâmetro, e armazenar os dados de cada posição no array criado nessa função
 
-        System.out.println("Digite o nome do item a ser adicionado no meunu: ");
+        System.out.println("Digite o nome do item a ser adicionado ao menu: ");
         arrayDeItens[arrayDeItens.length - 1] = leitor.nextLine();
         //Aqui pedimos ao usuário qual item deseja adicionar, e o armazenamos na última posição do array criado;
 

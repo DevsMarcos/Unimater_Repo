@@ -12,13 +12,13 @@ public class AdicionarPedido {
         //Primeiramente verificamos se possuimos um pedido no qual podemos adcionar itens, caso não haja
         //Essa função para, e precisaremos adcionar um pedido na função correta
         if (pedido.length < 1) {
-            System.out.println("Crie um novo pedido primeiramente");
+            System.out.println("Crie um novo pedido primeiramente!");
             return pedido;
         }
 
         //CAso haja um pedido poderemos selecionar o mesmo para adiconar o item
         //Utilizamos do for para iterar o array de pedidos, e printar os mesmos na tela
-        System.out.println("Qual dos pedidos você deseja adicionar o item: ");
+        System.out.println("Qual dos pedidos você deseja adicionar um item: ");
         for (int i = 0; i < pedido.length; i++) {
             System.out.println(i + "° pedido");
         }

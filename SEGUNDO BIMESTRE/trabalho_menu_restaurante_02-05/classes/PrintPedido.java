@@ -11,7 +11,7 @@ public class PrintPedido {
         double valorFInal = 0;//Var que aramzenará o valor final do pedido
 
         //Aqui requisitamos oa usuário que pedido que o memso deseja finalizar
-        System.out.println("Qual dos pedidos você deseja fechar a conta: ");
+        System.out.println("Qual dos pedidos você deseja finalizar: ");
         //Utilizamos do método FOR, para iterar pelo array de pedidos, e retornar printando os pedidos em aberto;
         for (int i = 0; i < pedido.length; i++) {
             System.out.println(i + "° pedido");
