@@ -84,6 +84,9 @@ public class Main {
     private static int ExibirMenu(Scanner leitor) {
         int opcao; //Variável de controle de escolha de opção
         System.out.println("""
+
+
+        
                 1 - Adicionar item
                 2 - Atribuir valor ao item
                 3 - Listar os itens
