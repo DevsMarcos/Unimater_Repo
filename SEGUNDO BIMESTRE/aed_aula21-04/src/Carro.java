@@ -22,6 +22,7 @@ public class Carro {
         System.out.println("Marca: "+this.marca);
         System.out.println("Modelo: "+this.modelo);
         System.out.println("Ano: "+this.ano);
+        System.out.println("----------------------------------------------------------");
         
     }
 
