@@ -6,11 +6,11 @@ public class CarroService {
         int anosRodados = (2024 - carro.ano);
         int kmRodado = (carro.quilometragem/anosRodados);
 
-        if (kmRodado >= 10000) {
-            System.out.println(carro.modelo+ ehRodado);
+        if (kmRodado <= 10000) {
+            System.out.println(carro.modelo+ naoEhRodado);
             System.out.println("----------------------------------------------------------");
         }else{
-            System.out.println(carro.modelo + naoEhRodado);
+            System.out.println(carro.modelo + ehRodado);
             System.out.println("----------------------------------------------------------");
         }
     }
