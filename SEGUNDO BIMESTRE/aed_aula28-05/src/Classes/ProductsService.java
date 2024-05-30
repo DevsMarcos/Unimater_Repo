@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductsService {
+    //Utilize Streams para filtrar os produtos que possuem preço maior que 50.0 e exiba seus nomes.
     public void filterList(List<Produto> lista){
         lista.stream()
-        .filter(produto -> produto.preco >= 50)
-        .forEach(produto -> System.out.println(produto.nome));
+        .filter(produto -> produto.preco >= 50) //Filtro nos produtos
+        .forEach(produto -> System.out.println("-> "+ produto.nome));//Printa os produtos
     }
 
     public void somaPrecos(List<Produto> lista){
