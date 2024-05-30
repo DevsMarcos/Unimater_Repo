@@ -10,6 +10,7 @@ public class App {
     public static void main(String[] args) {
 
         int opcaoEscolhida = 0;
+
         Scanner opcao = new Scanner(System.in);
         ProductsService novoServiço = new ProductsService();
         InterecaoUsuario pergunta = new InterecaoUsuario();
@@ -23,7 +24,7 @@ public class App {
         produto.add(new Produto("Barril de Heineken", 75, 0));
 
         do {
-           opcaoEscolhida = pergunta.PerguntaAoUsuario(opcao);
+            opcaoEscolhida = pergunta.PerguntaAoUsuario(opcao);
 
             switch (opcaoEscolhida) {
                 case 1:

@@ -24,7 +24,6 @@ public class ProductsService {
         Produto produtoComMaiorValor =  lista.stream()
          .max(Comparator.comparingDouble((p1)-> p1.preco))
          .get();
- 
          System.out.println(produtoComMaiorValor.nome);
          
     }
