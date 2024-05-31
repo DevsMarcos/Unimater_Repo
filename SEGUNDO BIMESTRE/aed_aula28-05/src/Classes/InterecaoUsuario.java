@@ -3,10 +3,11 @@ package Classes;
 import java.util.Scanner;
 
 public class InterecaoUsuario {
-
+//Essa função serve para realizarmos uma intereção com o usuário, referene oa procedimento que o mesmo deseja realizar
+//Recebe um Scanner como parâmetro;
     public int PerguntaAoUsuario(Scanner leitor){
 
-        int opcaoEscolhida = 0;
+        int opcaoEscolhida = 0; //Variável de controle de opção escolhida 
         System.out.println("""
             Escolha uma das opções abaixo para verificarmos os itens da lista:
             1. Filtrar produtos acima de R$50,00
@@ -21,9 +22,9 @@ public class InterecaoUsuario {
             -----------------------------------------------------------------------------------------
                 """);
 
-        opcaoEscolhida = leitor.nextInt();
+        opcaoEscolhida = leitor.nextInt(); //Definiido o valor 
 
-        return opcaoEscolhida;
+        return opcaoEscolhida;//Retornarndo o valor a ser utilizada
         
     }
     

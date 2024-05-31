@@ -68,11 +68,11 @@ public class ProductsService {
         System.out.println("Produtos acima de R$50,00: "+acima);
     }
 
-    //COncatena os produtos, um ao lado do outro
+    //Concatena os produtos, um ao lado do outro
     public void concatenarProdutos(List<Produto> lista){
-       String listaJunta = lista.stream()
-        .map(produto -> produto.nome)
-        .collect(Collectors.joining( ", "));
-        System.out.println(listaJunta);
+       String listaJunta = lista.stream() //Aramazena o Stream em uma variável 
+        .map(produto -> produto.nome)//Utiliza do map, para encontrar os nomes dos produtos
+        .collect(Collectors.joining( ", "));//Juntamos estes nomes, separando -os por virgula 
+        System.out.println(listaJunta);//Printamos
     }
 }

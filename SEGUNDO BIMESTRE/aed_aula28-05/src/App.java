@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import Classes.InterecaoUsuario;
 import Classes.ProductsService;
 import Classes.Produto;
@@ -9,13 +8,13 @@ import Classes.Produto;
 public class App {
     public static void main(String[] args) {
 
-        int opcaoEscolhida = 0;
+        int opcaoEscolhida = 0;//Variável de controle de opção escolhida 
 
         Scanner opcao = new Scanner(System.in);
-        ProductsService novoServiço = new ProductsService();
-        InterecaoUsuario pergunta = new InterecaoUsuario();
+        ProductsService novoServiço = new ProductsService();//Instanciação da Classe ProductServices
+        InterecaoUsuario pergunta = new InterecaoUsuario();//Instanciação da classe Perguntas
 
-        List<Produto> produto = new ArrayList<>();
+        List<Produto> produto = new ArrayList<>();//Lista com os itens a serem trabalhados
         produto.add(new Produto("Pó de Café", 2.50, 0));
         produto.add(new Produto("Arroz", 8, 0));
         produto.add(new Produto("Feijão", 12, 0));
@@ -23,6 +22,10 @@ public class App {
         produto.add(new Produto("Coca-Cola", 12.00, 0));
         produto.add(new Produto("Barril de Heineken", 75, 0));
 
+        /*Abaixo efetuaremos uma opereção onde, rodaresmo o código até o momento em que o usuário escolher 
+        O valor 9. A cada operação que ele escolher, executaremos um bloco de código correspondenten, 
+        E retornaresmo o valor da variável para zero, reiniciando o processo.
+        */
         do {
             opcaoEscolhida = pergunta.PerguntaAoUsuario(opcao);
 
