@@ -14,15 +14,15 @@ public class ControleNotas {
             System.out.println("Primeira avaliacao adicionada");
             return new double[alunos.length][1];
         }
-        // cria um array com uma posição a mais na segunda coluna
-        double[][] novoArray = new double[notas.length][notas[notas.length-1].length];
+        // cria um array com uma coluna a mais; 
+        double[][] novoArray = new double[notas.length][notas[notas.length-1].length+1];
         // copia o array antigo para o novo
         for (int i = 0; i < notas.length ; i++) {
             for (int j = 0; j < notas[i].length; j++) {
                 novoArray[i][j] = notas[i][j];
             }
         }
-        System.out.println("Avaliacao "+ novoArray[0].length + " adicionada");
+        System.out.println("Avaliacao "+ novoArray[notas.length-1].length + " adicionada");
         return novoArray;
     }
 
@@ -44,10 +44,13 @@ public class ControleNotas {
         int codigoAvaliacao = -1;
         for (int i = 0; i < notas[codigoAluno].length; i++) {
             System.out.println("Avaliação " + (i+1) + ": " + notas[codigoAluno][i]);
-            System.out.println("Qual avaliação deseja lançar a nota?");
-            codigoAvaliacao = leitor.nextInt() -1;
-            leitor.nextLine();
+
         }
+        System.out.println("Qual avaliação deseja lançar a nota?");
+        codigoAvaliacao = leitor.nextInt() -1;
+        leitor.nextLine();
+        
+
         if(codigoAvaliacao > notas[codigoAluno].length){
             System.out.println("Avaliacao nao encontrada");
             return;

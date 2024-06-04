@@ -28,6 +28,7 @@ public class Main {
         while (opcaoMenu != 0){
             // chamada da função que exibe o menu
             opcaoMenu = exibeMenu(leitor);
+
             switch (opcaoMenu){
                 case 1:{
                     // chama método que adiciona um aluno e armazena retorno na variável alunos
