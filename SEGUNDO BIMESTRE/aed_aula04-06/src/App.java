@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import Construtores.ListaDeDefeitos;
+import Construtores.Defeito;
 
 public class App {
     public static void main(String[] args){
-        List<ListaDeDefeitos> defeito = new ArrayList<>();
-        defeito.add(new ListaDeDefeitos("Engrenagens da Caixa quebradas", 3200, 3));
-        defeito.add(new ListaDeDefeitos("Velas pifadas", 650, 1));
-        defeito.add(new ListaDeDefeitos("Bateria Fraca", 350, 1));
-        defeito.add(new ListaDeDefeitos("Pastilhas de freio gastas", 430, 2));
+        List<Defeito> defeito = new ArrayList<>();
+        defeito.add(new Defeito("Engrenagens da Caixa quebradas", 3200, 3));
+        defeito.add(new Defeito("Velas pifadas", 650, 1));
+        defeito.add(new Defeito("Bateria Fraca", 350, 1));
+        defeito.add(new Defeito("Pastilhas de freio gastas", 430, 2));
     }
 }
