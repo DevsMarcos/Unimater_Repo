@@ -1,9 +1,9 @@
 package Construtores;
 public class Carro {
     
-    public final String marca;
-    public final String modelo;
-    public final int ano;
+    public String marca;
+    public String modelo;
+    public int ano;
 
     public Carro(String marca, String modelo, int ano){
         this.marca = marca;
