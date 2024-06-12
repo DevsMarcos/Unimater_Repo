@@ -10,4 +10,15 @@ public class OrdemDeServico {
         
     }
 
+    @Override
+    public String toString() {
+        return "----------------------------------------"+ "\n"+
+        "Marca: "+ carro.marca +"\n" + 
+        "Modelo: "+ carro.modelo + "\n"+
+        "Ano: "+ carro.ano+ "\n"+
+        "Defeito: "+defeito.defeito+ "\n"+
+        "Valor de Reparo: "+defeito.valor+ "\n"+
+        "Tempo de Reparo: "+defeito.tempo+ " Dias"+"\n"+
+        "----------------------------------------";
+    }
 }

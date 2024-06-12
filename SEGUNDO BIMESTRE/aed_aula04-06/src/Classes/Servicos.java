@@ -8,16 +8,8 @@ import Construtores.Defeito;
 import Construtores.OrdemDeServico;
 
 public class Servicos {
-    
-    public OrdemDeServico gerarOrdemDeServico(Carro carro, List<Defeito> defeitos){
-        Random random = new Random();
-        int defeitoSelecionado = random.nextInt(0, defeitos.size());
-        OrdemDeServico novaOrdem = new OrdemDeServico(carro, defeitos.get(defeitoSelecionado));
-        return novaOrdem;
-    }
 
-    public void AdicionarOrdemLista(Scanner leitor, List<OrdemDeServico> listaDeOrndes, List<Defeito> defeitos ){
-
+    public Carro criarCarro(Scanner leitor){
         String marca = "";
         String modelo = "";
         int ano = 0;
@@ -30,14 +22,27 @@ public class Servicos {
         
         System.out.println("Inform o ano do carro");
         ano = leitor.nextInt();
+        return new Carro(marca, modelo, ano);
+    }
+    
+    public OrdemDeServico gerarOrdemDeServico(Carro carro, List<Defeito> defeitos){
+        Random random = new Random();
+        int defeitoSelecionado = random.nextInt(0, defeitos.size());
+        OrdemDeServico novaOrdem = new OrdemDeServico(carro, defeitos.get(defeitoSelecionado));
+        return novaOrdem;
+    }
 
-        Carro carroAdd = new Carro(marca, modelo, ano);
-
-        var ordem = this.gerarOrdemDeServico(carroAdd, defeitos);
-
+    public List<OrdemDeServico> adicionarOrdemLista(Scanner leitor, List<OrdemDeServico> listaDeOrndes, List<Defeito> defeitos ){
+        Carro carro = this.criarCarro(leitor);
+        OrdemDeServico ordem = this.gerarOrdemDeServico(carro, defeitos);
         listaDeOrndes.add(ordem);
-
         System.out.println("Ordem adicioada com sucesso!");
+        return listaDeOrndes;
+    }
+
+    public void printarOrdens(List<OrdemDeServico> listaDeOrdens){
+        listaDeOrdens.stream()
+        .forEach(System.out::println);
     }
 
 }
