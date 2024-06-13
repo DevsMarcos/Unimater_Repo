@@ -6,7 +6,7 @@ public class Defeito {
 
     public Defeito(String defeito, double valor, int tempo){
         this.defeito = defeito;
-        this.tempo = tempo; //Dias
+        this.tempo = tempo;
         this.valor = valor;
 
     }

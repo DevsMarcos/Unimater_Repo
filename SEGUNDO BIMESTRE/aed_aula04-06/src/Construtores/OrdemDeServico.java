@@ -12,7 +12,7 @@ public class OrdemDeServico {
 
     @Override
     public String toString() {
-        return "----------------------------------------"+ "\n"+
+        return 
         "Marca: "+ carro.marca +"\n" + 
         "Modelo: "+ carro.modelo + "\n"+
         "Ano: "+ carro.ano+ "\n"+

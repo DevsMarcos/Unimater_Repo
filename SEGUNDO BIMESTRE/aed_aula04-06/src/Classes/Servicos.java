@@ -2,6 +2,7 @@ package Classes;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 import Construtores.Carro;
 import Construtores.Defeito;
@@ -9,21 +10,7 @@ import Construtores.OrdemDeServico;
 
 public class Servicos {
 
-    public Carro criarCarro(Scanner leitor){
-        String marca = "";
-        String modelo = "";
-        int ano = 0;
-
-        System.out.println("Informe a marca do carro: ");
-        marca = leitor.nextLine();
-        
-        System.out.println("Informe o modelo do carro: ");
-        modelo = leitor.nextLine();
-        
-        System.out.println("Inform o ano do carro");
-        ano = leitor.nextInt();
-        return new Carro(marca, modelo, ano);
-    }
+    InterecaoUsuario resposta = new InterecaoUsuario();
     
     public OrdemDeServico gerarOrdemDeServico(Carro carro, List<Defeito> defeitos){
         Random random = new Random();
@@ -33,7 +20,7 @@ public class Servicos {
     }
 
     public List<OrdemDeServico> adicionarOrdemLista(Scanner leitor, List<OrdemDeServico> listaDeOrndes, List<Defeito> defeitos ){
-        Carro carro = this.criarCarro(leitor);
+        Carro carro = resposta.criarCarro(leitor);
         OrdemDeServico ordem = this.gerarOrdemDeServico(carro, defeitos);
         listaDeOrndes.add(ordem);
         System.out.println("Ordem adicioada com sucesso!");
@@ -41,8 +28,12 @@ public class Servicos {
     }
 
     public void printarOrdens(List<OrdemDeServico> listaDeOrdens){
+        Consumer<OrdemDeServico> printaComIndex =
+        evento -> {
+            System.out.println((listaDeOrdens.indexOf(evento)+1) + "----------------------------------------"+ "\n" + evento);
+        };
         listaDeOrdens.stream()
-        .forEach(System.out::println);
-    }
+        .forEach(printaComIndex);
+}
 
 }
