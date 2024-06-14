@@ -1,39 +1,35 @@
 package Classes;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
-import java.util.function.Consumer;
-
 import Construtores.Carro;
 import Construtores.Defeito;
 import Construtores.OrdemDeServico;
 
 public class Servicos {
 
-    InterecaoUsuario resposta = new InterecaoUsuario();
-    
-    public OrdemDeServico gerarOrdemDeServico(Carro carro, List<Defeito> defeitos){
+    final String SUCESS_ADD = "Ordem adicionada com sucesso!";
+    final String SEE_THE_LIST = "Obeserve abaixo a lista de ordens: ";
+
+
+
+    public OrdemDeServico gerarOrdemDeServico(Carro carro, List<Defeito> defeitos) {
         Random random = new Random();
         int defeitoSelecionado = random.nextInt(0, defeitos.size());
         OrdemDeServico novaOrdem = new OrdemDeServico(carro, defeitos.get(defeitoSelecionado));
         return novaOrdem;
     }
 
-    public List<OrdemDeServico> adicionarOrdemLista(Scanner leitor, List<OrdemDeServico> listaDeOrndes, List<Defeito> defeitos ){
-        Carro carro = resposta.criarCarro(leitor);
-        OrdemDeServico ordem = this.gerarOrdemDeServico(carro, defeitos);
+
+    public List<OrdemDeServico> adicionarOrdemLista(List<OrdemDeServico> listaDeOrndes, OrdemDeServico ordem) {
         listaDeOrndes.add(ordem);
-        System.out.println("Ordem adicioada com sucesso!");
+        System.out.println(SUCESS_ADD);
         return listaDeOrndes;
     }
 
-    public void printarOrdens(List<OrdemDeServico> listaDeOrdens){
-        Consumer<OrdemDeServico> printaComIndex =
-        evento -> {
-            System.out.println((listaDeOrdens.indexOf(evento)+1) + "----------------------------------------"+ "\n" + evento);
-        };
-        listaDeOrdens.stream()
-        .forEach(printaComIndex);
-}
+
+    public List<OrdemDeServico> resolverOrdem(List<OrdemDeServico> listaDeServicos, OrdemDeServico ordem){
+        listaDeServicos.remove(ordem);
+        return listaDeServicos;
+    }
 
 }

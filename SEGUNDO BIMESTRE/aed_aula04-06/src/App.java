@@ -9,31 +9,51 @@ import Construtores.OrdemDeServico;
 
 public class App {
     public static void main(String[] args) {
-        InterecaoUsuario opcaoIntereacao = new InterecaoUsuario();
-        Servicos adicionarServico = new Servicos();
+        final String FINISH_APPLICATION = "Ecerrando aplicação.....";
+        final String WARNIGN_MESSAGE = "Opção inválida, tente novamente";
 
         Scanner leitor = new Scanner(System.in);
 
+        InterecaoUsuario opcaoIntereacao = new InterecaoUsuario(leitor);
+        Servicos adicionarServico = new Servicos();
+
+
         List<OrdemDeServico> listaDeOrdens = new ArrayList<>();
 
-        List<Defeito> defeito = new ArrayList<>();
-        defeito.add(new Defeito("Engrenagens da Caixa Quebradas", 3200, 3));
-        defeito.add(new Defeito("Velas pifadas", 650, 1));
-        defeito.add(new Defeito("Bateria Fraca", 350, 1));
-        defeito.add(new Defeito("Pastilhas de freio gastas", 430, 2));
+        List<Defeito> defeitos = new ArrayList<>();
+        defeitos.add(new Defeito("Engrenagens da Caixa Quebradas", 3200, 3));
+        defeitos.add(new Defeito("Velas pifadas", 650, 1));
+        defeitos.add(new Defeito("Bateria Fraca", 350, 1));
+        defeitos.add(new Defeito("Pastilhas de freio gastas", 430, 2));
 
         int opcaoEscolhida = 0;
         do {
-            opcaoEscolhida = opcaoIntereacao.EscolhaOpcao(leitor);
+            opcaoEscolhida = opcaoIntereacao.escolhaOpcao();
             switch (opcaoEscolhida) {
-                case 1:
-                    listaDeOrdens = adicionarServico.adicionarOrdemLista(leitor, listaDeOrdens, defeito);
+                case 1 -> {
+                    listaDeOrdens = adicionarServico.adicionarOrdemLista(listaDeOrdens, opcaoIntereacao.criarOrdem(defeitos));
                     opcaoEscolhida = 0;
-                    break;
-                case 2:
-                    adicionarServico.printarOrdens(listaDeOrdens);
+                }
+
+                case 2 -> {
+                    opcaoIntereacao.apresentaOrdems(listaDeOrdens);
                     opcaoEscolhida = 0;
-                    break;
+                }
+
+                case 3 -> {
+                    OrdemDeServico ordemEscolhida = opcaoIntereacao.ordemAResolver(listaDeOrdens);
+                    listaDeOrdens = adicionarServico.resolverOrdem(listaDeOrdens, ordemEscolhida);
+                    opcaoEscolhida = 0;
+
+                }
+
+                case 4 -> {
+                    System.out.println(FINISH_APPLICATION);
+                }
+
+                default -> {
+                    System.out.println(WARNIGN_MESSAGE);
+                }
             }
         } while (opcaoEscolhida != 4);
 
