@@ -21,10 +21,14 @@ public class App {
         List<OrdemDeServico> listaDeOrdens = new ArrayList<>();
 
         List<Defeito> defeitos = new ArrayList<>();
-        defeitos.add(new Defeito("Engrenagens da Caixa Quebradas", 3200, 3));
         defeitos.add(new Defeito("Velas pifadas", 650, 1));
-        defeitos.add(new Defeito("Bateria Fraca", 350, 1));
+        defeitos.add(new Defeito("Bateria fraca", 350, 1));
         defeitos.add(new Defeito("Pastilhas de freio gastas", 430, 2));
+        defeitos.add(new Defeito("Balanceamento e Alinhamento", 180, 1));
+        defeitos.add(new Defeito("Água no óleo de Cixa de Transmissão", 10000, 15));
+        defeitos.add(new Defeito("Motor esoutrado", 25000, 30));
+        defeitos.add(new Defeito("Falha Elétrica", 1200, 7));
+        defeitos.add(new Defeito("Bomba de combustível", 300, 1));
 
         int opcaoEscolhida = 0;
         do {

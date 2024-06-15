@@ -1,4 +1,5 @@
 package Classes;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 import Construtores.Carro;
@@ -19,7 +20,10 @@ public class InterecaoUsuario {
     final String RECIVE_CAR = "Informe a marca do carro: ";
     final String RECIVE_MODEL = "Informe o modelo do carro: ";
     final String RECIVE_YEAR = "Informe o ano do carro: ";
+    final String SUCCESS_RESOLVE = "Ordem de serviço resolvida com sucesso!";
+    final String GIFT = "Obrigado por escolher nossa oficina, você GANHOU uma lavagem e um poliemento";
     final String ORDER_ID = "Qual das ordens de serviço você deseja rescolver: ";
+    final String ORDER_RESOLVE_INTRODUCTIO = "Segue abaixo as ordens de serviço que você possui em aberto: ";
 
     public int escolhaOpcao() {
         int opcaoEscolher = 0;
@@ -63,10 +67,13 @@ public class InterecaoUsuario {
     }
 
     public OrdemDeServico ordemAResolver(List<OrdemDeServico> listaDeOrdens) {
-        System.out.println(ORDER_ID);
+        System.out.println(ORDER_RESOLVE_INTRODUCTIO);
         apresentaOrdems(listaDeOrdens);
         int numeroOrder = 0;
+        System.out.println(ORDER_ID);
         numeroOrder = leitor.nextInt();
+        System.out.println(SUCCESS_RESOLVE);
+        System.out.println(GIFT);
         return listaDeOrdens.get(numeroOrder-1);
     }
 
@@ -76,7 +83,7 @@ public class InterecaoUsuario {
         listaDeOrdens.forEach(
             ordem -> {
                 System.out.println(
-                    (listaDeOrdens.indexOf(ordem) + 1) + "----------------------------------------" + "\n" + ordem);
+                    (listaDeOrdens.indexOf(ordem) + 1) + "° Ordem -----------------------------------" + "\n" + ordem);
             }
         );
     }
