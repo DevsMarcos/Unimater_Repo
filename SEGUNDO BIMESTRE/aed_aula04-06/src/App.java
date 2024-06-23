@@ -50,13 +50,19 @@ public class App {
                     opcaoEscolhida = 0;
                 }
                 case 4 -> {
+                    OrdemDeServico ordemEscolhidaDevolucao = opcaoIntereacao.ordemRemover(listaDeOrdens);
+                    listaDeOrdens = adicionarServico.resolverOrdem(listaDeOrdens, ordemEscolhidaDevolucao);
+                    opcaoEscolhida = 0;
+                }
+                case 5 -> {
                     System.out.println(FINISH_APPLICATION);
+                    return;
                 }
                 default -> {
                     System.out.println(WARNIGN_MESSAGE);
                 }
             }
-        } while (opcaoEscolhida != 4);
+        } while (opcaoEscolhida != 5);
 
         listaDeOrdens.forEach(System.out::println);
     }
