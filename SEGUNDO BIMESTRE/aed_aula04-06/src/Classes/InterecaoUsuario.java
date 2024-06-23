@@ -67,25 +67,34 @@ public class InterecaoUsuario {
     }
 
     public OrdemDeServico ordemAResolver(List<OrdemDeServico> listaDeOrdens) {
-        System.out.println(ORDER_RESOLVE_INTRODUCTIO);
-        apresentaOrdems(listaDeOrdens);
-        int numeroOrder = 0;
-        System.out.println(ORDER_ID);
-        numeroOrder = leitor.nextInt();
-        System.out.println(SUCCESS_RESOLVE);
-        System.out.println(GIFT);
-        return listaDeOrdens.get(numeroOrder-1);
+        if (listaDeOrdens.isEmpty()) {
+            System.out.println("Não há orndes pendentes");
+            return null;
+        } else {
+            System.out.println(ORDER_RESOLVE_INTRODUCTIO);
+            apresentaOrdems(listaDeOrdens);
+            int numeroOrder = 0;
+            System.out.println(ORDER_ID);
+            numeroOrder = leitor.nextInt();
+            System.out.println(SUCCESS_RESOLVE);
+            System.out.println(GIFT);
+            return listaDeOrdens.get(numeroOrder - 1);
+        }
     }
 
-   
+
 
     public void apresentaOrdems(List<OrdemDeServico> listaDeOrdens){
-        listaDeOrdens.forEach(
-            ordem -> {
-                System.out.println(
-                    (listaDeOrdens.indexOf(ordem) + 1) + "° Ordem -----------------------------------" + "\n" + ordem);
-            }
-        );
+        if (listaDeOrdens.isEmpty()){
+            System.out.println("Não há ordens pendetes");
+        }else {
+            listaDeOrdens.forEach(
+                    ordem -> {
+                        System.out.println(
+                                (listaDeOrdens.indexOf(ordem) + 1) + "° Ordem -----------------------------------" + "\n" + ordem);
+                    }
+            );
+        }
     }
 
     
