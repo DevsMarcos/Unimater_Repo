@@ -7,10 +7,7 @@ import Construtores.OrdemDeServico;
 
 public class Servicos {
 
-    final String SUCESS_ADD = "Ordem adicionada com sucesso!";
-    final String SEE_THE_LIST = "Obeserve abaixo a lista de ordens: ";
-
-
+    final String SUCESS_ADD_ORDER = "Ordem adicionada com sucesso!";
 
     public OrdemDeServico gerarOrdemDeServico(Carro carro, List<Defeito> defeitos) {
         Random random = new Random();
@@ -19,13 +16,11 @@ public class Servicos {
         return novaOrdem;
     }
 
-
     public List<OrdemDeServico> adicionarOrdemLista(List<OrdemDeServico> listaDeOrndes, OrdemDeServico ordem) {
         listaDeOrndes.add(ordem);
-        System.out.println(SUCESS_ADD);
+        System.out.println(SUCESS_ADD_ORDER);
         return listaDeOrndes;
     }
-
 
     public List<OrdemDeServico> resolverOrdem(List<OrdemDeServico> listaDeServicos, OrdemDeServico ordem){
         listaDeServicos.remove(ordem);

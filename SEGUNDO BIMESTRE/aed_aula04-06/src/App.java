@@ -25,7 +25,7 @@ public class App {
         defeitos.add(new Defeito("Bateria fraca", 350, 1));
         defeitos.add(new Defeito("Pastilhas de freio gastas", 430, 2));
         defeitos.add(new Defeito("Balanceamento e Alinhamento", 180, 1));
-        defeitos.add(new Defeito("Água no óleo de Cixa de Transmissão", 10000, 15));
+        defeitos.add(new Defeito("Água no óleo de Caixa de Transmissão", 10000, 15));
         defeitos.add(new Defeito("Motor esoutrado", 25000, 30));
         defeitos.add(new Defeito("Falha Elétrica", 1200, 7));
         defeitos.add(new Defeito("Bomba de combustível", 300, 1));
@@ -48,13 +48,10 @@ public class App {
                     OrdemDeServico ordemEscolhida = opcaoIntereacao.ordemAResolver(listaDeOrdens);
                     listaDeOrdens = adicionarServico.resolverOrdem(listaDeOrdens, ordemEscolhida);
                     opcaoEscolhida = 0;
-
                 }
-
                 case 4 -> {
                     System.out.println(FINISH_APPLICATION);
                 }
-
                 default -> {
                     System.out.println(WARNIGN_MESSAGE);
                 }
@@ -62,7 +59,5 @@ public class App {
         } while (opcaoEscolhida != 4);
 
         listaDeOrdens.forEach(System.out::println);
-
     }
-
 }

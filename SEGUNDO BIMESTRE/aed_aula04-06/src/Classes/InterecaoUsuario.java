@@ -16,10 +16,10 @@ public class InterecaoUsuario {
         this.leitor = leitor;
     }
 
-
-    final String RECIVE_CAR = "Informe a marca do carro: ";
-    final String RECIVE_MODEL = "Informe o modelo do carro: ";
-    final String RECIVE_YEAR = "Informe o ano do carro: ";
+    final String EMPYT_LIST_ORDER = "Não há ordens de serviço pendentes";
+    final String RECIVE_CAR_BRAND = "Informe a marca do carro: ";
+    final String RECIVE_MODEL_CAR = "Informe o modelo do carro: ";
+    final String RECIVE_YEAR_CAR = "Informe o ano do carro: ";
     final String SUCCESS_RESOLVE = "Ordem de serviço resolvida com sucesso!";
     final String GIFT = "Obrigado por escolher nossa oficina, você GANHOU uma lavagem e um poliemento";
     final String ORDER_ID = "Qual das ordens de serviço você deseja rescolver: ";
@@ -48,13 +48,13 @@ public class InterecaoUsuario {
         String modelo = "";
         int ano = 0;
 
-        System.out.println(RECIVE_CAR);
+        System.out.println(RECIVE_CAR_BRAND);
         marca = leitor.nextLine();
 
-        System.out.println(RECIVE_MODEL);
+        System.out.println(RECIVE_MODEL_CAR);
         modelo = leitor.nextLine();
 
-        System.out.println(RECIVE_YEAR);
+        System.out.println(RECIVE_YEAR_CAR);
         ano = leitor.nextInt();
         return new Carro(marca, modelo, ano);
     }
@@ -68,7 +68,7 @@ public class InterecaoUsuario {
 
     public OrdemDeServico ordemAResolver(List<OrdemDeServico> listaDeOrdens) {
         if (listaDeOrdens.isEmpty()) {
-            System.out.println("Não há orndes pendentes");
+            System.out.println(EMPYT_LIST_ORDER);
             return null;
         } else {
             System.out.println(ORDER_RESOLVE_INTRODUCTIO);
@@ -82,16 +82,14 @@ public class InterecaoUsuario {
         }
     }
 
-
-
     public void apresentaOrdems(List<OrdemDeServico> listaDeOrdens){
         if (listaDeOrdens.isEmpty()){
-            System.out.println("Não há ordens pendetes");
+            System.out.println(EMPYT_LIST_ORDER);
         }else {
             listaDeOrdens.forEach(
                     ordem -> {
-                        System.out.println(
-                                (listaDeOrdens.indexOf(ordem) + 1) + "° Ordem -----------------------------------" + "\n" + ordem);
+                        System.out.println((listaDeOrdens.indexOf(ordem) + 1) +
+                                "° Ordem -----------------------------------" + "\n" + ordem);
                     }
             );
         }
