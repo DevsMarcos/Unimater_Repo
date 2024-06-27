@@ -1,7 +1,9 @@
 package Classes;
+
 import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
+
 import Construtores.Carro;
 import Construtores.Defeito;
 import Construtores.OrdemDeServico;
@@ -12,7 +14,7 @@ public class InterecaoUsuario {
 
     Servicos adicionarServico = new Servicos();
 
-    public InterecaoUsuario(Scanner leitor){
+    public InterecaoUsuario(Scanner leitor) {
         this.leitor = leitor;
     }
 
@@ -24,13 +26,13 @@ public class InterecaoUsuario {
     final String GIFT = "Obrigado por escolher nossa oficina, você GANHOU uma LAVAGEM e um POLIMENTO ;)";
     final String ORDER_ID = "Qual das ordens de serviço você deseja resolver: ";
     final String ORDER_ID_DEVOLUTION = "Qaul ordem de serviço você deseja reprovar: ";
-    final String ORDE_DEVOLUTION_MENSSAGE = "Ordem reprovada!";
+    final String ORDE_DEVOLUTION_MENSSAGE = "Ordem reprovada! O veículo está sendo devolvido da mesma forma como entregue por CONTA e RISCO do CLIENTE!";
     final String ORDER_RESOLVE_INTRODUCTIO = "Segue abaixo as ordens de serviço que você possui em aberto: ";
 
     public int escolhaOpcao() {
         int opcaoEscolher = 0;
         System.out.println("""
-                
+                                
                 AvantGarde Performance & Maintenance
                 Escolha uma das opções abaixo:
                 1. Adicionar Ordem de Serviço
@@ -62,11 +64,11 @@ public class InterecaoUsuario {
         return new Carro(marca, modelo, ano);
     }
 
-    public OrdemDeServico criarOrdem(List<Defeito> defeitos){
+    public OrdemDeServico criarOrdem(List<Defeito> defeitos) {
         Carro carro = this.criarCarro();
         OrdemDeServico novaOrdem = adicionarServico.gerarOrdemDeServico(carro, defeitos);
         return novaOrdem;
-        
+
     }
 
     public OrdemDeServico ordemAResolver(List<OrdemDeServico> listaDeOrdens) {
@@ -84,6 +86,7 @@ public class InterecaoUsuario {
             return listaDeOrdens.get(numeroOrder - 1);
         }
     }
+
     public OrdemDeServico ordemRemover(List<OrdemDeServico> listaDeOrdens) {
         if (listaDeOrdens.isEmpty()) {
             System.out.println(EMPYT_LIST_ORDER);
@@ -99,10 +102,10 @@ public class InterecaoUsuario {
         }
     }
 
-    public void apresentaOrdems(List<OrdemDeServico> listaDeOrdens){
-        if (listaDeOrdens.isEmpty()){
+    public void apresentaOrdems(List<OrdemDeServico> listaDeOrdens) {
+        if (listaDeOrdens.isEmpty()) {
             System.out.println(EMPYT_LIST_ORDER);
-        }else {
+        } else {
             listaDeOrdens.forEach(
                     ordem -> {
                         System.out.println((listaDeOrdens.indexOf(ordem) + 1) +
@@ -112,6 +115,5 @@ public class InterecaoUsuario {
         }
     }
 
-    
 
 }

@@ -1,6 +1,8 @@
 package Classes;
+
 import java.util.List;
 import java.util.Random;
+
 import Construtores.Carro;
 import Construtores.Defeito;
 import Construtores.OrdemDeServico;
@@ -22,7 +24,7 @@ public class Servicos {
         return listaDeOrndes;
     }
 
-    public List<OrdemDeServico> resolverOrdem(List<OrdemDeServico> listaDeServicos, OrdemDeServico ordem){
+    public List<OrdemDeServico> resolverOrdem(List<OrdemDeServico> listaDeServicos, OrdemDeServico ordem) {
         listaDeServicos.remove(ordem);
         return listaDeServicos;
     }

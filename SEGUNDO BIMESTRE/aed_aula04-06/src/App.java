@@ -9,7 +9,7 @@ import Construtores.OrdemDeServico;
 
 public class App {
     public static void main(String[] args) {
-        final String FINISH_APPLICATION = "Ecerrando aplicação.....";
+        final String FINISH_APPLICATION = "Obrigado e tenha um Bom Dia :)";
         final String WARNIGN_MESSAGE = "Opção inválida, tente novamente";
 
         Scanner leitor = new Scanner(System.in);
@@ -63,7 +63,5 @@ public class App {
                 }
             }
         } while (opcaoEscolhida != 5);
-
-        listaDeOrdens.forEach(System.out::println);
     }
 }
