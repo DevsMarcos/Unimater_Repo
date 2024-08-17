@@ -1,4 +1,6 @@
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,7 +9,7 @@ public class Main {
         filme1.setNome("Top Gun: Maverick");
         filme1.setAno(2022);
 
-        ArrayList<Filme> listaDeFilmes = new ArrayList<>();
+        List<Filme> listaDeFilmes = new ArrayList<>();
 
         Filme f;
         f = new Filme(2024, "Barbie");
@@ -21,9 +23,7 @@ public class Main {
 
         System.out.println(listaDeFilmes.size()+ " Filmes");
 
-        for (Filme filme : listaDeFilmes){
-            filme.print();
-        }
+        listaDeFilmes.forEach(Filme::print);
 
 
     }

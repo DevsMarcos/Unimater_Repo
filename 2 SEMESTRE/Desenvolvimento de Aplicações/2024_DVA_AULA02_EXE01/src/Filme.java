@@ -29,10 +29,18 @@ public class Filme {
     }
 
     public void print(){
-        System.out.println(String.format("""
+        System.out.printf(String.format("""
                 Filme %s lançado em %d
                 """,
                 this.nome,
                 this.ano));
+    }
+
+    @Override
+    public String toString() {
+        return "Filme{" +
+                "ano=" + ano +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 }
