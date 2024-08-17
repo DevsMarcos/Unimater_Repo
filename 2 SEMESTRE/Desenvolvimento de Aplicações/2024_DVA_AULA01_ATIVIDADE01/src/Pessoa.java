@@ -1,7 +1,6 @@
 public class Pessoa extends Endereco {
     private int idade;
     private String nome;
-    private String endereco;
 
     public int getIdade() {
         return idade;
@@ -19,10 +18,13 @@ public class Pessoa extends Endereco {
         this.nome = nome;
     }
 
-    @Override
-    public String toString() {
-        return "Nome: "+getNome() +'\n'+
+    public String printarInformacoes() {
+        return "========================"+ '\n'+
+                "Nome: "+getNome() +'\n'+
                 "Idade: "+getIdade() + '\n'+
-                super.toString();
+                "Endereço: "+getRua()+ '\n'+
+                "Número: "+getNumero()+ '\n'+
+                "Cidade: "+getCidade()+ '\n'+
+                "========================"+ '\n';
     }
 }

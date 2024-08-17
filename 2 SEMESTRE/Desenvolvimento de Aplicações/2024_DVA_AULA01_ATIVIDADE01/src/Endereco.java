@@ -27,8 +27,4 @@ public class Endereco {
         this.cidade = cidade;
     }
 
-    @Override
-    public String toString() {
-        return "Endereço -> "+ "Rua: "+getRua()+", Número: "+getNumero()+ ", Cidade: "+getCidade();
-    }
 }
