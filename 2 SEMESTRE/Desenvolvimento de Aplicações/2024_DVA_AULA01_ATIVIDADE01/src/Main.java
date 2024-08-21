@@ -44,5 +44,17 @@ public class Main {
 
         System.out.println(pessoa1.printarInfos());
         System.out.println(pessoa2.printarInfos());
+
+        /*Como as funções para definir e obter valores ajudam a proteger e controlar o acesso aos dados dos objetos?
+        * Pois permite realiza o acesso e modificação controlada dos tributos do objeto em questão, impedindo comportamentos inesperados
+        * e a atribuição de valores indesejados aos atributos, ale´m de ser possível com essa prática, realizar a manutenção e evoluçaõ do código
+        * de forma simplificada o tipos de aceeso em determinadas circunstâncias;
+        * */
+
+        /*Qual seria a vantagem de utilizar esses conceitos em um sistema mais complexo?
+         A vantegem está justamente na manutenção do código, pois permite realizar refatorações de forma simplificada,
+         reaalizar o controle de acesso e modificação dos atributos, e eseconder a complexidade dos projeto em si além de
+         realizar a proteção dos dados como um todo
+         */
     }
 }
