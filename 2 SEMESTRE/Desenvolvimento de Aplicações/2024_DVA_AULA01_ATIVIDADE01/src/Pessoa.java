@@ -1,7 +1,6 @@
 public class Pessoa {
     private int idade;
     private String nome;
-    private String endereco;
 
 
     public String getEndereco() {
@@ -28,6 +27,7 @@ public class Pessoa {
         this.nome = nome;
     }
 
+<<<<<<< HEAD
 
     public String printarInfos() {
         return  "Nome: " + getNome() + '\n' +
@@ -36,5 +36,15 @@ public class Pessoa {
                 getEndereco() + '\n'+
             "========================="+'\n'
         ;
+=======
+    public String printarInformacoes() {
+        return "========================"+ '\n'+
+                "Nome: "+getNome() +'\n'+
+                "Idade: "+getIdade() + '\n'+
+                "Endereço: "+getRua()+ '\n'+
+                "Número: "+getNumero()+ '\n'+
+                "Cidade: "+getCidade()+ '\n'+
+                "========================"+ '\n';
+>>>>>>> 30f5995c3e71d1930cf881c6e61d09345dc4d9f9
     }
 }

@@ -35,10 +35,13 @@ public class Endereco {
         this.cidade = cidade;
     }
 
+<<<<<<< HEAD
     @Override
     public String toString() {
         return "Rua: " + getRua() + '\n' +
                 "Número: " + getNumero() + '\n' +
                 "Cidade: " + getCidade() + '\n';
     }
+=======
+>>>>>>> 30f5995c3e71d1930cf881c6e61d09345dc4d9f9
 }
