@@ -3,6 +3,14 @@ public class Endereco {
     private int numero;
     private String cidade;
 
+
+
+//    public Endereco(String rua, int numero, String cidade) {
+//        this.rua = rua;
+//        this.numero = numero;
+//        this.cidade = cidade;
+//    }
+
     public String getRua() {
         return rua;
     }
@@ -29,6 +37,8 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return "Endereço -> "+ "Rua: "+getRua()+", Número: "+getNumero()+ ", Cidade: "+getCidade();
+        return "Rua: " + getRua() + '\n' +
+                "Número: " + getNumero() + '\n' +
+                "Cidade: " + getCidade() + '\n';
     }
 }
