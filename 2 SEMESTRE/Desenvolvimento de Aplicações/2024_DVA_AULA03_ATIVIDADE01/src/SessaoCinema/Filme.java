@@ -4,9 +4,12 @@ public class Filme {
     private String nomeFilme;
     private int anoLancamento;
 
-    public Filme(int anoLancamento, String nomeFilme) {
-        this.anoLancamento = anoLancamento;
+    public void setNomeFilme(String nomeFilme) {
         this.nomeFilme = nomeFilme;
+    }
+
+    public void setAnoLancamento(int anoLancamento) {
+        this.anoLancamento = anoLancamento;
     }
 
     public int getAnoLancamento() {
