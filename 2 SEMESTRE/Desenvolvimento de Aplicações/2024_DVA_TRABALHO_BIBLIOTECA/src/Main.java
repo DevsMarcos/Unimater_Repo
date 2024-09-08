@@ -16,7 +16,5 @@ public class Main {
         for (Autor autor : listaDeAutores){
             System.out.println(autor);
         }
-
-
     }
 }

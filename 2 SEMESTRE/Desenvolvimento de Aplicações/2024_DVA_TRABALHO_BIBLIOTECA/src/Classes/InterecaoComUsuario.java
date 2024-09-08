@@ -35,7 +35,7 @@ public class InterecaoComUsuario {
         return new Autor(nome, nacionalidade, anoNascimento);
     }
 
-    private Livro criarNovoLivro(){
+    private Livro criarNovoLivro() {
         String tituloDoLivro = "";
         int anoDeLancameto = 0;
         boolean disponivel = true;
@@ -54,5 +54,30 @@ public class InterecaoComUsuario {
         adicionarServiços.adicionarAutorLista(listaDeAutores, autor);
         System.out.println("Autor adicionado à lista com sucesso!");
         return listaDeAutores;
-    };
+    }
+
+    ;
+
+    public List<Autor> aidicionarLivroAListaDoAutor(List<Autor> listaDeAutores) {
+        Livro livro = this.criarNovoLivro();
+        System.out.println("Autores disponíveis: ");
+
+        for (int i = 0; i < listaDeAutores.size(); i++) {
+            System.out.println((i + 1) + ". " + listaDeAutores.get(i).getNome());
+        }
+        System.out.println("Digite o autor ao qual você deseja adicionar o livro criado");
+
+        int escolha = leitor.nextInt();
+
+        if (escolha < 1 || escolha > listaDeAutores.size()) {
+            System.out.println("Opção informada inválida tente novamente!");
+
+
+        }
+        Autor autorSelecionado = listaDeAutores.get(escolha - 1);
+        autorSelecionado.adicionarLivro(livro);
+        System.out.println("Livro vinculado ao autor com sucesso!");
+
+        return listaDeAutores;
+    }
 }
