@@ -8,13 +8,29 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner leitor = new Scanner(System.in);
-        List<Autor> listaDeAutores = new ArrayList<>();
         InterecaoComUsuario novaInteracao = new InterecaoComUsuario(leitor);
 
-        listaDeAutores = novaInteracao.adcionarNaListaDeAutores(listaDeAutores);
+        List<Autor> listaDeAutores = new ArrayList<>();
 
-        for (Autor autor : listaDeAutores){
-            System.out.println(autor);
-        }
+
+        int opcao = 0;
+
+        do {
+            novaInteracao.opcoesDeEscolha();
+            opcao = leitor.nextInt();
+
+            switch (opcao){
+                case 1 -> {
+                    listaDeAutores = novaInteracao.criarNovoAutor(listaDeAutores);
+                }
+                case 2 ->{
+                    novaInteracao.criarNovoLivro(listaDeAutores);
+                }
+                case 6->{
+                    novaInteracao.verificarLivrosDisponiveisPorAutor(listaDeAutores);
+                }
+            }
+
+        }while (opcao != 0);
     }
 }

@@ -19,6 +19,7 @@ public class Serviços {
 
     public List<Autor> vincularLivroAoAutor(List<Autor> autores, Autor autor, Livro livro){
         autor.adicionarLivro(livro);
+        autores.add(autor);
         System.out.println(SUCESS_ADD_BOOK_AUTOR);
         return autores;
     }

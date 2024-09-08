@@ -9,6 +9,10 @@ public class Autor {
     private String nacionalidade;
     private List<Livro> livros;
 
+    public Autor() {
+
+    }
+
     public Autor(String nome, String nacionalidade, int anoDenascimento) {
         this.nome = nome;
         this.livros = new ArrayList<>();
@@ -22,6 +26,10 @@ public class Autor {
 
     public void adicionarLivro(Livro livro){
         livros.add(livro);
+    }
+
+    public List<Livro> getLivros(){
+        return livros;
     }
 
     @Override

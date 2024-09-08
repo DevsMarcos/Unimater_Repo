@@ -4,35 +4,22 @@ public class Livro {
     private String titulo;
     private int dataDeLancamento;
     private boolean disponivel;
-    private Autor autor;
+    private String nomeAutor;
 
-    public Livro(String titulo, int dataDeLancamento, boolean disponivel) {
+    public Livro(String nomeAutor, String titulo, int dataDeLancamento, boolean disponivel) {
+        this.nomeAutor = nomeAutor;
         this.titulo = titulo;
         this.dataDeLancamento = dataDeLancamento;
         this.disponivel = disponivel;
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
+    @Override
+    public String toString() {
+        return
+                "Titulo: "+titulo+ "\n" +
+                "Data de Lançamento: " + dataDeLancamento + "\n"+
+                "Autor: "+ nomeAutor + "\n"+
+                "Disponível: " + disponivel + "\n";
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
-
-    public int getDataDeLancamento() {
-        return dataDeLancamento;
-    }
-
-    public void setDataDeLancamento(int dataDeLancamento) {
-        this.dataDeLancamento = dataDeLancamento;
     }
 }
