@@ -21,14 +21,17 @@ public class Autor {
     }
 
     public String getNome() {
+
         return nome;
     }
 
     public void adicionarLivro(Livro livro){
+
         livros.add(livro);
     }
 
     public List<Livro> getLivros(){
+
         return livros;
     }
 

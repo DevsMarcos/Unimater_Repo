@@ -1,5 +1,6 @@
 import Classes.InterecaoComUsuario;
 import Construtores.Autor;
+import Construtores.Membro;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class Main {
         InterecaoComUsuario novaInteracao = new InterecaoComUsuario(leitor);
 
         List<Autor> listaDeAutores = new ArrayList<>();
+        List<Membro> listaDeMembros = new ArrayList<>();
 
 
         int opcao = 0;
@@ -27,10 +29,15 @@ public class Main {
                     novaInteracao.criarNovoLivro(listaDeAutores);
                 }
                 case 6->{
-                    novaInteracao.verificarLivrosDisponiveisPorAutor(listaDeAutores);
+                    novaInteracao.verificarLivrosPorAutorOuTodosOsLivros(listaDeAutores);
+                }
+                case 7 -> {
+                    listaDeMembros = novaInteracao.criarNovoMembro(listaDeMembros);
+                    for (Membro membro: listaDeMembros){
+                        System.out.println(membro.toString());
+                    }
                 }
             }
-
         }while (opcao != 0);
     }
 }
