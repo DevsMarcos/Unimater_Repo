@@ -1,17 +1,16 @@
 package Construtores;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Autor {
-    private String nome;
-    private int anoDenascimento;
-    private String nacionalidade;
+    private final String nome;
+    private final int anoDenascimento;
+    private final String nacionalidade;
     private List<Livro> livros;
 
-    public Autor() {
-
-    }
 
     public Autor(String nome, String nacionalidade, int anoDenascimento) {
         this.nome = nome;
@@ -24,10 +23,6 @@ public class Autor {
         return nome;
     }
 
-    public int getISBN(){
-        return getISBN();
-    }
-
     public void adicionarLivro(Livro livro){
 
         livros.add(livro);
@@ -35,7 +30,7 @@ public class Autor {
 
     public List<Livro> getLivros(){
 
-        return livros;
+        return Collections.unmodifiableList(livros);
     }
 
     @Override

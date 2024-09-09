@@ -5,11 +5,45 @@ import Construtores.Livro;
 import Construtores.Membro;
 
 import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Serviços {
     final String SUCESS_ADD_AUTOR = "Autor adicionado com sucesso!";
     final String SUCESS_ADD_BOOK_AUTOR = "Livro vinculado ao autor com sucesso!";
 
+    public void apresentarHistoricoDeLivrosPorMembro(List<Membro> listaDeMembros, Scanner leitor){
+        int membroEscolhido = 0;
+        System.out.println("Escolha um dos membros que você deseja verificar o histórico: \n");
+        this.mostrarListaDeMembros(listaDeMembros);
+        membroEscolhido = leitor.nextInt();
+        Membro membro = listaDeMembros.get(membroEscolhido - 1);
+        List<Livro> historicoDeLivros = membro.historicoDeLivros();
+
+        System.out.println("Segue abaixo o histórico de libros o membro: " + membro.getNome() + "\n");
+        for (Livro livro : historicoDeLivros) {
+            System.out.printf("""
+                    Nome do Livro: %s
+                    Data de lançamento: %d
+                    Autor: %s
+                    ISBN: %d
+                    """, livro.getTitulo(), livro.getDataDeLancamento(), livro.getNomeAutor(), livro.getIsbn());
+        }
+
+    }
+
+    public void mostrarListaDeMembros(List<Membro> listaDeMembros){
+        for (int i = 0; i < listaDeMembros.size(); i++) {
+            System.out.println((i + 1) + ". " + listaDeMembros.get(i).toString());
+
+        }
+    }
+
+    public void apresentarAutores(List<Autor> listaDeAutores){
+        for (int i = 0; i < listaDeAutores.size(); i++) {
+            System.out.println((i + 1) + ". " + listaDeAutores.get(i).getNome());
+        }
+    }
 
 
     public List<Autor> adicionarAutorLista(List<Autor> autores, Autor autor){
@@ -37,6 +71,15 @@ public class Serviços {
             }
         return null; // Retorna null se o livro não for encontrado
     };
+
+    public int geradorDeCodigosEId(){
+        int numeroGerado = 0;
+        Random gerador = new Random();
+
+        numeroGerado = gerador.nextInt(100000);
+        return numeroGerado;
+
+    }
 
 
 

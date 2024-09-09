@@ -1,11 +1,11 @@
 package Construtores;
 
 public class Livro {
-    private String titulo;
-    private int dataDeLancamento;
+    private final String titulo;
+    private final int dataDeLancamento;
     private String disponivel;
-    private String nomeAutor;
-    private int isbn;
+    private final String nomeAutor;
+    private final int isbn;
 
     public Livro(String nomeAutor, String titulo, int dataDeLancamento, String disponivel, int isbn) {
         this.nomeAutor = nomeAutor;
@@ -34,28 +34,39 @@ public class Livro {
     }
 
     public String verificarDisponibilidade() {
+
         return disponivel;
     }
 
-    public String emprestarLivro(){
-        return disponivel = "Indisponível";
+    public String emprestarLivro() {
+        if (disponivel.equals("Indisponível")) {
+            System.out.println("O livro já foi emprestado!");
+            return disponivel;
+        } else {
+
+            return disponivel = "Indisponível";
+        }
     }
 
-    public String devolverLivro(){
+    public String devolverLivro() {
+        if (disponivel.equals("Disponível")) {
+            System.out.println("O livro está disponível");
+            return disponivel;
+        } else {
 
-        return disponivel = "Dispobível";
+            return disponivel = "Dispobível";
+        }
     }
-
 
 
     @Override
     public String toString() {
         return
-                "Titulo: "+titulo+ "\n" +
-                "Data de Lançamento: " + dataDeLancamento + "\n"+
-                "Autor: "+ nomeAutor + "\n"+
-                "Status de Empréstimo: " + disponivel + "\n"+
-                "ISBN: "+getIsbn() +"\n";
+                "Titulo: " + titulo + "\n" +
+                        "Data de Lançamento: " + dataDeLancamento + "\n" +
+                        "Autor: " + nomeAutor + "\n" +
+                        "Status de Empréstimo: " + disponivel + "\n" +
+                        "ISBN: " + getIsbn() + "\n";
 
     }
 }
