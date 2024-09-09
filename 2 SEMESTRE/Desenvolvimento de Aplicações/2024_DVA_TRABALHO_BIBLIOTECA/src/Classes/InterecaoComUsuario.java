@@ -17,9 +17,8 @@ public class InterecaoComUsuario {
             4. Verificar lista de membros
             5. Veriricar livros por autor
             6. Verificar Livros pedentes de devolução
-            7. Verificar Livros disponíveis para empréstimo
-            8. Realizar Emprestimo (Realiza empréstimos de Livros)
-            9. Realizar Devolução (Realiza a devolução de Livros)
+            7. Realizar Emprestimo (Realiza empréstimos de Livros)
+            8. Realizar Devolução (Realiza a devolução de Livros)
             0. Sair
             
             """;
@@ -69,7 +68,7 @@ public class InterecaoComUsuario {
         String nomeDoAutor = "";
         int anoDeLancameto = 0;
         int isbn = 0;
-        boolean disponivel = true;
+        String disponivel = "Disponível";
 
         if (listaDeAutores.isEmpty()) {
             System.out.println("Não há autores disponíveis na biblioteca no momento. Crie um novo autor para continuar.");
@@ -117,10 +116,16 @@ public class InterecaoComUsuario {
             System.out.println("Opção informada inválida tente novamente!");
         } else {
             Autor autorSelecioando = listaDeAutores.get(escolha -1);
-            System.out.println("Segue abaixo os livros do autor: "+autorSelecioando.getNome());
-            for (int i = 0; i < listaDeAutores.size(); i++) {
-                System.out.println((i + 1)+" - "+ listaDeAutores.get(i).getLivros());
+            List<Livro> livrosDoAutor = autorSelecioando.getLivros(); // Supondo que você tenha um método getLivros() na classe Autor
+            if (livrosDoAutor.isEmpty()) {
+                System.out.println("Este autor não possui livros cadastrados.");
+                return;
+            }
 
+            System.out.println("Segue abaixo os livros do autor: "+autorSelecioando.getNome());
+            for (int i = 0; i < livrosDoAutor.size(); i++) {
+                Livro livro = livrosDoAutor.get(i);
+                System.out.println((i + 1) + ". " + livro.toString() +"\n"); // Supondo que você tenha um método getTitulo() na classe Livro
             }
         }
     }
@@ -237,7 +242,7 @@ public class InterecaoComUsuario {
         System.out.println("Informe o livro que deseja emprestar: ");
         for (int i = 0; i < livrosDoAutor.size(); i++) {
             Livro livro = livrosDoAutor.get(i);
-            System.out.println((i + 1) + ". " + livro.getTitulo()); // Supondo que você tenha um método getTitulo() na classe Livro
+            System.out.println((i + 1) + ". " + livro.toString()); // Supondo que você tenha um método getTitulo() na classe Livro
         }
         livroEscolhido = leitor.nextInt() - 1; // Ajustar o índice para zero-based
         leitor.nextLine(); // Consumir o restante da linha
@@ -249,12 +254,15 @@ public class InterecaoComUsuario {
 
         Livro livro = livrosDoAutor.get(livroEscolhido);
 
+        if (livro.verificarDisponibilidade().equals("Indisponível")){
+            System.out.println("Livro indisponível para empréstimo!");
+        }else {
+            membro.adicionarLivro(livro); // Supondo que você tenha um método adicionarLivro(Livro livro) na classe Membro
+            livro.emprestarLivro();
+            System.out.println("Livro emprestado com sucesso!");
+        }
+
         // Adicionar o livro à lista de empréstimos do membro
-        membro.adicionarLivro(livro); // Supondo que você tenha um método adicionarLivro(Livro livro) na classe Membro
-        livro.emprestarLivro();
-
-        System.out.println("Livro emprestado com sucesso!");
-
 
     }
 }

@@ -3,11 +3,11 @@ package Construtores;
 public class Livro {
     private String titulo;
     private int dataDeLancamento;
-    private boolean disponivel;
+    private String disponivel;
     private String nomeAutor;
     private int isbn;
 
-    public Livro(String nomeAutor, String titulo, int dataDeLancamento, boolean disponivel, int isbn) {
+    public Livro(String nomeAutor, String titulo, int dataDeLancamento, String disponivel, int isbn) {
         this.nomeAutor = nomeAutor;
         this.titulo = titulo;
         this.dataDeLancamento = dataDeLancamento;
@@ -16,23 +16,26 @@ public class Livro {
     }
 
     public String getTitulo() {
+
         return titulo;
     }
 
     public int getIsbn() {
+
         return isbn;
     }
 
-    public boolean verificarDisponibilidade() {
+    public String verificarDisponibilidade() {
         return disponivel;
     }
 
-    public boolean emprestarLivro(){
-        return disponivel = false;
+    public String emprestarLivro(){
+        return disponivel = "Indisponível";
     }
 
-    public boolean devolverLivro(){
-        return disponivel = true;
+    public String devolverLivro(){
+
+        return disponivel = "Dispobível";
     }
 
     @Override
@@ -41,7 +44,7 @@ public class Livro {
                 "Titulo: "+titulo+ "\n" +
                 "Data de Lançamento: " + dataDeLancamento + "\n"+
                 "Autor: "+ nomeAutor + "\n"+
-                "Disponível: " + disponivel + "\n"+
+                "Status de Empréstimo: " + disponivel + "\n"+
                 "ISBN: "+isbn +"\n";
 
     }

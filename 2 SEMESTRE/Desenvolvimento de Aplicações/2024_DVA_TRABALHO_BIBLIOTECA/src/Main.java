@@ -37,7 +37,7 @@ public class Main {
                 case 5 -> {
                     novaInteracao.verificarLivrosPorAutorOuTodosOsLivros(listaDeAutores);
                 }
-                case 8 ->{
+                case 7 ->{
                     novaInteracao.emprestarLivros(listaDeAutores, listaDeMembros);
                 }
             }
