@@ -21,8 +21,11 @@ public class Autor {
     }
 
     public String getNome() {
-
         return nome;
+    }
+
+    public int getISBN(){
+        return getISBN();
     }
 
     public void adicionarLivro(Livro livro){

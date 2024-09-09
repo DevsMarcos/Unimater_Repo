@@ -21,23 +21,26 @@ public class Main {
             novaInteracao.opcoesDeEscolha();
             opcao = leitor.nextInt();
 
-            switch (opcao){
+            switch (opcao) {
                 case 1 -> {
                     listaDeAutores = novaInteracao.criarNovoAutor(listaDeAutores);
                 }
-                case 2 ->{
+                case 2 -> {
                     novaInteracao.criarNovoLivro(listaDeAutores);
                 }
-                case 6->{
+                case 3 -> {
+                    listaDeMembros = novaInteracao.criarNovoMembro(listaDeMembros);
+                }
+                case 4 -> {
+                    novaInteracao.printarListaDeMembros(listaDeMembros);
+                }
+                case 5 -> {
                     novaInteracao.verificarLivrosPorAutorOuTodosOsLivros(listaDeAutores);
                 }
-                case 7 -> {
-                    listaDeMembros = novaInteracao.criarNovoMembro(listaDeMembros);
-                    for (Membro membro: listaDeMembros){
-                        System.out.println(membro.toString());
-                    }
+                case 8 ->{
+                    novaInteracao.emprestarLivros(listaDeAutores, listaDeMembros);
                 }
             }
-        }while (opcao != 0);
+        } while (opcao != 0);
     }
 }

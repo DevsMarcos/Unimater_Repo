@@ -18,8 +18,14 @@ public class Membro {
         return nome;
     }
 
+
     public int getIdMembro() {
         return idMembro;
+    }
+
+    public void adicionarLivro(Livro livro){
+
+        historicoDeLivros.add(livro);
     }
 
     @Override

@@ -19,6 +19,22 @@ public class Livro {
         return titulo;
     }
 
+    public int getIsbn() {
+        return isbn;
+    }
+
+    public boolean verificarDisponibilidade() {
+        return disponivel;
+    }
+
+    public boolean emprestarLivro(){
+        return disponivel = false;
+    }
+
+    public boolean devolverLivro(){
+        return disponivel = true;
+    }
+
     @Override
     public String toString() {
         return

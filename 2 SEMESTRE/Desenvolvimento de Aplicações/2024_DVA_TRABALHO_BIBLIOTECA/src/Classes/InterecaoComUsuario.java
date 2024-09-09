@@ -13,11 +13,13 @@ public class InterecaoComUsuario {
             
             1. Criar Autor (Adiciona novo autor ao catálogo da biblioteca)
             2. Criar Livro (Vincula livro lançamento ao autor)
-            3. Realizar Emprestimo (Realiza empréstimos de Livros)
-            4. Realizar Devolução (Realiza a devolução de Livros)
-            5. Verificar Livros pedentes de devolução
-            6. Verificar Livros disponíveis para empréstimo
-            7. Adicionar novo membro à biblioteca
+            3. Adicionar novo membro à biblioteca
+            4. Verificar lista de membros
+            5. Veriricar livros por autor
+            6. Verificar Livros pedentes de devolução
+            7. Verificar Livros disponíveis para empréstimo
+            8. Realizar Emprestimo (Realiza empréstimos de Livros)
+            9. Realizar Devolução (Realiza a devolução de Livros)
             0. Sair
             
             """;
@@ -116,8 +118,9 @@ public class InterecaoComUsuario {
         } else {
             Autor autorSelecioando = listaDeAutores.get(escolha -1);
             System.out.println("Segue abaixo os livros do autor: "+autorSelecioando.getNome());
-            for (Livro livro: autorSelecioando.getLivros()){
-                System.out.println(livro.toString());
+            for (int i = 0; i < listaDeAutores.size(); i++) {
+                System.out.println((i + 1)+" - "+ listaDeAutores.get(i).getLivros());
+
             }
         }
     }
@@ -149,8 +152,11 @@ public class InterecaoComUsuario {
 
             Estudante estudante = new Estudante(nomeEstudante, idEstudante, curos);
 
+            System.out.printf("Membro %s, adiccionando aos membros da biblioteca com sucesso!", nomeEstudante);
+
             listaDeMembros.add(estudante);
         } else if (tipoMembro == 2) {
+
             String nomeProfessor = "";
             int idProfessor = 0;
             String departamento = "";
@@ -169,10 +175,86 @@ public class InterecaoComUsuario {
 
             Professor novoProfessor = new Professor(nomeProfessor, idProfessor, departamento, materia);
 
+            System.out.printf("Membro %s, adicionado aos membros da bilbioteca com sucesso!", nomeProfessor);
+
             listaDeMembros.add(novoProfessor);
         }else {
             System.out.println("Opção inválida tente novamente!");
         }
         return listaDeMembros;
+    }
+
+    public void printarListaDeMembros(List<Membro> listaDeMembros){
+        for (Membro membro : listaDeMembros){
+            System.out.println(membro.toString());
+        }
+    }
+
+    public void emprestarLivros(List<Autor> listaDeAutores, List<Membro> listaDeMembros){
+        int membroEscolhido = 0;
+        int livroEscolhido = 0;
+
+        if (listaDeMembros.isEmpty() ){
+            System.out.println("Adicione um membro à biblioteca primeiro!");
+            return;
+        }
+
+        if (listaDeAutores.isEmpty()){
+            System.out.println("Adicione um autor e um livro à biblioteca primeiro!");
+            return;
+
+        }
+        System.out.println("Informe a qual dos mesmbros você deseja empretar: ");
+        for (int i = 0; i < listaDeMembros.size(); i++) {
+            System.out.println((i + 1)+". "+listaDeMembros.get(i).getNome());
+
+        }
+        membroEscolhido = leitor.nextInt()-1;
+
+        Membro membro = listaDeMembros.get(membroEscolhido);
+
+        /////////////////////////////////////////////////////////////
+        System.out.println("Informe o autor do livro que deseja emprestar: ");
+        for (int i = 0; i < listaDeAutores.size(); i++) {
+            System.out.println((i + 1) + ". " + listaDeAutores.get(i).getNome());
+        }
+        int autorEscolhido = leitor.nextInt() - 1; // Ajustar o índice para zero-based
+        leitor.nextLine(); // Consumir o restante da linha
+
+        if (autorEscolhido < 0 || autorEscolhido >= listaDeAutores.size()) {
+            System.out.println("Autor inválido!");
+            return;
+        }
+
+        Autor autor = listaDeAutores.get(autorEscolhido);
+
+        List<Livro> livrosDoAutor = autor.getLivros(); // Supondo que você tenha um método getLivros() na classe Autor
+        if (livrosDoAutor.isEmpty()) {
+            System.out.println("Este autor não possui livros cadastrados.");
+            return;
+        }
+
+        System.out.println("Informe o livro que deseja emprestar: ");
+        for (int i = 0; i < livrosDoAutor.size(); i++) {
+            Livro livro = livrosDoAutor.get(i);
+            System.out.println((i + 1) + ". " + livro.getTitulo()); // Supondo que você tenha um método getTitulo() na classe Livro
+        }
+        livroEscolhido = leitor.nextInt() - 1; // Ajustar o índice para zero-based
+        leitor.nextLine(); // Consumir o restante da linha
+
+        if (livroEscolhido < 0 || livroEscolhido >= livrosDoAutor.size()) {
+            System.out.println("Livro inválido!");
+            return;
+        }
+
+        Livro livro = livrosDoAutor.get(livroEscolhido);
+
+        // Adicionar o livro à lista de empréstimos do membro
+        membro.adicionarLivro(livro); // Supondo que você tenha um método adicionarLivro(Livro livro) na classe Membro
+        livro.emprestarLivro();
+
+        System.out.println("Livro emprestado com sucesso!");
+
+
     }
 }
