@@ -33,6 +33,7 @@ public class Main {
                 }
                 case 4 -> {
                     novaInteracao.printarListaDeMembros(listaDeMembros);
+
                 }
                 case 5 -> {
                     novaInteracao.verificarLivrosDeDeterminadoAutor(listaDeAutores);
@@ -42,6 +43,9 @@ public class Main {
                 }
                 case 7 ->{
                     novaInteracao.emprestarLivros(listaDeAutores, listaDeMembros);
+                }
+                case 8 ->{
+                    novaInteracao.realizarDevolução(listaDeMembros, listaDeAutores);
                 }
             }
         } while (opcao != 0);

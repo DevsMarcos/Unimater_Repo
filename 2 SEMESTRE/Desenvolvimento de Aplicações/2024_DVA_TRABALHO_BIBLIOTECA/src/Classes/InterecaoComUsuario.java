@@ -299,4 +299,39 @@ public class InterecaoComUsuario {
                     """, livro.getTitulo(), livro.getDataDeLancamento(), livro.getNomeAutor(), livro.getIsbn());
         }
     }
+
+    public void realizarDevolução(List<Membro> listaDeMembrosPendetes, List<Autor> listaDeAutores){
+        int membroEscolhido = 0;
+        int livroASerDevolvido = 0;
+        System.out.println("Escolha um dos membros que você deseja verificar o histórico: \n");
+        for (int i = 0; i < listaDeMembrosPendetes.size(); i++) {
+            System.out.println((i + 1) + ". " + listaDeMembrosPendetes.get(i).getNome());
+        }
+        membroEscolhido = leitor.nextInt();
+        Membro membro = listaDeMembrosPendetes.get(membroEscolhido - 1);
+        List<Livro> historicoDeLivros = membro.historicoDeLivros();
+
+        System.out.println("Segue abaixo o histórico de libros o membro: " + membro.getNome() + "\n");
+        for (Livro livro : historicoDeLivros) {
+            System.out.printf("""
+                    Nome do Livro: %s
+                    Data de lançamento: %d
+                    Autor: %s
+                    ISBN: %d
+                    """, livro.getTitulo(), livro.getDataDeLancamento(), livro.getNomeAutor(), livro.getIsbn());
+        }
+
+        System.out.println("Informe o código do livro ao qual você deseja devolver: ");
+        livroASerDevolvido = leitor.nextInt();
+
+        Livro livro = adicionarServiços.buscarLivroPorCodigo(livroASerDevolvido, listaDeAutores);
+
+        if (livro == null){
+            System.out.println("Código de livro não localizado ou incorreto");
+            return;
+        }else {
+            livro.devolverLivro();
+            System.out.println("Devolução realizada com sucesso!");
+        }
+    }
 }
