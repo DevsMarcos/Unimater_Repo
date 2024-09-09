@@ -14,12 +14,19 @@ public class Membro {
         this.historicoDeLivros = new ArrayList<>();
     }
 
+    public List<Livro> historicoDeLivros(){
+        return historicoDeLivros;
+    }
+
+
+
     public String getNome() {
         return nome;
     }
 
 
     public int getIdMembro() {
+
         return idMembro;
     }
 

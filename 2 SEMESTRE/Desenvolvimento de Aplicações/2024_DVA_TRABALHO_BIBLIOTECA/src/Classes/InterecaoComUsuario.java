@@ -8,19 +8,20 @@ import java.util.Scanner;
 
 public class InterecaoComUsuario {
 
+    Serviços adicionarServiços = new Serviços();
     private final Scanner leitor;
     private final String OPCOES = """
-            
+                        
             1. Criar Autor (Adiciona novo autor ao catálogo da biblioteca)
             2. Criar Livro (Vincula livro lançamento ao autor)
             3. Adicionar novo membro à biblioteca
             4. Verificar lista de membros
             5. Veriricar livros por autor
-            6. Verificar Livros pedentes de devolução
+            6. Verificar histórico membros
             7. Realizar Emprestimo (Realiza empréstimos de Livros)
             8. Realizar Devolução (Realiza a devolução de Livros)
             0. Sair
-            
+                        
             """;
 
     public InterecaoComUsuario(Scanner leitor) {
@@ -28,7 +29,6 @@ public class InterecaoComUsuario {
         this.leitor = leitor;
     }
 
-    Serviços adicionarServiços = new Serviços();
 
     public void opcoesDeEscolha() {
         System.out.println(OPCOES);
@@ -53,6 +53,7 @@ public class InterecaoComUsuario {
         return new Autor(nome, nacionalidade, anoNascimento);
     }
 
+    //FUnção que realiza a criação de um novo autor.
     public List<Autor> criarNovoAutor(List<Autor> listaDeAutores) {
         Autor autor = this.criarNovoAutor();
         adicionarServiços.adicionarAutorLista(listaDeAutores, autor);
@@ -60,6 +61,7 @@ public class InterecaoComUsuario {
         return listaDeAutores;
     }
 
+    //Função que realiza a criação de um livro e vincula o mesmo au autor correspodente
     public void criarNovoLivro(List<Autor> listaDeAutores) {
         Random gerarIsbn = new Random();
 
@@ -96,15 +98,15 @@ public class InterecaoComUsuario {
         isbn = gerarIsbn.nextInt(100000);
 
 
-         Livro livro = new Livro(nomeDoAutor, tituloDoLivro, anoDeLancameto, disponivel, isbn);
-         autorSelecionado.adicionarLivro(livro);
+        Livro livro = new Livro(nomeDoAutor, tituloDoLivro, anoDeLancameto, disponivel, isbn);
+        autorSelecionado.adicionarLivro(livro);
 
         System.out.println("Livro criado e adicionado com sucesso!");
     };
 
 
-
-    public void verificarLivrosPorAutorOuTodosOsLivros(List<Autor> listaDeAutores){
+    //FUnção que permite verficar os livros de determinado autor
+    public void verificarLivrosDeDeterminadoAutor(List<Autor> listaDeAutores) {
         for (int i = 0; i < listaDeAutores.size(); i++) {
             System.out.println((i + 1) + ". " + listaDeAutores.get(i).getNome());
         }
@@ -115,22 +117,23 @@ public class InterecaoComUsuario {
         if (escolha < 1 || escolha > listaDeAutores.size()) {
             System.out.println("Opção informada inválida tente novamente!");
         } else {
-            Autor autorSelecioando = listaDeAutores.get(escolha -1);
+            Autor autorSelecioando = listaDeAutores.get(escolha - 1);
             List<Livro> livrosDoAutor = autorSelecioando.getLivros(); // Supondo que você tenha um método getLivros() na classe Autor
             if (livrosDoAutor.isEmpty()) {
                 System.out.println("Este autor não possui livros cadastrados.");
                 return;
             }
 
-            System.out.println("Segue abaixo os livros do autor: "+autorSelecioando.getNome());
+            System.out.println("Segue abaixo os livros do autor: " + autorSelecioando.getNome());
             for (int i = 0; i < livrosDoAutor.size(); i++) {
                 Livro livro = livrosDoAutor.get(i);
-                System.out.println((i + 1) + ". " + livro.toString() +"\n"); // Supondo que você tenha um método getTitulo() na classe Livro
+                System.out.println((i + 1) + ". " + livro.toString() + "\n"); // Supondo que você tenha um método getTitulo() na classe Livro
             }
         }
     }
 
-    public List<Membro> criarNovoMembro(List<Membro> listaDeMembros){
+    //Função que realiza a criação de um novo membro da bilbioteca
+    public List<Membro> criarNovoMembro(List<Membro> listaDeMembros) {
         Random geradorDeId = new Random();
         int tipoMembro = 0;
         System.out.println("""
@@ -142,7 +145,8 @@ public class InterecaoComUsuario {
 
         leitor.nextLine();
 
-        if (tipoMembro == 1){
+        //Membro do tipo Estudante
+        if (tipoMembro == 1) {
             String nomeEstudante = "";
             int idEstudante = 0;
             String curos = "";
@@ -160,6 +164,8 @@ public class InterecaoComUsuario {
             System.out.printf("Membro %s, adiccionando aos membros da biblioteca com sucesso!", nomeEstudante);
 
             listaDeMembros.add(estudante);
+
+            //Membro do Tipo Professor
         } else if (tipoMembro == 2) {
 
             String nomeProfessor = "";
@@ -183,42 +189,52 @@ public class InterecaoComUsuario {
             System.out.printf("Membro %s, adicionado aos membros da bilbioteca com sucesso!", nomeProfessor);
 
             listaDeMembros.add(novoProfessor);
-        }else {
+
+            //Opção inválida
+        } else {
             System.out.println("Opção inválida tente novamente!");
         }
         return listaDeMembros;
     }
 
-    public void printarListaDeMembros(List<Membro> listaDeMembros){
-        for (Membro membro : listaDeMembros){
+    //Printar Lista de Membros
+    public void printarListaDeMembros(List<Membro> listaDeMembros) {
+        for (Membro membro : listaDeMembros) {
             System.out.println(membro.toString());
         }
     }
 
-    public void emprestarLivros(List<Autor> listaDeAutores, List<Membro> listaDeMembros){
+    public void emprestarLivros(List<Autor> listaDeAutores, List<Membro> listaDeMembros) {
+
+        ////Escolha do Membro
         int membroEscolhido = 0;
         int livroEscolhido = 0;
 
-        if (listaDeMembros.isEmpty() ){
+        if (listaDeMembros.isEmpty()) {
             System.out.println("Adicione um membro à biblioteca primeiro!");
             return;
         }
 
-        if (listaDeAutores.isEmpty()){
+        if (listaDeAutores.isEmpty()) {
             System.out.println("Adicione um autor e um livro à biblioteca primeiro!");
             return;
 
         }
         System.out.println("Informe a qual dos mesmbros você deseja empretar: ");
         for (int i = 0; i < listaDeMembros.size(); i++) {
-            System.out.println((i + 1)+". "+listaDeMembros.get(i).getNome());
+            System.out.println((i + 1) + ". " + listaDeMembros.get(i).toString());
 
         }
-        membroEscolhido = leitor.nextInt()-1;
+        membroEscolhido = leitor.nextInt();
+        Membro membro = adicionarServiços.buscarMembroPorID(membroEscolhido, listaDeMembros);
 
-        Membro membro = listaDeMembros.get(membroEscolhido);
+        if (membro == null) {
+            System.out.println("Membro não encontrado!");
+            return;
+        }
 
-        /////////////////////////////////////////////////////////////
+        //Escolha do Autor
+
         System.out.println("Informe o autor do livro que deseja emprestar: ");
         for (int i = 0; i < listaDeAutores.size(); i++) {
             System.out.println((i + 1) + ". " + listaDeAutores.get(i).getNome());
@@ -244,25 +260,43 @@ public class InterecaoComUsuario {
             Livro livro = livrosDoAutor.get(i);
             System.out.println((i + 1) + ". " + livro.toString()); // Supondo que você tenha um método getTitulo() na classe Livro
         }
-        livroEscolhido = leitor.nextInt() - 1; // Ajustar o índice para zero-based
+        livroEscolhido = leitor.nextInt(); // Ajustar o índice para zero-based
         leitor.nextLine(); // Consumir o restante da linha
 
-        if (livroEscolhido < 0 || livroEscolhido >= livrosDoAutor.size()) {
-            System.out.println("Livro inválido!");
+        Livro livro = adicionarServiços.buscarLivroPorCodigo(livroEscolhido, listaDeAutores);
+
+        if (livro == null) {
+            System.out.println("Livro não encontrado");
             return;
         }
 
-        Livro livro = livrosDoAutor.get(livroEscolhido);
-
-        if (livro.verificarDisponibilidade().equals("Indisponível")){
+        if (livro.verificarDisponibilidade().equals("Indisponível")) {
             System.out.println("Livro indisponível para empréstimo!");
-        }else {
+        } else {
             membro.adicionarLivro(livro); // Supondo que você tenha um método adicionarLivro(Livro livro) na classe Membro
             livro.emprestarLivro();
             System.out.println("Livro emprestado com sucesso!");
         }
+    }
 
-        // Adicionar o livro à lista de empréstimos do membro
+    public void verificarHistoricoPorMembro(List<Membro> listaDeMembros) {
+        int membroEscolhido = 0;
+        System.out.println("Escolha um dos membros que você deseja verificar o histórico: \n");
+        for (int i = 0; i < listaDeMembros.size(); i++) {
+            System.out.println((i + 1) + ". " + listaDeMembros.get(i).getNome());
+        }
+        membroEscolhido = leitor.nextInt();
+        Membro membro = listaDeMembros.get(membroEscolhido - 1);
+        List<Livro> historicoDeLivros = membro.historicoDeLivros();
 
+        System.out.println("Segue abaixo o histórico de libros o membro: " + membro.getNome() + "\n");
+        for (Livro livro : historicoDeLivros) {
+            System.out.printf("""
+                    Nome do Livro: %s
+                    Data de lançamento: %d
+                    Autor: %s
+                    ISBN: %d
+                    """, livro.getTitulo(), livro.getDataDeLancamento(), livro.getNomeAutor(), livro.getIsbn());
+        }
     }
 }

@@ -15,6 +15,14 @@ public class Livro {
         this.isbn = isbn;
     }
 
+    public int getDataDeLancamento() {
+        return dataDeLancamento;
+    }
+
+    public String getNomeAutor() {
+        return nomeAutor;
+    }
+
     public String getTitulo() {
 
         return titulo;
@@ -38,6 +46,8 @@ public class Livro {
         return disponivel = "Dispobível";
     }
 
+
+
     @Override
     public String toString() {
         return
@@ -45,7 +55,7 @@ public class Livro {
                 "Data de Lançamento: " + dataDeLancamento + "\n"+
                 "Autor: "+ nomeAutor + "\n"+
                 "Status de Empréstimo: " + disponivel + "\n"+
-                "ISBN: "+isbn +"\n";
+                "ISBN: "+getIsbn() +"\n";
 
     }
 }

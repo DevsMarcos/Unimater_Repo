@@ -35,7 +35,10 @@ public class Main {
                     novaInteracao.printarListaDeMembros(listaDeMembros);
                 }
                 case 5 -> {
-                    novaInteracao.verificarLivrosPorAutorOuTodosOsLivros(listaDeAutores);
+                    novaInteracao.verificarLivrosDeDeterminadoAutor(listaDeAutores);
+                }
+                case 6 -> {
+                    novaInteracao.verificarHistoricoPorMembro(listaDeMembros);
                 }
                 case 7 ->{
                     novaInteracao.emprestarLivros(listaDeAutores, listaDeMembros);

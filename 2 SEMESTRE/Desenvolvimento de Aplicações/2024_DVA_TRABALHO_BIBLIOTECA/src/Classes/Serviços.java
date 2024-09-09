@@ -2,6 +2,7 @@ package Classes;
 
 import Construtores.Autor;
 import Construtores.Livro;
+import Construtores.Membro;
 
 import java.util.List;
 
@@ -17,12 +18,27 @@ public class Serviços {
         return autores;
     }
 
-    public List<Autor> vincularLivroAoAutor(List<Autor> autores, Autor autor, Livro livro){
-        autor.adicionarLivro(livro);
-        autores.add(autor);
-        System.out.println(SUCESS_ADD_BOOK_AUTOR);
-        return autores;
+
+    public Livro buscarLivroPorCodigo(int codigo, List<Autor> listaDeAutores) {
+        for (Autor autor : listaDeAutores) {
+            for (Livro livro : autor.getLivros()) {
+                if (livro.getIsbn() == codigo) {
+                    return livro;
+                }
+            }
+        }
+        return null; // Retorna null se o livro não for encontrado
     }
+    public Membro buscarMembroPorID(int codigo, List<Membro> listaDeMembros) {
+        for (Membro membro : listaDeMembros) {
+                if (membro.getIdMembro() == codigo) {
+                    return membro;
+                }
+            }
+        return null; // Retorna null se o livro não for encontrado
+    };
+
+
 
 
 }
