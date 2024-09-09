@@ -53,7 +53,6 @@ public class Livro {
             System.out.println("O livro está disponível");
             return disponivel;
         } else {
-
             return disponivel = "Dispobível";
         }
     }

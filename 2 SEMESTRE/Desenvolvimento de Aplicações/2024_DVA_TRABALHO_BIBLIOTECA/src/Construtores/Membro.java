@@ -1,6 +1,7 @@
 package Construtores;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Membro {
@@ -15,23 +16,19 @@ public class Membro {
     }
 
     public List<Livro> historicoDeLivros(){
-        return historicoDeLivros;
+        return Collections.unmodifiableList(historicoDeLivros);
     }
-
 
 
     public String getNome() {
         return nome;
     }
 
-
     public int getIdMembro() {
-
         return idMembro;
     }
 
     public void adicionarLivro(Livro livro){
-
         historicoDeLivros.add(livro);
     }
 
