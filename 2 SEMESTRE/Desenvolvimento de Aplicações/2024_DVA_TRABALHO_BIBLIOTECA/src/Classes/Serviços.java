@@ -12,6 +12,13 @@ public class Serviços {
     final String SUCESS_ADD_AUTOR = "Autor adicionado com sucesso!";
     final String SUCESS_ADD_BOOK_AUTOR = "Livro vinculado ao autor com sucesso!";
 
+    public void printarListaDeLivros(List<Livro> listaDeLivros){
+        for (int i = 0; i < listaDeLivros.size(); i++) {
+            Livro livro = listaDeLivros.get(i);
+            System.out.println((i + 1) + ". " + livro.toString() + "\n"); // Supondo que você tenha um método getTitulo() na classe Livro
+        }
+    }
+
     public void apresentarHistoricoDeLivrosPorMembro(List<Membro> listaDeMembros, Scanner leitor){
         int membroEscolhido = 0;
         System.out.println("Escolha um dos membros que você deseja verificar o histórico: \n");

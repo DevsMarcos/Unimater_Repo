@@ -112,7 +112,6 @@ public class InterecaoComUsuario {
     //FUnção que permite verficar os livros de determinado autor
     public void verificarLivrosDeDeterminadoAutor(List<Autor> listaDeAutores) {
         adicionarServiços.apresentarAutores(listaDeAutores);
-
         System.out.println("Digite o autor ao qual você deseja visuliazar os livros lançados: ");
 
         int escolha = leitor.nextInt();
@@ -128,10 +127,7 @@ public class InterecaoComUsuario {
             }
 
             System.out.println("Segue abaixo os livros do autor: " + autorSelecioando.getNome());
-            for (int i = 0; i < livrosDoAutor.size(); i++) {
-                Livro livro = livrosDoAutor.get(i);
-                System.out.println((i + 1) + ". " + livro.toString() + "\n"); // Supondo que você tenha um método getTitulo() na classe Livro
-            }
+            adicionarServiços.printarListaDeLivros(livrosDoAutor);
         }
     }
 
