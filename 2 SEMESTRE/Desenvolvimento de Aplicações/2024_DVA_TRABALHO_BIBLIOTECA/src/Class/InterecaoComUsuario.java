@@ -10,18 +10,26 @@ import Class.Constructor.Professor;
 
 public class InterecaoComUsuario {
 
+    //SERVIÇOS ADICIONAIS -----------------------------------------
     private List<Autor> listaDeAutores = new ArrayList<>();
     private List<Membro> listaDeMembros = new ArrayList<>();
-
-
     private final Serviços adicionarServiços = new Serviços();
     private final Scanner leitor;
+    //-----------------------------------------------------------------------
+
+    //TEXTOS PADRÃO--------------------------------------------------------------
+
+    //FUNÇÃO CRIAR MEMBROS
     private final String CADASTRO_DE_MEMBROS = """
             Vamos cadastrar um novo membro, informe uma das opções abaixo:
             1. Estudante
             2. Professor
                 """;
 
+    //FUNÇÃO DE CADASTRO DE AUTOR
+    private final String CONFIRMACAO_AUTOR_CRIADO_COM_SUCESSO = "Autor adicionado à lista com sucesso!";
+
+    //LSITA DE OPÇÕES DE INTEAÇÃO
     private final String OPCOES = """
                         
             1. Criar Autor (Adiciona novo autor ao catálogo da biblioteca)
@@ -35,7 +43,25 @@ public class InterecaoComUsuario {
             0. Sair
                         
             """;
-
+    //DADOS DO AUTOR---------------------------------------------------------------
+    private final String PERGUNTA_NOME_DO_AUTOR = "Informe o nome do autor: ";
+    private final String AVISO_NOME_OBRIGATORIO = "O nome é obrigatório! ";
+    private final String PERGUNTA_NACIONALIDADE_AUTOR = "Informe a nacionalidade: ";
+    private final String AVISO_NACIONALIDADE_AUTOR = "A nacionalidade não pode ser vazia! ";
+    private final String PERGUNTA_ANO_NASCIENTO_AUTOR = "Informe o ano de nascimento: ";
+    private final String AVISO_ANO_NASCIMENTO_AUTOR = "O ano de nascimento não pode ser igual a 0!";
+    //-------------------------------------------------------------------------------------
+    //FUNÇÃO DE CRIAR NOVO LIVRO
+    private final String PADROA_LANCAMENTO = "Disponível";
+    private final String LIVRO_CRIADO = "Livro criado e adicionado com sucesso!";
+    private final String LANÇAMENTO_LIVRO = "Informe o ano de lançamento do livro: ";
+    private final String AVISO_DATA_LANCAMENTO_OBRIGATORIO = "A data de lançamento do Livro é obrigatória!";
+    private final String AVISO_TITULO_OBRIGATORIO= "O título do Livro é obrigatório!";
+    private final String NOME_DO_LIVRO = "Informe o Título do Livro: ";
+    private final String PERGUNTA_INFORMAR_AUTOR_DESEJADO = "Digite o autor ao qual você deseja adicionar ao livro";
+    private final String MENSAGEM_DE_AUTORES_DISPONIVEIS = "Autores disponíveis: ";
+    private final String AVISO_LISTA_DE_AUTORES_VAZIA = "Não há autores disponíveis na biblioteca no momento. Crie um novo autor para continuar.";
+    //FIM TEXTOS PADRÃO-------------------------------------------------------------------
     public InterecaoComUsuario(Scanner leitor) {
         this.leitor = leitor;
     }
@@ -51,38 +77,39 @@ public class InterecaoComUsuario {
         String nacionalidade = "";
         int anoNascimento = 0;
         leitor.nextLine();
-        System.out.println("\n");
+
+        adicionarServiços.quebraDeLinha();
 
         while (true) {
-            System.out.println("Informe o nome do autor: ");
+            System.out.println(PERGUNTA_NOME_DO_AUTOR);
             nome = leitor.nextLine();
             if (!nome.trim().isEmpty()) {
                 break;
             }
-            System.out.println("O nome é obrigatório! ");
+            System.out.println(AVISO_NOME_OBRIGATORIO);
         }
-
             adicionarServiços.quebraDeLinha();
+
         while (true) {
-            System.out.println("Informe a nacionalidade: ");
+            System.out.println(PERGUNTA_NACIONALIDADE_AUTOR);
             nacionalidade = leitor.nextLine();
             if (!nacionalidade.trim().isEmpty()) {
                 break;
             }
-            System.out.println("A nacionalidade não pode ser vazia! ");
+            System.out.println(AVISO_NACIONALIDADE_AUTOR);
         }
+
         adicionarServiços.quebraDeLinha();
         
         while (true) {
-            System.out.println("Informe o ano de nascimento: ");
+            System.out.println(PERGUNTA_ANO_NASCIENTO_AUTOR);
             if (leitor.hasNextInt()) {
                 anoNascimento = leitor.nextInt();
                 break;
             }           
-            System.out.println("O ano de nascimento não pode ser igual a 0!");
+            System.out.println(AVISO_ANO_NASCIMENTO_AUTOR);
         }
-        
-        
+
         return new Autor(nome, nacionalidade, anoNascimento);
     }
 
@@ -90,7 +117,7 @@ public class InterecaoComUsuario {
     public List<Autor> criarAutorEVincular() {
         Autor autor = this.criarNovoAutor();
         adicionarServiços.adicionarAutorLista(listaDeAutores, autor);
-        System.out.println("Autor adicionado à lista com sucesso!");
+        System.out.println(CONFIRMACAO_AUTOR_CRIADO_COM_SUCESSO);
         return listaDeAutores;
     }
 
@@ -102,41 +129,41 @@ public class InterecaoComUsuario {
         String nomeDoAutor = "";
         int anoDeLancameto = 0;
         int isbn = 0;
-        String disponivel = "Disponível";
+        String disponivel = PADROA_LANCAMENTO;
 
         if (listaDeAutores.isEmpty()) {
-            System.out.println("Não há autores disponíveis na biblioteca no momento. Crie um novo autor para continuar.");
+            System.out.println(AVISO_LISTA_DE_AUTORES_VAZIA);
             return;
         } else {
-            System.out.println("Autores disponíveis: ");
+            System.out.println(MENSAGEM_DE_AUTORES_DISPONIVEIS);
 
             adicionarServiços.apresentarAutores(listaDeAutores);
         }
 
-        System.out.println("Digite o autor ao qual você deseja adicionar ao livro");
+        System.out.println(PERGUNTA_INFORMAR_AUTOR_DESEJADO);
         autorEscolhido = leitor.nextInt();
         Autor autorSelecionado = listaDeAutores.get(autorEscolhido - 1);
         nomeDoAutor = autorSelecionado.getNome();
         leitor.nextLine();
 
         while (true) {
-            System.out.println("Informe o Título do Livro: ");
+            System.out.println(NOME_DO_LIVRO);
             tituloDoLivro = leitor.nextLine();
             if (!tituloDoLivro.equals("")) {
                 break;
             }
-            System.out.println("O título do Livro é obrigatório!");
+            System.out.println(AVISO_TITULO_OBRIGATORIO);
         }
 
         adicionarServiços.quebraDeLinha();
 
         while (true) {
-            System.out.println("Informe o ano de lançamento do livro: ");
+            System.out.println(LANÇAMENTO_LIVRO);
             if (leitor.hasNextInt()) {
                 anoDeLancameto = leitor.nextInt();
                 break;
             }
-            System.out.println("A data de lançamento do Livro é obrigatória!");
+            System.out.println(AVISO_DATA_LANCAMENTO_OBRIGATORIO);
         }
         
         isbn = adicionarServiços.geradorDeCodigosEId();
@@ -145,7 +172,7 @@ public class InterecaoComUsuario {
         Livro livro = new Livro(nomeDoAutor, tituloDoLivro, anoDeLancameto, disponivel, isbn);
         autorSelecionado.adicionarLivro(livro);
 
-        System.out.println("Livro criado e adicionado com sucesso!");
+        System.out.println(LIVRO_CRIADO);
     };
 
 
