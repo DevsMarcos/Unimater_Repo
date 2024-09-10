@@ -1,6 +1,5 @@
-package Construtores;
+package Class.Constructor;
 
-import java.util.List;
 
 public class Estudante extends Membro{
     private String curso;

@@ -1,12 +1,11 @@
-package Classes;
+package Class;
 
-import Construtores.Autor;
-import Construtores.Livro;
-import Construtores.Membro;
 
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+
+import Class.Constructor.Membro;
 
 public class Serviços {
     final String SUCESS_ADD_AUTOR = "Autor adicionado com sucesso!";
@@ -21,6 +20,10 @@ public class Serviços {
 
     public void apresentarHistoricoDeLivrosPorMembro(List<Membro> listaDeMembros, Scanner leitor){
         int membroEscolhido = 0;
+        if (listaDeMembros.size() == 0) {
+            System.out.println("Não há membro cadastrados no momento!");
+            return;
+        }else{
         System.out.println("Escolha um dos membros que você deseja verificar o histórico: \n");
         this.mostrarListaDeMembros(listaDeMembros);
         membroEscolhido = leitor.nextInt();
@@ -36,10 +39,15 @@ public class Serviços {
                     ISBN: %d
                     """, livro.getTitulo(), livro.getDataDeLancamento(), livro.getNomeAutor(), livro.getIsbn());
         }
+    }
 
     }
 
     public void mostrarListaDeMembros(List<Membro> listaDeMembros){
+        if (listaDeMembros.size() == 0) {
+            System.out.println("Não há membro cadastrados no momento!");
+            return;
+        }
         for (int i = 0; i < listaDeMembros.size(); i++) {
             System.out.println((i + 1) + ". " + listaDeMembros.get(i).toString());
 
@@ -92,11 +100,11 @@ public class Serviços {
         System.out.println("\n");
     }
 
-    public void validacaoDeTexto(String mensagem, String texto, Scanner leitor, String mensagemAviso){
+    public void validacaoDeTexto(String mensagem, String var, Scanner leitor, String mensagemAviso){
         while (true) {
             System.out.println(mensagem);
-            texto = leitor.nextLine();
-            if (!texto.trim().equals("")) {
+            var = leitor.nextLine();
+            if (!var.trim().equals(" ")) {
                 break;
             }
             System.out.println(mensagemAviso);

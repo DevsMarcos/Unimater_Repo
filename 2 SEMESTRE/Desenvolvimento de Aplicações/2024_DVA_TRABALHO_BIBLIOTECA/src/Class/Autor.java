@@ -1,7 +1,7 @@
-package Construtores;
+package Class;
+
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class Autor {
         return nome;
     }
 
-    public void adicionarLivro(Livro livro){
+    void adicionarLivro(Livro livro){
 
         livros.add(livro);
     }

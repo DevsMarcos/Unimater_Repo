@@ -1,18 +1,11 @@
-import Classes.InterecaoComUsuario;
-import Construtores.Autor;
-import Construtores.Membro;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
+import Class.InterecaoComUsuario;
 
 public class Main {
     public static void main(String[] args) {
         Scanner leitor = new Scanner(System.in);
         InterecaoComUsuario novaInteracao = new InterecaoComUsuario(leitor);
-
-        List<Autor> listaDeAutores = new ArrayList<>();
-        List<Membro> listaDeMembros = new ArrayList<>();
 
 
         int opcao = 0;
@@ -23,29 +16,29 @@ public class Main {
 
             switch (opcao) {
                 case 1 -> {
-                    listaDeAutores = novaInteracao.criarNovoAutor(listaDeAutores);
+                    novaInteracao.criarAutorEVincular();
                 }
                 case 2 -> {
-                    novaInteracao.criarNovoLivro(listaDeAutores);
+                    novaInteracao.criarNovoLivro();
                 }
                 case 3 -> {
-                    listaDeMembros = novaInteracao.criarNovoMembro(listaDeMembros);
+                    novaInteracao.criarNovoMembro();
                 }
                 case 4 -> {
-                    novaInteracao.printarListaDeMembros(listaDeMembros);
+                    novaInteracao.printarListaDeMembros();
 
                 }
                 case 5 -> {
-                    novaInteracao.verificarLivrosDeDeterminadoAutor(listaDeAutores);
+                    novaInteracao.verificarLivrosDeDeterminadoAutor();
                 }
                 case 6 -> {
-                    novaInteracao.verificarHistoricoPorMembro(listaDeMembros);
+                    novaInteracao.verificarHistoricoPorMembro();
                 }
                 case 7 ->{
-                    novaInteracao.emprestarLivros(listaDeAutores, listaDeMembros);
+                    novaInteracao.emprestarLivros();
                 }
                 case 8 ->{
-                    novaInteracao.realizarDevolução(listaDeMembros, listaDeAutores);
+                    novaInteracao.realizarDevolução();
                 }
             }
         } while (opcao != 0);

@@ -1,12 +1,18 @@
-package Classes;
+package Class;
 
-import Construtores.*;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
+import Class.Constructor.Estudante;
+import Class.Constructor.Membro;
+import Class.Constructor.Professor;
+
 public class InterecaoComUsuario {
+
+    private List<Autor> listaDeAutores = new ArrayList<>();
+    private List<Membro> listaDeMembros = new ArrayList<>();
+
 
     private final Serviços adicionarServiços = new Serviços();
     private final Scanner leitor;
@@ -41,13 +47,21 @@ public class InterecaoComUsuario {
 
 
     private Autor criarNovoAutor() {
-        String nome = "";
+        String nome = " ";
         String nacionalidade = "";
         int anoNascimento = 0;
         leitor.nextLine();
         System.out.println("\n");
 
-        adicionarServiços.validacaoDeTexto("Informe o nome do autor: ",nome, leitor, "O autor é obrigatório!" );
+        while (true) {
+            System.out.println("Informe o nome do autor: ");
+            nome = leitor.nextLine();
+            if (!nome.trim().isEmpty()) {
+                break;
+            }
+            System.out.println("O nome é obrigatório! ");
+        }
+
             adicionarServiços.quebraDeLinha();
         while (true) {
             System.out.println("Informe a nacionalidade: ");
@@ -73,7 +87,7 @@ public class InterecaoComUsuario {
     }
 
     //FUnção que realiza a criação de um novo autor.
-    public List<Autor> criarNovoAutor(List<Autor> listaDeAutores) {
+    public List<Autor> criarAutorEVincular() {
         Autor autor = this.criarNovoAutor();
         adicionarServiços.adicionarAutorLista(listaDeAutores, autor);
         System.out.println("Autor adicionado à lista com sucesso!");
@@ -81,7 +95,7 @@ public class InterecaoComUsuario {
     }
 
     //Função que realiza a criação de um livro e vincula o mesmo au autor correspodente
-    public void criarNovoLivro(List<Autor> listaDeAutores) {
+    public void criarNovoLivro() {
 
         String tituloDoLivro = "";
         int autorEscolhido = 0;
@@ -136,7 +150,7 @@ public class InterecaoComUsuario {
 
 
     //FUnção que permite verficar os livros de determinado autor
-    public void verificarLivrosDeDeterminadoAutor(List<Autor> listaDeAutores) {
+    public void verificarLivrosDeDeterminadoAutor() {
         adicionarServiços.apresentarAutores(listaDeAutores);
         System.out.println("Digite o autor ao qual você deseja visuliazar os livros lançados: ");
 
@@ -158,7 +172,7 @@ public class InterecaoComUsuario {
     }
 
     //Função que realiza a criação de um novo membro da bilbioteca
-    public List<Membro> criarNovoMembro(List<Membro> listaDeMembros) {
+    public List<Membro> criarNovoMembro() {
         int tipoMembro = 0;
         System.out.println(CADASTRO_DE_MEMBROS);
         tipoMembro = leitor.nextInt();
@@ -218,11 +232,11 @@ public class InterecaoComUsuario {
     }
 
     //Printar Lista de Membros
-    public void printarListaDeMembros(List<Membro> listaDeMembros) {
+    public void printarListaDeMembros() {
         adicionarServiços.mostrarListaDeMembros(listaDeMembros);
     }
 
-    public void emprestarLivros(List<Autor> listaDeAutores, List<Membro> listaDeMembros) {
+    public void emprestarLivros() {
 
         ////Escolha do Membro
         int membroEscolhido = 0;
@@ -292,13 +306,17 @@ public class InterecaoComUsuario {
         }
     }
 
-    public void verificarHistoricoPorMembro(List<Membro> listaDeMembros) {
+    public void verificarHistoricoPorMembro() {
         adicionarServiços.apresentarHistoricoDeLivrosPorMembro(listaDeMembros, leitor);
     }
 
-    public void realizarDevolução(List<Membro> listaDeMembrosPendetes, List<Autor> listaDeAutores){
+    public void realizarDevolução(){
         int livroASerDevolvido = 0;
-        adicionarServiços.apresentarHistoricoDeLivrosPorMembro(listaDeMembrosPendetes, leitor);
+        if (listaDeMembros.isEmpty()) {
+            System.out.println("Não há membros disponíveis!");
+            return;
+        }
+        adicionarServiços.apresentarHistoricoDeLivrosPorMembro(listaDeMembros, leitor);
 
 
         System.out.println("Informe o código do livro ao qual você deseja devolver: ");
