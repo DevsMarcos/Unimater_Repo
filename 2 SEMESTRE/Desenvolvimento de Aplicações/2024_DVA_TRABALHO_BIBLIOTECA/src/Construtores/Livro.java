@@ -53,15 +53,15 @@ public class Livro {
             System.out.println("O livro está disponível");
             return disponivel;
         } else {
-            return disponivel = "Dispobível";
+            return disponivel = "Disponível";
         }
     }
 
 
     @Override
     public String toString() {
-        return
-                "Titulo: " + titulo + "\n" +
+        return"\n"+
+                        "Titulo: " + titulo + "\n" +
                         "Data de Lançamento: " + dataDeLancamento + "\n" +
                         "Autor: " + nomeAutor + "\n" +
                         "Status de Empréstimo: " + disponivel + "\n" +

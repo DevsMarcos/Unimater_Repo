@@ -88,6 +88,33 @@ public class Serviços {
 
     }
 
+    public void quebraDeLinha(){
+        System.out.println("\n");
+    }
+
+    public void validacaoDeTexto(String mensagem, String texto, Scanner leitor, String mensagemAviso){
+        while (true) {
+            System.out.println(mensagem);
+            texto = leitor.nextLine();
+            if (!texto.trim().equals("")) {
+                break;
+            }
+            System.out.println(mensagemAviso);
+        }
+    }
+
+        public void validacaoDeNumero(String mensagemEntrada,String mensagem, 
+        String mensagemErro, int numeroAvaliado, Scanner leitor ){
+            while (true) {
+                System.out.println(mensagemEntrada);
+                if (leitor.hasNextInt()) {
+                    numeroAvaliado = leitor.nextInt();
+                    break;
+                }           
+                System.out.println(mensagemErro);
+            }
+    }
+
 
 
 

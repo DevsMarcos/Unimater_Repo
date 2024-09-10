@@ -45,16 +45,30 @@ public class InterecaoComUsuario {
         String nacionalidade = "";
         int anoNascimento = 0;
         leitor.nextLine();
+        System.out.println("\n");
 
-        System.out.println("Informe o nome do autor: ");
-        nome = leitor.nextLine();
-
-        System.out.println("Informe a nacionalidade: ");
-        nacionalidade = leitor.nextLine();
-
-        System.out.println("Informe o ano de nascimento: ");
-        anoNascimento = leitor.nextInt();
-
+        adicionarServiços.validacaoDeTexto("Informe o nome do autor: ",nome, leitor, "O autor é obrigatório!" );
+            adicionarServiços.quebraDeLinha();
+        while (true) {
+            System.out.println("Informe a nacionalidade: ");
+            nacionalidade = leitor.nextLine();
+            if (!nacionalidade.trim().isEmpty()) {
+                break;
+            }
+            System.out.println("A nacionalidade não pode ser vazia! ");
+        }
+        adicionarServiços.quebraDeLinha();
+        
+        while (true) {
+            System.out.println("Informe o ano de nascimento: ");
+            if (leitor.hasNextInt()) {
+                anoNascimento = leitor.nextInt();
+                break;
+            }           
+            System.out.println("O ano de nascimento não pode ser igual a 0!");
+        }
+        
+        
         return new Autor(nome, nacionalidade, anoNascimento);
     }
 
@@ -82,9 +96,7 @@ public class InterecaoComUsuario {
         } else {
             System.out.println("Autores disponíveis: ");
 
-            for (int i = 0; i < listaDeAutores.size(); i++) {
-                System.out.println((i + 1) + ". " + listaDeAutores.get(i).getNome());
-            }
+            adicionarServiços.apresentarAutores(listaDeAutores);
         }
 
         System.out.println("Digite o autor ao qual você deseja adicionar ao livro");
@@ -93,12 +105,26 @@ public class InterecaoComUsuario {
         nomeDoAutor = autorSelecionado.getNome();
         leitor.nextLine();
 
-        System.out.println("Informe o Título do Livro: ");
-        tituloDoLivro = leitor.nextLine();
+        while (true) {
+            System.out.println("Informe o Título do Livro: ");
+            tituloDoLivro = leitor.nextLine();
+            if (!tituloDoLivro.equals("")) {
+                break;
+            }
+            System.out.println("O título do Livro é obrigatório!");
+        }
 
-        System.out.println("Informe o ano de lançamento do livro: ");
-        anoDeLancameto = leitor.nextInt();
+        adicionarServiços.quebraDeLinha();
 
+        while (true) {
+            System.out.println("Informe o ano de lançamento do livro: ");
+            if (leitor.hasNextInt()) {
+                anoDeLancameto = leitor.nextInt();
+                break;
+            }
+            System.out.println("A data de lançamento do Livro é obrigatória!");
+        }
+        
         isbn = adicionarServiços.geradorDeCodigosEId();
 
 
