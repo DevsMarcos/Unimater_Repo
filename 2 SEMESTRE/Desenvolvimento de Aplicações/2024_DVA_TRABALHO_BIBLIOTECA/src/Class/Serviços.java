@@ -18,7 +18,7 @@ public class Serviços {
         }
     }
 
-    public void apresentarHistoricoDeLivrosPorMembro(List<Membro> listaDeMembros, Scanner leitor){
+    public void apresentarHistoricoDeLivrosPorMembro(List<Membro> listaDeMembros, Scanner leitor, String texto){
         int membroEscolhido = 0;
         if (listaDeMembros.size() == 0) {
             System.out.println("Não há membro cadastrados no momento!");
@@ -27,8 +27,18 @@ public class Serviços {
         System.out.println("Escolha um dos membros que você deseja verificar o histórico: \n");
         this.mostrarListaDeMembros(listaDeMembros);
         membroEscolhido = leitor.nextInt();
-        Membro membro = listaDeMembros.get(membroEscolhido - 1);
+        
+        Membro membro = this.buscarMembroPorID(membroEscolhido, listaDeMembros);
+        if (membro.equals(null)) {
+            System.out.println("Membro não encontrado! \n");
+            return;
+        }
         List<Livro> historicoDeLivros = membro.historicoDeLivros();
+
+        if (historicoDeLivros.isEmpty()) {
+            System.out.println(texto);
+            return;
+        }
 
         System.out.println("Segue abaixo o histórico de libros o membro: " + membro.getNome() + "\n");
         for (Livro livro : historicoDeLivros) {

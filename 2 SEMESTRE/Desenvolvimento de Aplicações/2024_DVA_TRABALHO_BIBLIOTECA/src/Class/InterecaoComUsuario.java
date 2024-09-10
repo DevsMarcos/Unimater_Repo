@@ -62,6 +62,11 @@ public class InterecaoComUsuario {
     private final String MENSAGEM_DE_AUTORES_DISPONIVEIS = "Autores disponíveis: ";
     private final String AVISO_LISTA_DE_AUTORES_VAZIA = "Não há autores disponíveis na biblioteca no momento. Crie um novo autor para continuar.";
     //FIM TEXTOS PADRÃO-------------------------------------------------------------------
+    //VERIFICAR LIVROS DE DETERMINADO AUTOR-----------------------------------------------
+    private final String SELECIONAR_AUTOR_VERIFICAR = "Informe o autor ao qual você deseja visuliazar os livros lançados: ";
+    private final String ERRO_OPCAO_INVALIDA = "Opção informada inválida tente novamente!";
+    private final String AUTOR_SEM_LIVRO_CADASTRADO = "Este autor não possui livros cadastrados.";
+    private final String MENSAGEM_INTRODUCAO_LIVROS_AUTOR = "Segue abaixo os livros do autor: ";
     public InterecaoComUsuario(Scanner leitor) {
         this.leitor = leitor;
     }
@@ -179,21 +184,21 @@ public class InterecaoComUsuario {
     //FUnção que permite verficar os livros de determinado autor
     public void verificarLivrosDeDeterminadoAutor() {
         adicionarServiços.apresentarAutores(listaDeAutores);
-        System.out.println("Digite o autor ao qual você deseja visuliazar os livros lançados: ");
+        System.out.println(SELECIONAR_AUTOR_VERIFICAR);
 
         int escolha = leitor.nextInt();
 
         if (escolha < 1 || escolha > listaDeAutores.size()) {
-            System.out.println("Opção informada inválida tente novamente!");
+            System.out.println(ERRO_OPCAO_INVALIDA);
         } else {
             Autor autorSelecioando = listaDeAutores.get(escolha - 1);
             List<Livro> livrosDoAutor = autorSelecioando.getLivros(); // Supondo que você tenha um método getLivros() na classe Autor
             if (livrosDoAutor.isEmpty()) {
-                System.out.println("Este autor não possui livros cadastrados.");
+                System.out.println(AUTOR_SEM_LIVRO_CADASTRADO);
                 return;
             }
 
-            System.out.println("Segue abaixo os livros do autor: " + autorSelecioando.getNome());
+            System.out.println( MENSAGEM_INTRODUCAO_LIVROS_AUTOR + autorSelecioando.getNome());
             adicionarServiços.printarListaDeLivros(livrosDoAutor);
         }
     }
@@ -334,7 +339,7 @@ public class InterecaoComUsuario {
     }
 
     public void verificarHistoricoPorMembro() {
-        adicionarServiços.apresentarHistoricoDeLivrosPorMembro(listaDeMembros, leitor);
+        adicionarServiços.apresentarHistoricoDeLivrosPorMembro(listaDeMembros, leitor, "O membro não possui livros em seu histórico");
     }
 
     public void realizarDevolução(){
@@ -343,8 +348,9 @@ public class InterecaoComUsuario {
             System.out.println("Não há membros disponíveis!");
             return;
         }
-        adicionarServiços.apresentarHistoricoDeLivrosPorMembro(listaDeMembros, leitor);
+        adicionarServiços.apresentarHistoricoDeLivrosPorMembro(listaDeMembros, leitor, "O membro não possui livros pendentes de devolução");
 
+        leitor.nextLine();
 
         System.out.println("Informe o código do livro ao qual você deseja devolver: ");
         livroASerDevolvido = leitor.nextInt();
