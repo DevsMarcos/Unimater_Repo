@@ -306,14 +306,16 @@ public class InterecaoComUsuario {
                 System.out.println(AVISA_CURSO_ESTUDANTE_VAZIO);
             }
 
-            //Por fim criamos 
+            //Por fim criamos um novo estudante, passando os parâmetros necessários
             Estudante estudante = new Estudante(nomeEstudante, idEstudante, curos);
 
+            //Informamos o sucesso da operação de criação
             System.out.printf(MENSAGEM_SUCESSO_CRIAÇÃO_ESTUDANTE, nomeEstudante);
-
+            //Salvamos o estudante na lsita de membros;
             listaDeMembros.add(estudante);
 
-            //Membro do Tipo Professor
+            //Membro do Tipo Professor, repetimos o processo acima citado, entrtanto utilizando um número maior de 
+            //Variáveis. 
         } else if (tipoMembro == 2) {
 
             String nomeProfessor = "";
@@ -359,90 +361,115 @@ public class InterecaoComUsuario {
 
             //Opção inválida
         } else {
+            //Se a opção de criação de membros infromada foir inválida, um alerta sera emitido e o repitirá.
             System.out.println(MENSAGEM_ERRO_OPCAO_CRIACAO_INVALIDA);
         }
+        //Por fim, retornamos a lista de membros.
         return listaDeMembros;
     }
 
-    //Printar Lista de Membros
+    //O método abaixo printa a lsita de membros cadastrados no sistema, para isso, utiliza um método 
+    //da classe adicionarServiços, que possui como parâmetro uma lista de membros.
     public void printarListaDeMembros() {
         adicionarServiços.mostrarListaDeMembros(listaDeMembros);
     }
 
+    //O método emprestar livro, tem por objetivo registrar o histórico de empréstimos de um livro,
+    //Ao mesmo tempo que indisponibiliza esse livro.
     public void emprestarLivros() {
 
         ////Escolha do Membro
         int membroEscolhido = 0;
         int livroEscolhido = 0;
-
+        //Primeiramente verificamos se a bilbioteca possui membros cadastrados, caso não haja
+        //Será emitido uma aviso e o programa voltará para a tela de opções;
         if (listaDeMembros.isEmpty()) {
             System.out.println(MENSAGEM_ERRO_BIBLIOTECA_SEM_MEMBROS);
             return;
         }
 
+        //Verificamos tamvém, se existem autores cadastrados, caso não haja, p sistema emitira um aviso
+        // e voltará para a tela inicial.
         if (listaDeAutores.isEmpty()) {
             System.out.println(MENSAGEM_DE_ERRO_BILBIOTECA_SEM_AUTORES);
             return;
-
         }
+
+        //Após as validações, o sistema irá requisitar o ID do membro para realizar o empréstimo, sendo necessário informar o 
+        //ID corretamente
         System.out.println(REQUISICAO_ID_MEMBRO);
+        //Será listado a lista de membro, e o usuário irá informar um código de validação.
         adicionarServiços.mostrarListaDeMembros(listaDeMembros);
         membroEscolhido = leitor.nextInt();
-
+        //Após isso, o sistema irá tentar localizar um Membro que possua tal ID
         Membro membro = adicionarServiços.buscarMembroPorID(membroEscolhido, listaDeMembros);
-
+        //Caso o mesmo não consiga localizar, ele emitirá um aviso e o código retornará para a tela de opções. 
         if (membro == null) {
             System.out.println("Membro não encontrado!");
             return;
         }
 
-        //Escolha do Autor
+        //Se localizado, o sistema irá requisitar o autor que o usuário deseja emprestar o livro
+        //Utilizando dos mesmos meios para printar os autores e selecionar o mesmo
         System.out.println(REQUISICAO_AUTOR);
         adicionarServiços.apresentarAutores(listaDeAutores);
         int autorEscolhido = leitor.nextInt() - 1; // Ajustar o índice para zero-based
         leitor.nextLine(); // Consumir o restante da linha
 
+        //Validação se o autor informado realmente existe; 
         if (autorEscolhido < 0 || autorEscolhido >= listaDeAutores.size()) {
             System.out.println(FALAHA_REUISCAO_AUTOR_NAO_ENCONTRADO);
             return;
         }
 
+        //Após isso, o sistema irá localizar o autor escolhido
         Autor autor = listaDeAutores.get(autorEscolhido);
-
-        List<Livro> livrosDoAutor = autor.getLivros(); // Supondo que você tenha um método getLivros() na classe Autor
+        //E irá trazer os liveos do mesmo, para o membro escolher, se o autor não possui livros, o 
+        //será emitido uma viso, e o sistema retornará para a tela de opções. 
+        List<Livro> livrosDoAutor = autor.getLivros(); 
         if (livrosDoAutor.isEmpty()) {
             System.out.println(FALHA_LOCALIZAR_LIVRO_AUTOR_SEM_LIVROS);
             return;
         }
-
+        //Se for encontrado livros, o sistema irá iterar sobre a lista de livros, 
+        //E irá mostarar todos os livros encontrados, utilizando para o método toString();
         System.out.println(REQUISICAO_LIVRO);
         for (int i = 0; i < livrosDoAutor.size(); i++) {
             Livro livro = livrosDoAutor.get(i);
             System.out.println((i + 1) + ". " + livro.toString()); // Supondo que você tenha um método getTitulo() na classe Livro
         }
+        //O usuário irá infomrar o código ISBN do livro para realizar esse empréstimo. 
         livroEscolhido = leitor.nextInt(); // Ajustar o índice para zero-based
         leitor.nextLine(); // Consumir o restante da linha
 
+        //O sistema irá tentar localizar o livro informado pel0o código.
         Livro livro = adicionarServiços.buscarLivroPorCodigo(livroEscolhido, listaDeAutores);
 
+            //Caso o livo não seja encontrado, o sistema emitira um aviso e retornara a tela de opções
         if (livro == null) {
             System.out.println(FALHA_LOCALIZAR_LIVRO);
             return;
         }
 
+        //Se verificará se o livro que esta tentando se emprestar possui disponibilida
+        //Caso não, uma viso será mostrado, caso sim, o livro será emprestado e indisponibilizado. 
         if (livro.verificarDisponibilidade().equals("Indisponível")) {
             System.out.println("Livro indisponível para empréstimo! \n");
         } else {
-            membro.adicionarLivro(livro); // Supondo que você tenha um método adicionarLivro(Livro livro) na classe Membro
+            membro.adicionarLivro(livro); 
             livro.emprestarLivro();
             System.out.println("Livro emprestado com sucesso!\n");
         }
     }
 
+    //Abaixo temos uma método que mostra o histórico de livros de um determinado membro.
+    //Possui como parâmetro uma lista de membros, um Scanner, e um aviso caso o livro não seja encontrado.
     public void verificarHistoricoPorMembro() {
         adicionarServiços.apresentarHistoricoDeLivrosPorMembro(listaDeMembros, leitor, MEMBRO_NÃO_POSSUI_LIVROS);
     }
 
+
+    //Por fim, temos o método que realiza a devolução de livros; 
     public void realizarDevolução() {
         int livroASerDevolvido = 0;
         boolean validacao;
