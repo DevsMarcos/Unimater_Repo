@@ -1,11 +1,9 @@
-package Class.Constructor;
+package Class;
 
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import Class.Livro;
 
 public class Membro {
     private String nome;
@@ -31,7 +29,7 @@ public class Membro {
         return idMembro;
     }
 
-    public void adicionarLivro(Livro livro){
+    void adicionarLivro(Livro livro){
         historicoDeLivros.add(livro);
     }
 

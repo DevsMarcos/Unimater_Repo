@@ -1,7 +1,7 @@
-package Class.Constructor;
+package Class;
 
 
-public class Estudante extends Membro{
+public class Estudante extends Membro {
     private String curso;
 
     public Estudante(String nome, int idMembro, String curso) {

@@ -1,7 +1,7 @@
-package Class.Constructor;
+package Class;
 
 
-public class Professor extends Membro{
+public class Professor extends Membro {
     private String departamento;
     private String materia;
 

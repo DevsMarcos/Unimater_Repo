@@ -5,39 +5,35 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import Class.Constructor.Membro;
-
 public class Serviços {
-    final String SUCESS_ADD_AUTOR = "Autor adicionado com sucesso!";
-    final String SUCESS_ADD_BOOK_AUTOR = "Livro vinculado ao autor com sucesso!";
 
     public void printarListaDeLivros(List<Livro> listaDeLivros){
         for (int i = 0; i < listaDeLivros.size(); i++) {
             Livro livro = listaDeLivros.get(i);
-            System.out.println((i + 1) + ". " + livro.toString() + "\n"); // Supondo que você tenha um método getTitulo() na classe Livro
+            System.out.println(livro.toString() + "\n"); // Supondo que você tenha um método getTitulo() na classe Livro
         }
     }
 
-    public void apresentarHistoricoDeLivrosPorMembro(List<Membro> listaDeMembros, Scanner leitor, String texto){
+    public boolean apresentarHistoricoDeLivrosPorMembro(List<Membro> listaDeMembros, Scanner leitor, String texto){
         int membroEscolhido = 0;
-        if (listaDeMembros.size() == 0) {
-            System.out.println("Não há membro cadastrados no momento!");
-            return;
+        if (listaDeMembros.isEmpty()) {
+            System.out.println("Não há membro cadastrados no momento!\n");
+            return false;
         }else{
         System.out.println("Escolha um dos membros que você deseja verificar o histórico: \n");
         this.mostrarListaDeMembros(listaDeMembros);
         membroEscolhido = leitor.nextInt();
         
-        Membro membro = this.buscarMembroPorID(membroEscolhido, listaDeMembros);
-        if (membro.equals(null)) {
-            System.out.println("Membro não encontrado! \n");
-            return;
+        Membro membro = buscarMembroPorID(membroEscolhido, listaDeMembros);
+        if (membro == null){
+            System.out.println("Membro não encontrado");
+            return false;
         }
         List<Livro> historicoDeLivros = membro.historicoDeLivros();
 
         if (historicoDeLivros.isEmpty()) {
             System.out.println(texto);
-            return;
+            return false;
         }
 
         System.out.println("Segue abaixo o histórico de libros o membro: " + membro.getNome() + "\n");
@@ -50,16 +46,16 @@ public class Serviços {
                     """, livro.getTitulo(), livro.getDataDeLancamento(), livro.getNomeAutor(), livro.getIsbn());
         }
     }
-
+    return true;
     }
 
     public void mostrarListaDeMembros(List<Membro> listaDeMembros){
         if (listaDeMembros.size() == 0) {
-            System.out.println("Não há membro cadastrados no momento!");
+            System.out.println("Não há membro cadastrados no momento!\n");
             return;
         }
         for (int i = 0; i < listaDeMembros.size(); i++) {
-            System.out.println((i + 1) + ". " + listaDeMembros.get(i).toString());
+            System.out.println(listaDeMembros.get(i).toString());
 
         }
     }
@@ -73,7 +69,6 @@ public class Serviços {
 
     public List<Autor> adicionarAutorLista(List<Autor> autores, Autor autor){
         autores.add(autor);
-        System.out.println(SUCESS_ADD_AUTOR);
         return autores;
     }
 
@@ -109,31 +104,6 @@ public class Serviços {
     public void quebraDeLinha(){
         System.out.println("\n");
     }
-
-    public void validacaoDeTexto(String mensagem, String var, Scanner leitor, String mensagemAviso){
-        while (true) {
-            System.out.println(mensagem);
-            var = leitor.nextLine();
-            if (!var.trim().equals(" ")) {
-                break;
-            }
-            System.out.println(mensagemAviso);
-        }
-    }
-
-        public void validacaoDeNumero(String mensagemEntrada,String mensagem, 
-        String mensagemErro, int numeroAvaliado, Scanner leitor ){
-            while (true) {
-                System.out.println(mensagemEntrada);
-                if (leitor.hasNextInt()) {
-                    numeroAvaliado = leitor.nextInt();
-                    break;
-                }           
-                System.out.println(mensagemErro);
-            }
-    }
-
-
 
 
 }
