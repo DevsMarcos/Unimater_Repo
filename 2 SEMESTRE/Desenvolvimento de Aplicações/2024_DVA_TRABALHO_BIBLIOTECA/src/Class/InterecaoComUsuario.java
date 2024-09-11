@@ -166,7 +166,7 @@ public class InterecaoComUsuario {
 
     //Função que realiza a criação de um novo livro
     public void criarNovoLivro() {
-
+        //Abaixo temos as variáveis que realizam o controle dos dados inseridos pelo usuário
         String tituloDoLivro = "";
         int autorEscolhido = 0;
         String nomeDoAutor = "";
@@ -174,22 +174,32 @@ public class InterecaoComUsuario {
         int isbn = 0;
         String disponivel = PADROA_LANCAMENTO;
 
-        leitor.nextLine();
+        leitor.nextLine(); //Scanner utilizado para realizar a limepza dos buffers
+
+        //Validação da lsita de autores, caso a lista de autores esteja vazia,
+        //o sistema apresenta uma mensagem informando o evento e para o istema; 
         if (listaDeAutores.isEmpty()) {
             System.out.println(AVISO_LISTA_DE_AUTORES_VAZIA);
             return;
         } else {
+            //Caso contrário, ele apresentará os autores presente nas lsita
             System.out.println(MENSAGEM_DE_AUTORES_DISPONIVEIS);
-
+            //Abaixo temos o método da Classe aicionarServiços, que apresenta os autores de uma lista.
             adicionarServiços.apresentarAutores(listaDeAutores);
         }
-
+        //Após apresentado os autores, o sistema solicitará para informar o autor desejado, o valor a ser informado
+        //Se trata da posição do uusário na lsita. 
         System.out.println(PERGUNTA_INFORMAR_AUTOR_DESEJADO);
         autorEscolhido = leitor.nextInt();
+        //Será então recupardo o autor da lista conforme informado
         Autor autorSelecionado = listaDeAutores.get(autorEscolhido - 1);
+        //Por fim, guardaremos o nome do autor na variável referente
         nomeDoAutor = autorSelecionado.getNome();
+        //Limparemos o buffer;
         leitor.nextLine();
 
+        //Repte-se a validação dos dados, para que não seja informado nenhum campo em vazio, inicilamente
+        //Validando no nome
         while (true) {
             System.out.println(NOME_DO_LIVRO);
             tituloDoLivro = leitor.nextLine();
@@ -198,7 +208,7 @@ public class InterecaoComUsuario {
             }
             System.out.println(AVISO_TITULO_OBRIGATORIO);
         }
-
+        //Posteriormente a data de lançamento do livro.
         while (true) {
             System.out.println(LANÇAMENTO_LIVRO);
             if (leitor.hasNextInt()) {
@@ -210,12 +220,16 @@ public class InterecaoComUsuario {
 
         adicionarServiços.quebraDeLinha();
 
-
+        //Enquanto ao ISBN, o mesmo será cirado de forma randômica, utilizando um método
+        //criado e presente na classe adicionarServiços. 
         isbn = adicionarServiços.geradorDeCodigosEId();
 
+        //Com os dados em mãos, criaremos um novo livro, que recebe como parâmaetro o nome do autor, titulo do livro,
+        // ano de lançamento, diponibildiade (o mesmo se inicia Disponível para empréstimo) e o ISBN
         Livro livro = new Livro(nomeDoAutor, tituloDoLivro, anoDeLancameto, disponivel, isbn);
         autorSelecionado.adicionarLivro(livro);
 
+        //Por fim, informamos que o mesmo foi criado e vinculado ao autor.
         System.out.println(LIVRO_CRIADO);
     }
 
@@ -223,44 +237,54 @@ public class InterecaoComUsuario {
 
     //FUnção que permite verficar os livros de determinado autor
     public void verificarLivrosDeDeterminadoAutor() {
+        //Inicialmente realizamos uma validação se existe na lsita de autores, algum autor criado
+        //Caso não exista, será emitida uma mensagem de aviso e o método parará e retornará a lista de opções
         if (listaDeAutores.isEmpty()) {
             System.out.println(AVISO_LISTA_DE_AUTORES_VAZIA);
             return;
         }
+        //Se existir, os mesmos serão printados novamente pelo método de apresentar autores.
         adicionarServiços.apresentarAutores(listaDeAutores);
         System.out.println(SELECIONAR_AUTOR_VERIFICAR);
-
+        //Será requisitado ao usuário que informe o autor que deseja visualizar os livros.
         int escolha = leitor.nextInt();
 
+        //Caso o usuário informe um valor menor que 1 ou maior que a quantiodade de autores existentes
+        //O sistema informará que tal opção é inválida. 
         if (escolha < 1 || escolha > listaDeAutores.size()) {
             System.out.println(ERRO_OPCAO_INVALIDA);
         } else {
+            //Caso conrtário, será buscado o autor, conforme solicitado ao usuario
             Autor autorSelecioando = listaDeAutores.get(escolha - 1);
-            List<Livro> livrosDoAutor = autorSelecioando.getLivros(); // Supondo que você tenha um método getLivros() na classe Autor
+            //E por fim, será localizado a lsita de livros referente ao mesmo, sendo armezando em livrosDoAutor
+            List<Livro> livrosDoAutor = autorSelecioando.getLivros();
+            //Se a lista de livros do mesmo estiver vazia, o sismtea avisará, e retornará à tela de opções inicial
             if (livrosDoAutor.isEmpty()) {
                 System.out.println(AUTOR_SEM_LIVRO_CADASTRADO);
                 return;
             }
-
+           //Caso contrário, irá imprimir no console, todos os livros do autor selecionado
             System.out.println(MENSAGEM_INTRODUCAO_LIVROS_AUTOR + autorSelecioando.getNome());
             adicionarServiços.printarListaDeLivros(livrosDoAutor);
         }
     }
 
-    //Função que realiza a criação de um novo membro da bilbioteca
+    //Função que realiza a criação de um novo membro da bilbioteca, o meétodo abaixo, retonra uma nova lista de membros.
     public List<Membro> criarNovoMembro() {
         int tipoMembro = 0;
+        //Inicialmente será solicitado ao usuário, informar o tipo do membro entre Alno e Professor;
         System.out.println(CADASTRO_DE_MEMBROS);
         tipoMembro = leitor.nextInt();
 
         leitor.nextLine();
 
-        //Membro do tipo Estudante
+        //Caso seja selecionado 1, Aluno, entraremos na seguinte condição. 
         if (tipoMembro == 1) {
             String nomeEstudante = "";
             int idEstudante = 0;
             String curos = "";
-
+            //Utilizaremos da estrutura de valição, para impedir que o usuário informe campos em vazio;
+            //Validamos primeiramente o nome do estudante
             while (true) {
                 System.out.println(INFORMAR_NOME_ESTUDANTE);
                 nomeEstudante = leitor.nextLine();
@@ -269,9 +293,10 @@ public class InterecaoComUsuario {
                 }
                 System.out.println(AVISO_NOME_ESTUDANTE_VAZIO);
             }
-
+            //Geramos um ID aleatório com o método geradorDeCódigo
             idEstudante = adicionarServiços.geradorDeCodigosEId();
 
+            //Validamos o curso do mesmo
             while (true) {
                 System.out.println(INFORMAR_CURSO_ESTUDANTE);
                 curos = leitor.nextLine();
@@ -281,6 +306,7 @@ public class InterecaoComUsuario {
                 System.out.println(AVISA_CURSO_ESTUDANTE_VAZIO);
             }
 
+            //Por fim criamos 
             Estudante estudante = new Estudante(nomeEstudante, idEstudante, curos);
 
             System.out.printf(MENSAGEM_SUCESSO_CRIAÇÃO_ESTUDANTE, nomeEstudante);
