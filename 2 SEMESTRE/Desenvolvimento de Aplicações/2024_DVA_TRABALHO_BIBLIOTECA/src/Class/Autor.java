@@ -38,7 +38,8 @@ public class Autor {
 
         return Collections.unmodifiableList(livros);
     }
-
+    //Métodos toString(), retorna uma representação em forma de String(tetxo), do objeto.
+    //Aqui refereênciamos os atributos da classe para obeter os valores.
     @Override
     public String toString() {
         return "Autor: "+this.nome+"\n"+
