@@ -7,11 +7,14 @@ import java.util.Scanner;
 public class InterecaoComUsuario {
 
     //SERVIÇOS ADICIONAIS -----------------------------------------
+    //Listas referente a Autores e membros dentro do projeto
     private List<Autor> listaDeAutores = new ArrayList<>();
     private List<Membro> listaDeMembros = new ArrayList<>();
+    //Classe serviço, onde se encontram código que reptem e métodos de serviço.
     private final Serviços adicionarServiços = new Serviços();
     private final Scanner leitor;
     //-----------------------------------------------------------------------
+    //String finais referente à eununciados e/ou títuloa;
     //FUNÇÃO DE CADASTRO DE AUTOR
     private final String CONFIRMACAO_AUTOR_CRIADO_COM_SUCESSO = "Autor adicionado à lista com sucesso!";
 
@@ -89,24 +92,30 @@ public class InterecaoComUsuario {
     private final String MEMBRO_NÃO_POSSUI_LIVROS = "O membro não possui livros em seu histórico! \n";
     private final String MEMBRO_NAO_POSSUI_PENDENCIAS = "O membro não possui livros pendentes de devolução! \n";
 
-
+    //COnstrutor da Clase InteracaoComUsuario, recebe como parâmatro um Scanner, que tem por
+    //objetivo, ser uma variálve global da classe.
     public InterecaoComUsuario(Scanner leitor) {
         this.leitor = leitor;
     }
 
+    //Função que printa a lsita de opções ao usuário. 
     public void opcoesDeEscolha() {
         System.out.println(OPCOES);
     }
 
-
+    //Método que possui como retorno um novo autor. 
     private Autor criarNovoAutor() {
+        //Variáveis para controle de dados no método
         String nome = " ";
         String nacionalidade = "";
         int anoNascimento = 0;
         leitor.nextLine();
 
+        //função para quebra de linha
         adicionarServiços.quebraDeLinha();
 
+        //validação de resposta do usuário, caso o usuário tente informar um valor vazio para o nome do autor
+        //o código avisará que se tratar de uma açõ impossível e repetira até que a mesma seja efetuada corretamente. 
         while (true) {
             System.out.println(PERGUNTA_NOME_DO_AUTOR);
             nome = leitor.nextLine();
@@ -117,7 +126,9 @@ public class InterecaoComUsuario {
         }
 
         adicionarServiços.quebraDeLinha();
-
+        
+        //validação de resposta do usuário, caso o usuário tente informar um valor vazio para a nacionalidade do autor
+        //o código avisará que se tratar de uma açõ impossível e repetira até que a mesma seja efetuada corretamente. 
         while (true) {
             System.out.println(PERGUNTA_NACIONALIDADE_AUTOR);
             nacionalidade = leitor.nextLine();
@@ -128,7 +139,8 @@ public class InterecaoComUsuario {
         }
 
         adicionarServiços.quebraDeLinha();
-
+    //validação de resposta do usuário, caso o usuário tente informar um valor vazio para a idade do autor
+    //o código avisará que se tratar de uma açõ impossível e repetira até que a mesma seja efetuada corretamente. 
         while (true) {
             System.out.println(PERGUNTA_ANO_NASCIENTO_AUTOR);
             if (leitor.hasNextInt()) {
@@ -137,18 +149,22 @@ public class InterecaoComUsuario {
             }
             System.out.println(AVISO_ANO_NASCIMENTO_AUTOR);
         }
-
+        //Ao final do método, retornamos a criação de um novo autor, passando os parâmetros necessário, que são:
+        //Nome, nacionalidade e ano de nascimento. 
         return new Autor(nome, nacionalidade, anoNascimento);
     }
 
-    //FUnção que realiza a criação de um novo autor.
+    //Função que realiza a criação e a adição desse novo autor à lista de autores.
+    //Utliza da função privada acima criarNovoAtuor para a criação do autor. 
     public void criarAutorEVincular() {
-        Autor autor = this.criarNovoAutor();
+        Autor autor = this.criarNovoAutor(); //Método que cria e retorna um aturo. O retorno está sendo salvo em "autor".
+        //O método abaixo, presente na calsse adicionarServiços, adciona o autor à uma lista, e recebe como parâmetro 
+        //uma lista de autores e um autor.
         adicionarServiços.adicionarAutorLista(listaDeAutores, autor);
         System.out.println(CONFIRMACAO_AUTOR_CRIADO_COM_SUCESSO);
     }
 
-    //Função que realiza a criação de um livro e vincula o mesmo au autor correspodente
+    //Função que realiza a criação de um novo livro
     public void criarNovoLivro() {
 
         String tituloDoLivro = "";
