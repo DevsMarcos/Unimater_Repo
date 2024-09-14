@@ -473,21 +473,27 @@ public class InterecaoComUsuario {
     public void realizarDevolução() {
         int livroASerDevolvido = 0;
         boolean validacao;
+        //Inicialmente, realizamaos a cerificação da existencia de membros no sistema
+        //Caso não haja membros cadastrados, será emitido um aviso e retonrará para a página de opções
         if (listaDeMembros.isEmpty()) {
             System.out.println("Não há membros disponíveis!\n");
             return;
         }
 
+        //Aqui iremos vaidar as etpas do Histórico de livros, caso algumas das etapas retorne false, o programa irá avisa sobre o erro
+        //E retornar para a página inicial.
         validacao = adicionarServiços.apresentarHistoricoDeLivrosPorMembro(listaDeMembros, leitor, MEMBRO_NAO_POSSUI_PENDENCIAS);
         if (!validacao){
             return;
         }
 
         leitor.nextLine();
-
+        //Solicitamos qual livro queremos devolver
         System.out.println("Informe o código do livro ao qual você deseja devolver: ");
         livroASerDevolvido = leitor.nextInt();
 
+        //O sistema irá tentar encontrar o livro, caso o mesmo não encontre, ele emitirá aum aviso e parará o código
+        //Caso contrário, irá realizar a devolução do livro;
         Livro livro = adicionarServiços.buscarLivroPorCodigo(livroASerDevolvido, listaDeAutores);
 
         if (livro == null) {
