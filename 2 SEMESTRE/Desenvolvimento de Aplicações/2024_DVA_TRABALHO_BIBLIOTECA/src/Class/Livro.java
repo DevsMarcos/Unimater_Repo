@@ -4,12 +4,13 @@ package Class;
 public class Livro {
     private final String titulo;
     private final int dataDeLancamento;
-    private String disponivel;
+    private boolean disponivel;
     private final String nomeAutor;
     private final int isbn;
 
+
     //Cosntrutor da Classe Livro, que possui os atributos necessários para a criação como parâmetro
-    public Livro(String nomeAutor, String titulo, int dataDeLancamento, String disponivel, int isbn) {
+    public Livro(String nomeAutor, String titulo, int dataDeLancamento, boolean disponivel, int isbn) {
         this.nomeAutor = nomeAutor;
         this.titulo = titulo;
         this.dataDeLancamento = dataDeLancamento;
@@ -21,47 +22,55 @@ public class Livro {
     public int getDataDeLancamento() {
         return dataDeLancamento;
     }
-//Função que retorna o nome do autor
+
+    //Função que retorna o nome do autor
     public String getNomeAutor() {
         return nomeAutor;
     }
-//Função que retornar o título do livro
+
+    //Função que retornar o título do livro
     public String getTitulo() {
 
         return titulo;
     }
-//FUnção que retorna o ISBN do livro
+
+    //FUnção que retorna o ISBN do livro
     public int getIsbn() {
 
         return isbn;
     }
 
     //Função que verifica a disponibilidade de empréstimo do livro
-    public String verificarDisponibilidade() {
+    public boolean verificarDisponibilidade() {
 
         return disponivel;
     }
 
     //Função que realiza o empréstimo do livro. Caso o livro já esteja "emprestado", ele retorna uma mensagem e para a execução da memsma.
     //Caso esteja disponível, realiza o empréstimo e muda o valor desse atributo para o condizente à emprestado
-    public String emprestarLivro() {
-        if (disponivel.equals("Indisponível")) {
+    public boolean emprestarLivro() {
+        if (!disponivel) {
             System.out.println("O livro já foi emprestado!");
             return disponivel;
         } else {
-
-            return disponivel = "Indisponível";
+            System.out.println("Empréstimo realizado!");
+            return true;
         }
     }
-    
-     //Função que realiza o empréstimo do livro. Caso o livro já esteja "emprestado", ele retorna uma mensagem e para a execução da memsma.
+
+    public boolean getDisponivel() {
+        return disponivel;
+    }
+
+    //Função que realiza o empréstimo do livro. Caso o livro já esteja "emprestado", ele retorna uma mensagem e para a execução da memsma.
     //Caso esteja disponível, realiza o empréstimo e muda o valor desse atributo para o condizente à emprestado
-    public String devolverLivro() {
-        if (disponivel.equals("Disponível")) {
-            System.out.println("O livro está disponível");
+    public boolean devolverLivro() {
+        if (!disponivel) {
+            System.out.println("O livro não pode ser devolvido pois já se encontra disponível!");
             return disponivel;
         } else {
-            return disponivel = "Disponível";
+            System.out.printf("Devolução realizada!");
+            return false;
         }
     }
 
@@ -69,12 +78,12 @@ public class Livro {
     //Aqui refereênciamos os atributos da classe para obeter os valores.
     @Override
     public String toString() {
-        return"\n"+
-                        "Titulo: " + titulo + "\n" +
-                        "Data de Lançamento: " + dataDeLancamento + "\n" +
-                        "Autor: " + nomeAutor + "\n" +
-                        "Status de Empréstimo: " + disponivel + "\n" +
-                        "ISBN: " + getIsbn() + "\n";
+        return "\n" +
+                "Titulo: " + titulo + "\n" +
+                "Data de Lançamento: " + dataDeLancamento + "\n" +
+                "Autor: " + nomeAutor + "\n" +
+                "Livro emprestado: " + disponivel + "\n" +
+                "ISBN: " + getIsbn() + "\n";
 
     }
 }

@@ -38,7 +38,7 @@ public class Main {
                     novaInteracao.emprestarLivros();
                 }
                 case 8 ->{
-                    novaInteracao.realizarDevolução();
+                    novaInteracao.realizarDevolucao();
                 }
             }
         } while (opcao != 0);

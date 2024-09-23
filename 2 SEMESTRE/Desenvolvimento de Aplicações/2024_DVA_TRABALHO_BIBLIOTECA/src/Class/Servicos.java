@@ -2,10 +2,11 @@ package Class;
 
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Serviços {
+public class Servicos {
 
     //Essa função retorna a lista mostra os livros de uma lista de livros, percorrendo por ela e printando cada livro;
     public void printarListaDeLivros(List<Livro> listaDeLivros){
@@ -118,6 +119,19 @@ public class Serviços {
     public void quebraDeLinha(){
         System.out.println("\n");
     }
+
+
+//    public void validar(Object dado){
+//        if(dado instanceof String){
+//
+//        }
+//        if (dado instanceof Integer){
+//
+//        }
+//        else
+//            System.out.println("Informe uma string ou um int");
+//
+//    }
 
 
 }

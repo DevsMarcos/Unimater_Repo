@@ -11,7 +11,7 @@ public class InterecaoComUsuario {
     private List<Autor> listaDeAutores = new ArrayList<>();
     private List<Membro> listaDeMembros = new ArrayList<>();
     //Classe serviço, onde se encontram código que reptem e métodos de serviço.
-    private final Serviços adicionarServiços = new Serviços();
+    private final Servicos adicionarServiços = new Servicos();
     private final Scanner leitor;
     //-----------------------------------------------------------------------
     //String finais referente à eununciados e/ou títuloa;
@@ -41,7 +41,7 @@ public class InterecaoComUsuario {
     private final String AVISO_ANO_NASCIMENTO_AUTOR = "O ano de nascimento não pode ser igual a 0! \n";
     //-------------------------------------------------------------------------------------
     //FUNÇÃO DE CRIAR NOVO LIVRO
-    private final String PADROA_LANCAMENTO = "Disponível";
+    private final boolean PADROA_LANCAMENTO = true;
     private final String LIVRO_CRIADO = "Livro criado e adicionado com sucesso!\n";
     private final String LANÇAMENTO_LIVRO = "Informe o ano de lançamento do livro: ";
     private final String AVISO_DATA_LANCAMENTO_OBRIGATORIO = "A data de lançamento do Livro é obrigatória! \n";
@@ -104,7 +104,7 @@ public class InterecaoComUsuario {
     }
 
     //Método que possui como retorno um novo autor. 
-    private Autor criarNovoAutor() {
+    private Autor requerirDadosECriarAutor() {
         //Variáveis para controle de dados no método
         String nome = " ";
         String nacionalidade = "";
@@ -157,7 +157,7 @@ public class InterecaoComUsuario {
     //Função que realiza a criação e a adição desse novo autor à lista de autores.
     //Utliza da função privada acima criarNovoAtuor para a criação do autor. 
     public void criarAutorEVincular() {
-        Autor autor = this.criarNovoAutor(); //Método que cria e retorna um aturo. O retorno está sendo salvo em "autor".
+        Autor autor = this.requerirDadosECriarAutor(); //Método que cria e retorna um aturo. O retorno está sendo salvo em "autor".
         //O método abaixo, presente na calsse adicionarServiços, adciona o autor à uma lista, e recebe como parâmetro 
         //uma lista de autores e um autor.
         adicionarServiços.adicionarAutorLista(listaDeAutores, autor);
@@ -172,7 +172,7 @@ public class InterecaoComUsuario {
         String nomeDoAutor = "";
         int anoDeLancameto = 0;
         int isbn = 0;
-        String disponivel = PADROA_LANCAMENTO;
+        boolean disponivel = PADROA_LANCAMENTO;
 
         leitor.nextLine(); //Scanner utilizado para realizar a limepza dos buffers
 
@@ -453,7 +453,7 @@ public class InterecaoComUsuario {
 
         //Se verificará se o livro que esta tentando se emprestar possui disponibilida
         //Caso não, uma viso será mostrado, caso sim, o livro será emprestado e indisponibilizado. 
-        if (livro.verificarDisponibilidade().equals("Indisponível")) {
+        if (!livro.verificarDisponibilidade()) {
             System.out.println("Livro indisponível para empréstimo! \n");
         } else {
             membro.adicionarLivro(livro); 
@@ -470,7 +470,7 @@ public class InterecaoComUsuario {
 
 
     //Por fim, temos o método que realiza a devolução de livros; 
-    public void realizarDevolução() {
+    public void realizarDevolucao() {
         int livroASerDevolvido = 0;
         boolean validacao;
         //Inicialmente, realizamaos a cerificação da existencia de membros no sistema
@@ -498,10 +498,9 @@ public class InterecaoComUsuario {
 
         if (livro == null) {
             System.out.println("Código de livro não localizado ou incorreto!\n");
-            return;
-        } else {
+
+        }else {
             livro.devolverLivro();
-            System.out.println("Devolução realizada com sucesso!\n");
         }
     }
 }

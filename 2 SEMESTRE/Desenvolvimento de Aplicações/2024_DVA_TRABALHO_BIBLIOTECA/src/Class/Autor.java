@@ -35,7 +35,6 @@ public class Autor {
     //Função que retorna os livros de um autor. É protegida pelo métodou nmodifiableList.
     //Serve apenas para visualização
     public List<Livro> getLivros(){
-
         return Collections.unmodifiableList(livros);
     }
     //Métodos toString(), retorna uma representação em forma de String(tetxo), do objeto.

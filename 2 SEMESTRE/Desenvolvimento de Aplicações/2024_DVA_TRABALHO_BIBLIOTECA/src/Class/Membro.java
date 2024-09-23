@@ -4,6 +4,7 @@ package Class;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 //Atributos da Classe Membro
 public class Membro {
     private String nome;
@@ -19,29 +20,30 @@ public class Membro {
     }
 
     //Método que retorna a lista de livros, no caso, o histórico de livros emprestados pelo membro.
-    public List<Livro> historicoDeLivros(){
+    public List<Livro> historicoDeLivros() {
         return Collections.unmodifiableList(historicoDeLivros);
     }
 
-//Método que retorna o nome do membro
+    //Método que retorna o nome do membro
     public String getNome() {
         return nome;
     }
-//Método que retorna o Id do membro;
+
+    //Método que retorna o Id do membro;
     public int getIdMembro() {
         return idMembro;
     }
 
     //Método que realiza a adição de novos livros ao histórico do memobr. Possui o nível de acesso definido
     //como Private-Package. 
-    void adicionarLivro(Livro livro){
+    void adicionarLivro(Livro livro) {
         historicoDeLivros.add(livro);
     }
 
     @Override
     public String toString() {
         return "\n" +
-                "nome: "+nome+ "\n"+
-                "Id do Membro"+ idMembro +"\n";
+                "nome: " + nome + "\n" +
+                "Id do Membro" + idMembro + "\n";
     }
 }
