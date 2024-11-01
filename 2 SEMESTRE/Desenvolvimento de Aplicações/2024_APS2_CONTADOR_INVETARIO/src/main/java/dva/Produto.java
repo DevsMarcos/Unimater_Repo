@@ -34,4 +34,9 @@ public class Produto {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+
+    @Override
+    public String toString() {
+        return codBarras+" - "+descricao+": "+saldo;
+    }
 }

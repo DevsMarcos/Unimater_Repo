@@ -20,9 +20,9 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btnProduto.setOnAction(actionEvent -> btnProdutosAction());
+        btnProduto.setOnAction(event -> btnProdutosAction());
 
-        btnInventario.setOnAction(actionEvent -> btnInventarioAction());
+        btnInventario.setOnAction(event -> btnInventarioAction());
     }
 
     private void btnProdutosAction(){
