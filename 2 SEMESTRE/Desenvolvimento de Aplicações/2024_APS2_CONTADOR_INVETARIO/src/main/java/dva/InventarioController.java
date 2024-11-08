@@ -38,17 +38,24 @@ public class InventarioController implements Initializable {
         txtLabel.setOnAction(event -> onKeyPress());
     }
 
+    List<Produto> listaAtualizada = new ArrayList<>();
+
+
     private void onKeyPress() {
         String textoDigitado = txtLabel.getText();
 
-        List<Produto> listaAtualizada = new ArrayList<>();
 
         Produto produto = buscarProdutoPorCodigo(textoDigitado, Estoque.estoqueAtual());
+
         if (produto == null){
             System.out.println("Produto inexistente");
         }else {
+            produto.setSaldo(1);
             listaAtualizada.add(produto);
-            System.out.println();;
+            System.out.println("Lista atualizada");
+            System.out.println(listaAtualizada);
+
+
         }
     }
 
