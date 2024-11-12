@@ -1,5 +1,4 @@
 package dva;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -12,12 +11,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 public class InventarioController implements Initializable {
 
     @FXML
@@ -30,16 +27,14 @@ public class InventarioController implements Initializable {
     private TextField txtLabel;
 
     private List<Produto> listaEstoqueInicial;
-
     private List<Produto> listaAtualizada = new ArrayList<>();
     private ObservableList<String> listaObservavel = FXCollections.observableArrayList();
-    private List<Produto> lista1 = new ArrayList<>();
-    private List<Produto> lista2 = new ArrayList<>();
-    private List<Produto> lista3 = new ArrayList<>();
+    private List<Produto> lista1;
+    private List<Produto> lista2;
+    private List<Produto> lista3;
     private int contadorFinalizar = 0;
     private int contadorFechamento = 5;
     private Timeline timeline;
-    private boolean atualizarLista1 = true;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,12 +50,12 @@ public class InventarioController implements Initializable {
 
         if (produto == null) {
             listaObservavel.clear();
-            listaObservavel.add("Produto inexistente");
+            listaObservavel.add("Produto inexistente!");
         } else {
             atualizarOuAdicionarProduto(produto);
-            if (atualizarLista1) {
-                adicionarProdutoNaLista(produto, listaAtualizada);
-            }
+
+            adicionarProdutoNaLista(produto, listaAtualizada);
+
             atualizarListView();
             txtLabel.clear();
         }
@@ -117,45 +112,27 @@ public class InventarioController implements Initializable {
 
         if (contadorFinalizar == 1) {
             lista1 = new ArrayList<>(listaAtualizada);
-            atualizarLista1 = false;
             listaAtualizada.clear();
-
-
             if (listasIguais(lista1, listaEstoqueInicial)) {
-                listaObservavel.clear();
-                listaObservavel.add("Contagem realizada! Valores corretos, o sistema irá finalizar!");
-//                try{
-//                    Thread.sleep(4000);
-//                } catch (InterruptedException e) {
-//                    throw new RuntimeException(e);
-//                }
-//                iniciarContadorFechamento();
+                iniciarContadorFechamento();
             } else {
                 listaObservavel.clear();
-                listaObservavel.add("Listas diferentes, continue usando a lista 2");
+                listaObservavel.add("Contagem Incorreta! 2° Contagem iniciada.");
             }
         } else if (contadorFinalizar == 2) {
             lista2 = new ArrayList<>(listaAtualizada);
             listaAtualizada.clear();
 
             if (listasIguais(lista2, listaEstoqueInicial)) {
-                listaObservavel.clear();
-                listaObservavel.add("Contagem correta, finalizando...");
-                try {
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                listaObservavel.clear();
                 iniciarContadorFechamento();
 
             } else if (listasIguais(lista2, lista1)) {
                 listaObservavel.clear();
-                diferecasEstoque(lista2, listaEstoqueInicial);
+                listaObservavel.add(diferecasEstoque(lista2, listaEstoqueInicial));
 
             } else {
                 listaObservavel.clear();
-                listaObservavel.add("tente novamente no 3");
+                listaObservavel.add("Contagem Incorreta! 3° Contagem iniciada.");
             }
 
         } else if (contadorFinalizar == 3) {
@@ -163,11 +140,10 @@ public class InventarioController implements Initializable {
             listaAtualizada.clear();
 
             if (listasIguais(lista3, listaEstoqueInicial)) {
-                listaObservavel.clear();
-                listaObservavel.add("Listas iguais, fechando...");
+                iniciarContadorFechamento();
             } else {
                 listaObservavel.clear();
-                diferecasEstoque(lista2, listaEstoqueInicial);
+                diferecasEstoque(lista3, listaEstoqueInicial);
             }
         }
     }
@@ -175,7 +151,8 @@ public class InventarioController implements Initializable {
     private boolean listasIguais(List<Produto> listaA, List<Produto> listaB) {
         if (listaA.size() != listaB.size()) {
             return false;
-        };
+        }
+        ;
         for (Produto produtoA : listaA) {
             for (Produto produtoB : listaB) {
                 if (produtoA.getCodBarras().equals(produtoB.getCodBarras()) &&
@@ -191,7 +168,7 @@ public class InventarioController implements Initializable {
 
     private String diferecasEstoque(List<Produto> listaA, List<Produto> listB) {
         StringBuilder resultado = new StringBuilder();
-        listaObservavel.add("Lista finalizada com divergência \n");
+        listaObservavel.add("Contagem finalizada com divergência. Segue abaixo itens com saldo divergente:  \n");
 
         for (Produto produtoA : listaA) {
             for (Produto produtoB : listB) {
@@ -209,13 +186,14 @@ public class InventarioController implements Initializable {
     }
 
     private void iniciarContadorFechamento() {
-        contadorFechamento = 5;
+        contadorFechamento = 6;
         listaObservavel.clear();
-        listaObservavel.add("Fechando em " + contadorFechamento + " segundos...");
+
+        listaObservavel.add("Contagem realizada! Valores corretos, o sistema irá finalizar, em 5 segundos");
 
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             contadorFechamento--;
-            listaObservavel.set(0, "Fechando em " + contadorFechamento + " segundos...");
+            listaObservavel.add( "Fechando em " + contadorFechamento + " segundos...");
 
             if (contadorFechamento <= 0) {
                 timeline.stop();
