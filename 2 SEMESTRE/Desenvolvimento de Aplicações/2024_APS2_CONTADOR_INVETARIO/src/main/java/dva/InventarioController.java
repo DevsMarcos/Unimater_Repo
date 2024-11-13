@@ -3,10 +3,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
@@ -42,6 +39,8 @@ public class InventarioController implements Initializable {
         listView.setItems(listaObservavel);
         btnEnviar.setOnAction(event -> finalizar());
         listaEstoqueInicial = new ArrayList<>(Estoque.estoqueAtual());
+
+
     }
 
     private void onKeyPress() {
@@ -110,40 +109,60 @@ public class InventarioController implements Initializable {
     private void finalizar() {
         contadorFinalizar++;
 
+        Alert alertProxiamContagem = new Alert(Alert.AlertType.ERROR);
+        alertProxiamContagem.setTitle("Aviso! ");
+        alertProxiamContagem.setHeaderText("Contagem com divergência");
+        alertProxiamContagem.setContentText("Contagem incorreta! "+(contadorFinalizar+1)+"° contagem iniciada!");
+
+        Alert alertContagemCorreta = new Alert(Alert.AlertType.CONFIRMATION);
+        alertContagemCorreta.setTitle("Confimação");
+        alertContagemCorreta.setHeaderText("Contagem correta!");
+        alertContagemCorreta.setContentText("Contagem correta e realizada com sucesso! O sistema será finalizado!");
+
+        Alert alertDivergencia = new Alert(Alert.AlertType.INFORMATION);
+        alertDivergencia.setTitle("Fianlização");
+        alertDivergencia.setHeaderText("Contagem finalizanda com Divergência");
+
         if (contadorFinalizar == 1) {
             lista1 = new ArrayList<>(listaAtualizada);
             listaAtualizada.clear();
             if (listasIguais(lista1, listaEstoqueInicial)) {
+                alertContagemCorreta.showAndWait();
                 iniciarContadorFechamento();
             } else {
                 listaObservavel.clear();
-                listaObservavel.add("Contagem Incorreta! 2° Contagem iniciada.");
+                alertProxiamContagem.showAndWait();
             }
         } else if (contadorFinalizar == 2) {
             lista2 = new ArrayList<>(listaAtualizada);
             listaAtualizada.clear();
 
             if (listasIguais(lista2, listaEstoqueInicial)) {
+                alertContagemCorreta.showAndWait();
                 iniciarContadorFechamento();
 
             } else if (listasIguais(lista2, lista1)) {
-                listaObservavel.clear();
-                listaObservavel.add(diferecasEstoque(lista2, listaEstoqueInicial));
 
+                alertDivergencia.setContentText("Contagem finalizada com divergência. Segue abaixo itens com saldo divergente:  \n"
+                        + diferecasEstoque(lista2, listaEstoqueInicial));
+
+                alertDivergencia.showAndWait();
+                iniciarContadorFechamento();
             } else {
                 listaObservavel.clear();
-                listaObservavel.add("Contagem Incorreta! 3° Contagem iniciada.");
-            }
+                alertProxiamContagem.showAndWait();            }
 
         } else if (contadorFinalizar == 3) {
             lista3 = new ArrayList<>(listaAtualizada);
             listaAtualizada.clear();
 
             if (listasIguais(lista3, listaEstoqueInicial)) {
+                alertContagemCorreta.showAndWait();
                 iniciarContadorFechamento();
             } else {
                 listaObservavel.clear();
-                diferecasEstoque(lista3, listaEstoqueInicial);
+                alertDivergencia.setContentText("Contagem finalizada com divergência. Segue abaixo itens com saldo divergente:  \n"
+                        + diferecasEstoque(lista3, listaEstoqueInicial));
             }
         }
     }
@@ -168,7 +187,7 @@ public class InventarioController implements Initializable {
 
     private String diferecasEstoque(List<Produto> listaA, List<Produto> listB) {
         StringBuilder resultado = new StringBuilder();
-        listaObservavel.add("Contagem finalizada com divergência. Segue abaixo itens com saldo divergente:  \n");
+//        listaObservavel.add();
 
         for (Produto produtoA : listaA) {
             for (Produto produtoB : listB) {
@@ -176,7 +195,7 @@ public class InventarioController implements Initializable {
                     double diferenca = produtoA.getSaldo() - produtoB.getSaldo();
                     resultado.append(produtoA.getDescricao())
                             .append(" - Valor de Divergência: ")
-                            .append(diferenca)
+                            .append(Math.abs(diferenca))
                             .append("\n");
                 }
             }
@@ -189,7 +208,7 @@ public class InventarioController implements Initializable {
         contadorFechamento = 6;
         listaObservavel.clear();
 
-        listaObservavel.add("Contagem realizada! Valores corretos, o sistema irá finalizar, em 5 segundos");
+        listaObservavel.add("Contagem realizada! O sistema irá finalizar, em 5 segundos");
 
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             contadorFechamento--;
