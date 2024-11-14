@@ -45,12 +45,18 @@ public class InventarioController implements Initializable {
     }
 
     private void onKeyPress() {
+        Alert produtoInexistente = new Alert(Alert.AlertType.WARNING);
+        produtoInexistente.setTitle("Aviso!");
+        produtoInexistente.setHeaderText("Produto Inexistente!");
+        produtoInexistente.setContentText("O código informado não pertence a nenhum produto!");
+        produtoInexistente.getDialogPane().setPrefSize(300, 250);
+
         String textoDigitado = txtLabel.getText();
         Produto produto = buscarProdutoPorCodigo(textoDigitado, Estoque.estoqueAtual());
 
         if (produto == null) {
-            listaObservavel.clear();
-            listaObservavel.add("Produto inexistente!");
+            produtoInexistente.show();
+
         } else {
             atualizarOuAdicionarProduto(produto);
 
@@ -125,6 +131,8 @@ public class InventarioController implements Initializable {
         alertDivergencia.setTitle("Fianlização");
         alertDivergencia.setHeaderText("Contagem finalizanda com Divergência");
         alertDivergencia.getDialogPane().setPrefSize(600, 400);
+
+
 
         if (contadorFinalizar == 1) {
             lista1 = new ArrayList<>(listaAtualizada);
