@@ -205,32 +205,46 @@ public class InventarioController implements Initializable {
 
     private String diferecasEstoque(List<Produto> listaA, List<Produto> listB) {
         StringBuilder resultado = new StringBuilder();
+        StringBuilder resultadoDesc = new StringBuilder();
+
 
         Map<String, Produto> mapaListaB = new HashMap<>();
-
         for (Produto produtoB : listB) {
-            mapaListaB.put(produtoB.getCodBarras(), produtoB);
+            if (produtoB.getSaldo() > 0) {  // Ignorar produtos com saldo zero
+                mapaListaB.put(produtoB.getCodBarras(), produtoB);
+            }
         }
 
-        // Comparar produtos da listaA com a listaB
+        // Comparar produtos de listaA com os de listaB
         for (Produto produtoA : listaA) {
+            if (produtoA.getSaldo() > 0) {  // Ignorar produtos com saldo zero
+                Produto produtoB = mapaListaB.get(produtoA.getCodBarras());
 
-            Produto produtoB = mapaListaB.get(produtoA.getCodBarras());
-
-            if (produtoB != null) {
-                // Se o produto existe em ambas as listas, calcula a diferença de saldo
-                double diferenca = produtoA.getSaldo() - produtoB.getSaldo();
-                if (diferenca > 0) {
-                    resultado.append(produtoA.getDescricao())
-                            .append(" - Valor de Divergência: ")
-                            .append(Math.abs(diferenca))
-                            .append("\n");
-                    mapaListaB.remove(produtoA.getDescricao());
+                if (produtoB != null) {
+                    // Se o produto existe em ambas as listas, calcula a diferença de saldo
+                    double diferenca = produtoA.getSaldo() - produtoB.getSaldo();
+                    if (diferenca != 0) {  // Somente adiciona se houver uma diferença
+                        resultado.append(produtoA.getDescricao())
+                                .append(" - Saldo em Divergência com estoque: ")
+                                .append(Math.abs(diferenca))
+                                .append("\n");
+                    }
+                    // Remover o produto do mapa após a comparação
+                    mapaListaB.remove(produtoA.getCodBarras());
                 }
             }
         }
+
+        // Adicionar os produtos restantes em listaB (que não foram encontrados em listaA)
+        for (Produto produtoBRestante : mapaListaB.values()) {
+            resultado.append(produtoBRestante.getDescricao())
+                    .append(" - Saldo em Divergência com estoque: ")
+                    .append(produtoBRestante.getSaldo())
+                    .append("\n");
+        }
+
         return resultado.toString();
-    }
+    };
 
 
     private void iniciarContadorFechamento() {
