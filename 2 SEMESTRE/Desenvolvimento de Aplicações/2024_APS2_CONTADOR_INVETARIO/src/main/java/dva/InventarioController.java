@@ -1,4 +1,5 @@
 package dva;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -8,10 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+
 public class InventarioController implements Initializable {
 
     @FXML
@@ -112,7 +113,8 @@ public class InventarioController implements Initializable {
         Alert alertProxiamContagem = new Alert(Alert.AlertType.ERROR);
         alertProxiamContagem.setTitle("Aviso! ");
         alertProxiamContagem.setHeaderText("Contagem com divergência");
-        alertProxiamContagem.setContentText("Contagem incorreta! "+(contadorFinalizar+1)+"° contagem iniciada!");
+        alertProxiamContagem.setContentText("Contagem incorreta! " + (contadorFinalizar + 1) + "° contagem iniciada!");
+        alertProxiamContagem.getDialogPane().setPrefSize(400, 200);
 
         Alert alertContagemCorreta = new Alert(Alert.AlertType.CONFIRMATION);
         alertContagemCorreta.setTitle("Confimação");
@@ -122,6 +124,7 @@ public class InventarioController implements Initializable {
         Alert alertDivergencia = new Alert(Alert.AlertType.INFORMATION);
         alertDivergencia.setTitle("Fianlização");
         alertDivergencia.setHeaderText("Contagem finalizanda com Divergência");
+        alertDivergencia.getDialogPane().setPrefSize(600, 400);
 
         if (contadorFinalizar == 1) {
             lista1 = new ArrayList<>(listaAtualizada);
@@ -150,7 +153,8 @@ public class InventarioController implements Initializable {
                 iniciarContadorFechamento();
             } else {
                 listaObservavel.clear();
-                alertProxiamContagem.showAndWait();            }
+                alertProxiamContagem.showAndWait();
+            }
 
         } else if (contadorFinalizar == 3) {
             lista3 = new ArrayList<>(listaAtualizada);
@@ -159,25 +163,39 @@ public class InventarioController implements Initializable {
             if (listasIguais(lista3, listaEstoqueInicial)) {
                 alertContagemCorreta.showAndWait();
                 iniciarContadorFechamento();
+
             } else {
-                listaObservavel.clear();
                 alertDivergencia.setContentText("Contagem finalizada com divergência. Segue abaixo itens com saldo divergente:  \n"
                         + diferecasEstoque(lista3, listaEstoqueInicial));
+                alertDivergencia.showAndWait();
+                iniciarContadorFechamento();
             }
         }
     }
 
     private boolean listasIguais(List<Produto> listaA, List<Produto> listaB) {
-        if (listaA.size() != listaB.size()) {
+
+        long countA = listaA.stream().filter(produto -> produto.getSaldo() > 0).count();
+        long countB = listaB.stream().filter(produto -> produto.getSaldo() > 0).count();
+
+        if (countA != countB) {
             return false;
         }
-        ;
+        Map<String, Produto> mapaListaB = new HashMap<>();
+
+        for (Produto produtoB : listaB) {
+            if (produtoB.getSaldo() > 0) {
+                mapaListaB.put(produtoB.getCodBarras(), produtoB);
+            }
+        }
+
+        // Comparar produtos da listaA com a listaB
         for (Produto produtoA : listaA) {
-            for (Produto produtoB : listaB) {
-                if (produtoA.getCodBarras().equals(produtoB.getCodBarras()) &&
-                        produtoA.getSaldo() == produtoB.getSaldo()) {
-                    return true;
-                } else {
+            if (produtoA.getSaldo() > 0) {  // Ignorar itens com saldo zero
+                Produto produtoB = mapaListaB.get(produtoA.getCodBarras());
+
+                // Verificar se existe o produto em listaB e se os saldos são iguais
+                if (produtoB == null || produtoA.getSaldo() != produtoB.getSaldo()) {
                     return false;
                 }
             }
@@ -187,22 +205,33 @@ public class InventarioController implements Initializable {
 
     private String diferecasEstoque(List<Produto> listaA, List<Produto> listB) {
         StringBuilder resultado = new StringBuilder();
-//        listaObservavel.add();
 
+        Map<String, Produto> mapaListaB = new HashMap<>();
+
+        for (Produto produtoB : listB) {
+            mapaListaB.put(produtoB.getCodBarras(), produtoB);
+        }
+
+        // Comparar produtos da listaA com a listaB
         for (Produto produtoA : listaA) {
-            for (Produto produtoB : listB) {
-                if (produtoA.getCodBarras().equals(produtoB.getCodBarras())) {
-                    double diferenca = produtoA.getSaldo() - produtoB.getSaldo();
+
+            Produto produtoB = mapaListaB.get(produtoA.getCodBarras());
+
+            if (produtoB != null) {
+                // Se o produto existe em ambas as listas, calcula a diferença de saldo
+                double diferenca = produtoA.getSaldo() - produtoB.getSaldo();
+                if (diferenca > 0) {
                     resultado.append(produtoA.getDescricao())
                             .append(" - Valor de Divergência: ")
                             .append(Math.abs(diferenca))
                             .append("\n");
+                    mapaListaB.remove(produtoA.getDescricao());
                 }
             }
         }
         return resultado.toString();
-
     }
+
 
     private void iniciarContadorFechamento() {
         contadorFechamento = 6;
@@ -212,7 +241,7 @@ public class InventarioController implements Initializable {
 
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             contadorFechamento--;
-            listaObservavel.add( "Fechando em " + contadorFechamento + " segundos...");
+            listaObservavel.add("Fechando em " + contadorFechamento + " segundos...");
 
             if (contadorFechamento <= 0) {
                 timeline.stop();

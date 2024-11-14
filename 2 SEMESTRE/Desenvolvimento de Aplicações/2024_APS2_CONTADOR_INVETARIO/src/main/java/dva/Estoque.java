@@ -12,7 +12,7 @@ public class Estoque {
         produtos.add(new Produto("234", "Chinelos", 1));
         produtos.add(new Produto("456", "Bota", 1));
         produtos.add(new Produto("567", "Tenis", 1));
-        produtos.add(new Produto("678", "Meia", 1));
+        produtos.add(new Produto("678", "Meia", 0));
         return produtos;
     }
 }
