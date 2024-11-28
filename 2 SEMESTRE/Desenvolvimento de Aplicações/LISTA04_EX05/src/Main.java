@@ -5,13 +5,13 @@ public class Main {
 
         Scanner leitor = new Scanner(System.in);
         int opcao = 0;
-        Produto chaveiroDosVingadores = new Produto("Chaveiro dos Vingadores", 130.50);
-        Produto cheirinhoParaCarroAmericano = new Produto("Perfume automotivo americano", 60.99);
-        Produto jogoDeChavesIngles = new Produto("Jogo de Chaves Ingles", 440.30);
+        ProdutoImportado chaveiroDosVingadores = new ProdutoImportado("Chaveiro dos Vingadores", 130.50);
+        ProdutoImportado cheirinhoParaCarroAmericano = new ProdutoImportado("Perfume automotivo americano", 60.99);
+        ProdutoImportado jogoDeChavesIngles = new ProdutoImportado("Jogo de Chaves Ingles", 440.30);
 
-        Carro carro = new Carro();
-        Moto moto = new Moto();
-        Caminhao caminhao = new Caminhao();
+        Carro carro = new Carro(66);
+        Moto moto = new Moto(15);
+        Caminhao caminhao = new Caminhao(550);
         System.out.println("Bem-Vindo ao Posto Ipiranga, seleciona uma das opções abaixo: ");
 
         do {
@@ -41,24 +41,24 @@ public class Main {
                     if (tipo == 1){
                         System.out.println("Quantos litros deseja abastecer: ");
                         int litragem = leitor.nextInt();
-                        carro.setCombustivel(combustivel);
+                        carro.setQuantidadeAbastecida(litragem);
+                        carro.setTipoCombustivel(combustivel);
                         carro.calcularCusto(litragem);
-
-                        System.out.println("Carro abastecido como solicitado!");
                     }
                     if (tipo == 2){
                         System.out.println("Quantos litros deseja abastecer: ");
                         int litragem = leitor.nextInt();
-                        carro.setCombustivel(combustivel);
-                        carro.calcularCusto(litragem);
+                        moto.setQuantidadeAbastecida(litragem);
+                        moto.setTipoCombustivel(combustivel);
+                        moto.calcularCusto(litragem);
                         System.out.println("Moto abastecido como solicitado!");
                     }
                     if (tipo == 3){
                         System.out.println("Quantos litros deseja abastecer: ");
                         int litragem = leitor.nextInt();
-                        carro.setCombustivel(combustivel);
-                        carro.calcularCusto(litragem);
-                        System.out.println("Caminhão abastecido como solicitado!");
+                        caminhao.setQuantidadeAbastecida(litragem);
+                        caminhao.setTipoCombustivel(combustivel);
+                        caminhao.calcularCusto(litragem);
                     }
                 } case 2 ->{
                     System.out.println("""
@@ -101,20 +101,20 @@ public class Main {
                             caminhao.adicionarProduto(jogoDeChavesIngles);
                         }
                     }
-                } case -> 3{
+                } case 3 -> {
                     System.out.println("""
-                            Informe o veiculo que deseja fechar a conta: 
+                            Informe o veiculo de veículo que deseja finalizar a venda: 
                             1. Carro - Josimar
                             2. Moto - Tonho
                             3. Caminhão - Marcos
                             """);
                     int tipo = leitor.nextInt();
+                    if (tipo == 1){
+                        carro.fecharConta(carro.getQuantidadeAbastecida());
+                    }if (tipo ==2 )
                 }
             }
         }while (opcao != 0);
-
-
-
 
     }
 }

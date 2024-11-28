@@ -7,28 +7,22 @@ public class Caminhao extends Veiculo {
 //    private final double etanol = 4.10;
 //    private final double diesel = 5.93;
 
-    public Caminhao(String placa, int combustivel, int capacidadeDoTanque) {
-        super(placa, combustivel, capacidadeDoTanque);
+    public Caminhao(int capacidadeDoTanque) {
+        super(capacidadeDoTanque);
     }
 
     public Caminhao() {
     }
 
-    @Override
-    public double abastacer(int quantidadeLitrosAbastecida) {
-        if (quantidadeLitrosAbastecida > getCapacidadeDoTanque()){
-            System.out.println("Quatidade de abastecimento solicitada maior que o tanque do veículo placa: "+getPlaca());
-            return 0;
-        }
-        double total = calcularCusto(quantidadeLitrosAbastecida);
-        System.out.println("O valor do abastecimento do veiculo placa: "+getPlaca()+" ficou em R$: "+total);
-        return total;
-    }
 
     @Override
     public double calcularCusto(int quantidadeLitrosAbastecida) {
+        if (quantidadeLitrosAbastecida > getCapacidadeDoTanque()){
+            System.out.println("Quatidade de abastecimento solicitada maior que o tanque do veículo ");
+            return 0;
+        }
         double precoPorLitro = 0;
-        switch (getCombustivel()){
+        switch (getTipoCombustivel()){
             case 1 -> {
                 precoPorLitro = 6.10;
             }
@@ -43,5 +37,6 @@ public class Caminhao extends Veiculo {
             }
         }
         return quantidadeLitrosAbastecida * precoPorLitro;
-    }
+    };
+
 }
