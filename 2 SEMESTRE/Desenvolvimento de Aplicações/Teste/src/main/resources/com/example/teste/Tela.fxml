@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dva_2024_aula12_urna_eletronica.TelaController">
+   <children>
+      <Pane layoutX="431.0" layoutY="112.0" prefHeight="259.0" prefWidth="291.0" style="-fx-background-color: gray;">
+         <children>
+            <Button fx:id="btn1" layoutX="41.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: black;" text="1" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn2" layoutX="113.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: black;" text="2" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn3" layoutX="185.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: black;" text="3" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn6" layoutX="186.0" layoutY="63.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: black;" text="6" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn5" layoutX="114.0" layoutY="63.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: black;" text="5" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn4" layoutX="42.0" layoutY="64.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: black;" text="4" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn7" layoutX="41.0" layoutY="112.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: black;" text="7" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn8" layoutX="113.0" layoutY="111.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: black;" text="8" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn9" layoutX="185.0" layoutY="111.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: black;" text="9" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn0" layoutX="114.0" layoutY="156.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: black;" text="0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCONFIRMA" layoutX="198.0" layoutY="181.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="85.0" style="-fx-background-color: #42C374;" text="CONFIRMA">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCORRIGE" layoutX="108.0" layoutY="198.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="77.0" style="-fx-background-color: #F79B52;" text="CORRIGE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnBRANCO" layoutX="21.0" layoutY="198.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="77.0" style="-fx-background-color: WHITE;" text="BRANCO">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <ImageView fitHeight="80.0" fitWidth="314.0" layoutX="431.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@JusticaEleitoral.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="21.0" layoutY="21.0" prefHeight="348.0" prefWidth="397.0" style="-fx-background-color: #D3D3D3;">
+         <children>
+            <Text layoutX="27.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número:" />
+            <TextField fx:id="txtNum1" editable="false" layoutX="94.0" layoutY="60.0" prefHeight="43.0" prefWidth="45.0" style="-fx-border-color: black;">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtNum2" editable="false" layoutX="147.0" layoutY="60.0" prefHeight="43.0" prefWidth="45.0" style="-fx-border-color: black;">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtNum3" editable="false" layoutX="199.0" layoutY="60.0" prefHeight="43.0" prefWidth="45.0" style="-fx-border-color: black;">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtNum4" editable="false" layoutX="252.0" layoutY="60.0" prefHeight="43.0" prefWidth="45.0" style="-fx-border-color: black;">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtNum5" editable="false" layoutX="304.0" layoutY="59.0" prefHeight="43.0" prefWidth="45.0" style="-fx-border-color: black;">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextField>
+            <Text layoutX="27.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" />
+            <Text fx:id="txtNome" layoutX="90.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do Candidato" wrappingWidth="263.02587890625">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Pane layoutX="205.0" layoutY="201.0" prefHeight="133.0" prefWidth="144.0" style="-fx-background-color: WHITE;">
+               <children>
+                  <ImageView fx:id="imgFoto" fitHeight="139.0" fitWidth="152.0" layoutX="-4.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <Text fx:id="txtPartido" layoutX="94.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AAaa" wrappingWidth="77.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="24.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Partido:" />
+         </children></Pane>
+      <Button fx:id="btnPRINT" layoutX="722.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="22.0" style="-fx-background-color: RED;" text="BRANCO">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
