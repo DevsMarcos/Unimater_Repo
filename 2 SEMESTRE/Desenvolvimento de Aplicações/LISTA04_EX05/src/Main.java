@@ -2,12 +2,20 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        int opcao = 0;
 
         Scanner leitor = new Scanner(System.in);
-        int opcao = 0;
         ProdutoImportado chaveiroDosVingadores = new ProdutoImportado("Chaveiro dos Vingadores", 130.50);
+        chaveiroDosVingadores.setValotItem(chaveiroDosVingadores.calculatImposto());
+        System.out.println(chaveiroDosVingadores.getValotItem());
+
+
         ProdutoImportado cheirinhoParaCarroAmericano = new ProdutoImportado("Perfume automotivo americano", 60.99);
+        cheirinhoParaCarroAmericano.setValotItem(cheirinhoParaCarroAmericano.calculatImposto());
+
+
         ProdutoImportado jogoDeChavesIngles = new ProdutoImportado("Jogo de Chaves Ingles", 440.30);
+        jogoDeChavesIngles.setValotItem(jogoDeChavesIngles.calculatImposto());
 
         Carro carro = new Carro(66);
         Moto moto = new Moto(15);
@@ -50,7 +58,6 @@ public class Main {
                         int litragem = leitor.nextInt();
                         moto.setQuantidadeAbastecida(litragem);
                         moto.setTipoCombustivel(combustivel);
-                        moto.calcularCusto(litragem);
                         System.out.println("Moto abastecido como solicitado!");
                     }
                     if (tipo == 3){
@@ -58,7 +65,7 @@ public class Main {
                         int litragem = leitor.nextInt();
                         caminhao.setQuantidadeAbastecida(litragem);
                         caminhao.setTipoCombustivel(combustivel);
-                        caminhao.calcularCusto(litragem);
+
                     }
                 } case 2 ->{
                     System.out.println("""
@@ -78,27 +85,36 @@ public class Main {
                     if (item == 1){
                         if (tipo == 1){
                             carro.adicionarProduto(chaveiroDosVingadores);
-                        } if (tipo == 2) {
-                            moto.adicionarProduto(cheirinhoParaCarroAmericano);
-                        }if (tipo == 3){
+                        } else if  (tipo == 2) {
+                            moto.adicionarProduto(chaveiroDosVingadores);
+                        }
+                        else if (tipo == 3){
                             caminhao.adicionarProduto(chaveiroDosVingadores);
+                        } else {
+                            System.out.println("Veículo não encontrdo");
+
                         }
                     }
                     if (item == 2){
                         if (tipo == 1){
                             carro.adicionarProduto(cheirinhoParaCarroAmericano);
-                        } if (tipo == 2) {
+                        } else if (tipo == 2) {
                             moto.adicionarProduto(cheirinhoParaCarroAmericano);
-                        }if (tipo == 3){
+                        }else if (tipo == 3){
                             caminhao.adicionarProduto(cheirinhoParaCarroAmericano);
-                        }                    }
+                        } else {
+                            System.out.println("Veículo não encontrdo");
+
+                        }               }
                     if (item == 3){
                         if (tipo == 1){
                             carro.adicionarProduto(jogoDeChavesIngles);
-                        } if (tipo == 2) {
+                        }else if (tipo == 2) {
                             moto.adicionarProduto(jogoDeChavesIngles);
-                        }if (tipo == 3){
+                        }else if (tipo == 3){
                             caminhao.adicionarProduto(jogoDeChavesIngles);
+                        }else {
+                            System.out.println("Veículo não encontrdo");
                         }
                     }
                 } case 3 -> {
@@ -111,10 +127,15 @@ public class Main {
                     int tipo = leitor.nextInt();
                     if (tipo == 1){
                         carro.fecharConta(carro.getQuantidadeAbastecida());
-                    }if (tipo ==2 )
+                    }else if (tipo ==2 ){
+                        moto.fecharConta(carro.getQuantidadeAbastecida());
+                    }else if (tipo == 3){
+                        caminhao.calcularCusto(caminhao.getQuantidadeAbastecida());
+                    }else {
+                        System.out.println("Veículo não encontrdo");
+                    }
                 }
             }
         }while (opcao != 0);
-
     }
 }

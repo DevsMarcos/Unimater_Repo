@@ -49,17 +49,20 @@ public abstract class Veiculo {
 
 
     public void fecharConta(int quantidadeAbastecida){
-        double valortotal =0;
+        double valorPordutos =0;
+        double valorGasolina = 0;
+        double valorTotal = 0;
         for (Produto produto : listaDeProdutos){
-            valortotal += produto.getValotItem();
+            valorPordutos += produto.getValotItem();
         }
-        valortotal+=calcularCusto(quantidadeAbastecida);
-        System.out.println("O valor total da conta ficou em R$: "+valortotal);
+        valorGasolina = calcularCusto(quantidadeAbastecida);
+        valorTotal = valorPordutos + valorGasolina;
+        System.out.println("O valor total da conta ficou em R$: "+valorTotal);
     }
 
     public double calcularCusto(int quantidadeLitrosAbastecida) {
         if (quantidadeLitrosAbastecida > getCapacidadeDoTanque()){
-            System.out.println("Quatidade de abastecimento solicitada maior que o tanque do veículo");
+            System.out.println("Quatidade de abastecimento solicitada maior que o tanque do veículo! \n");
             return 0;
         }
         double precoPorLitro = 0;
@@ -74,10 +77,9 @@ public abstract class Veiculo {
                 precoPorLitro = 5.93;
             }
             default -> {
-                System.out.println("Tipo não identificado tente novamente");
+                System.out.println("Tipo não identificado tente novamente! \n");
             }
         }
-        System.out.println("Abastecimento realizado com sucessO!");
         return quantidadeLitrosAbastecida * precoPorLitro;
     }
 }
